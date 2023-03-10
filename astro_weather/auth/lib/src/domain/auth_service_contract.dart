@@ -1,5 +1,5 @@
 import 'package:async/async.dart';
-import 'package:auth/src/domain/token.dart';
+import '../domain/token.dart';
 
 
 abstract class IAuthService{
