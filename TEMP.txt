@@ -1,0 +1,98 @@
+
+import 'package:page_transition/page_transition.dart';
+import 'package:astro_weather/register.dart';
+
+
+
+body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+
+            //welcome back,
+            const Text(
+              'Welcome to StarryWeather',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            //username textfield
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Email',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+              
+            //password textfield
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: 'Password',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+
+            //forgot password?
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    // FORGOT PASSWORD PAGE
+                  },
+                  child: Text('Forgot Password'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            //sign in button
+            Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // ROOT PAGE
+                      },
+                      child: const Text('Login'),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.bottomToTop,
+                            child: RegisterPage(),
+                            duration: Duration(milliseconds: 400),
+                          ),
+                        );
+                      },
+                      child: const Text('Register'),
+                    ),
+                  ),
+                ],
+              ),
+            //sign in with google 
+              
+            //register
+              
+             
+              
+              
+          ]),
+        ),
+      ),

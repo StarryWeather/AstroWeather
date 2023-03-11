@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
+
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
