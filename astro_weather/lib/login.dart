@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Center(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 300),
+          margin: const EdgeInsets.symmetric(horizontal: 5),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.grey[200],
@@ -74,13 +74,13 @@ class LoginPage extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: () {
                         Navigator.push(
-                        context,
-                        PageTransition(
-                        type: PageTransitionType.bottomToTop,
-                        child: RegisterPage(),
-                        duration: Duration(milliseconds: 400),
-                      ),
-                    );
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.bottomToTop,
+                            child: RegisterPage(),
+                            duration: Duration(milliseconds: 400),
+                          ),
+                        );
                       },
                       child: const Text('Register'),
                     ),
