@@ -16,6 +16,8 @@ dependencies:
 
   animated_background: ^2.0.0
 
+  starsview: ^0.0.2
+
 
 dev_dependencies:
   flutter_test:
@@ -26,4 +28,6 @@ flutter:
   uses-material-design: true
 
   assets:
-  - lib/login_register/images/
+  - assets/
+  - assets/images/
+  - assets/images/google.png
