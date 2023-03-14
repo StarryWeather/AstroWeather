@@ -22,7 +22,7 @@ dependencies:
   google_fonts: ^2.3.1
   line_icons: ^2.0.1
   flutter_cube: ^0.1.1
-
+  proste_bezier_curve:
 
 dev_dependencies:
   flutter_test:

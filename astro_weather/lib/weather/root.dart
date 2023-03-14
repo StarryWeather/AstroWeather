@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 import 'package:flutter/services.dart';
+import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
@@ -38,9 +39,21 @@ class _RootPageState extends State<RootPage> {
       child: Scaffold(
         body: Column(
           children: [
-            Container(
-              height: 100,
-              color: Colors.yellow,
+            ClipPath(
+              clipper: ProsteBezierCurve(
+                position: ClipPosition.bottom,
+                list: [
+                  BezierCurveSection(
+                    start: Offset(0, 150),
+                    top: Offset(MediaQuery.of(context).size.width / 2, 117.5),
+                    end: Offset(MediaQuery.of(context).size.width, 150),
+                  ),
+                ],
+              ),
+              child: Container(
+                height: 150,
+                color: Colors.red,
+              ),
             ),
             Expanded(
               child: Stack(
@@ -57,37 +70,43 @@ class _RootPageState extends State<RootPage> {
                       height: 100,
                     ),
                   ),
+                  Slider(
+                    value: timeOfDay,
+                    onChanged: (value) {
+                      setState(() {
+                        timeOfDay = value;
+                        if (timeOfDay == 1.0 && isNight == false) {
+                          timeOfDay = 0.0;
+                          isNight = true;
+                        } else if (timeOfDay == 1.0 && isNight == true) {
+                          timeOfDay = 0.0;
+                          isNight = false;
+                        }
+                      });
+                    },
+                    min: 0.0,
+                    max: 1.0,
+                    divisions: 1200,
+                  ),
                 ],
               ),
             ),
-            Slider(
-              value: timeOfDay,
-              onChanged: (value) {
-                setState(() {
-                  timeOfDay = value;
-                  if (timeOfDay == 1.0 && isNight == false) {
-                    timeOfDay = 0.0;
-                    isNight = true;
-                  } else if (timeOfDay == 1.0 && isNight == true) {
-                    timeOfDay = 0.0;
-                    isNight = false;
-                  }
-                });
-              },
-              min: 0.0,
-              max: 1.0,
-              divisions: 1200,
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(50),
-                topRight: Radius.circular(50),
+            ClipPath(
+              clipper: ProsteBezierCurve(
+                position: ClipPosition.top,
+                list: [
+                  BezierCurveSection(
+                    start: Offset(MediaQuery.of(context).size.width, 35),
+                    top: Offset(MediaQuery.of(context).size.width / 2, 0),
+                    end: Offset(0, 35),
+                  ),
+                ],
               ),
               child: Container(
                 color: Colors.purple,
-                height: 100,
+                height: 150,
               ),
-            ),
+            )
           ],
         ),
       ),
