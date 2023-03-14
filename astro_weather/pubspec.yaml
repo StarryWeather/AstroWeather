@@ -17,6 +17,11 @@ dependencies:
   animated_background: ^2.0.0
 
   starsview: ^0.0.2
+  cupertino_icons: ^0.1.2
+  neon: ^0.0.1
+  google_fonts: ^2.3.1
+  line_icons: ^2.0.1
+  flutter_cube: ^0.1.1
 
 
 dev_dependencies:
@@ -26,8 +31,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
+  
   assets:
-  - assets/
-  - assets/images/
-  - assets/images/google.png
+  - assets/earth/
