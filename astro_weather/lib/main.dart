@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_register/login.dart';
+import 'weather/root.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AstroWeather',
-      home: LoginPage(),
+      home: RootPage(),
     );
   }
 }

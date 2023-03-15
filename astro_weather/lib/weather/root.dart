@@ -61,7 +61,12 @@ class _RootPageState extends State<RootPage> {
                   AnimatedPositioned(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.easeInOut,
+                    
+                    
+
                     left: (MediaQuery.of(context).size.width - 100) * timeOfDay,
+                    top: (MediaQuery.of(context).size.width - 100) * timeOfDay,
+
                     child: Image.asset(
                       (isNight == true)
                           ? 'assets/weather/moon.png'
