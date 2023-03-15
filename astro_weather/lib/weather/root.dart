@@ -1,7 +1,7 @@
+import 'dart:ui';
 import 'package:astro_weather/weather/info.dart';
 import 'package:astro_weather/weather/stars.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
 
 import 'package:flutter/services.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
@@ -13,10 +13,38 @@ class RootPage extends StatefulWidget {
   State<RootPage> createState() => _RootPageState();
 }
 
-class _RootPageState extends State<RootPage> {
+class _RootPageState extends State<RootPage>
+    with SingleTickerProviderStateMixin {
   // **get time of day**
   double timeOfDay = 0.0;
   bool isNight = false;
+
+  late Path _path;
+
+  @override
+  void initState() {
+    super.initState();
+    _path = drawPath();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  void updateTimeOfDay(double newValue) {
+    setState(() {
+      timeOfDay = newValue;
+    });
+  }
+
+  Offset calculate() {
+    PathMetrics pathMetrics = _path.computeMetrics();
+    PathMetric pathMetric = pathMetrics.elementAt(0);
+    double value = pathMetric.length * timeOfDay;
+    Tangent? pos = pathMetric.getTangentForOffset(value);
+    return pos!.position;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,18 +85,18 @@ class _RootPageState extends State<RootPage> {
             ),
             Expanded(
               child: Stack(
-                children: [
-                  AnimatedPositioned(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.easeInOut,
-                    
-                    
-
-                    left: (MediaQuery.of(context).size.width - 100) * timeOfDay,
-                    top: (MediaQuery.of(context).size.width - 100) * timeOfDay,
-
+                children: <Widget>[
+                  Positioned(
+                    top: 0,
+                    child: CustomPaint(
+                      painter: PathPainter(_path),
+                    ),
+                  ),
+                  Positioned(
+                    top: calculate().dy,
+                    left: calculate().dx,
                     child: Image.asset(
-                      (isNight == true)
+                      (isNight)
                           ? 'assets/weather/moon.png'
                           : 'assets/weather/sun.png',
                       width: 100,
@@ -80,10 +108,10 @@ class _RootPageState extends State<RootPage> {
                     onChanged: (value) {
                       setState(() {
                         timeOfDay = value;
-                        if (timeOfDay == 1.0 && isNight == false) {
+                        if (timeOfDay == 1.0 && !isNight) {
                           timeOfDay = 0.0;
                           isNight = true;
-                        } else if (timeOfDay == 1.0 && isNight == true) {
+                        } else if (timeOfDay == 1.0 && isNight) {
                           timeOfDay = 0.0;
                           isNight = false;
                         }
@@ -91,7 +119,7 @@ class _RootPageState extends State<RootPage> {
                     },
                     min: 0.0,
                     max: 1.0,
-                    divisions: 1200,
+                    divisions: 48,
                   ),
                 ],
               ),
@@ -117,4 +145,32 @@ class _RootPageState extends State<RootPage> {
       ),
     );
   }
+
+  Path drawPath() {
+    Size size = Size(300, 150);
+    Path path = Path();
+    path.moveTo(0, size.height / 2);
+    path.quadraticBezierTo(
+        size.width / 2, -size.height, size.width + 35, size.height / 2);
+    return path;
+  }
+}
+
+class PathPainter extends CustomPainter {
+  Path path;
+
+  PathPainter(this.path);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..color = Colors.redAccent.withOpacity(0.3)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3.0;
+
+    canvas.drawPath(this.path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
