@@ -24,7 +24,6 @@ class _RootPageState extends State<RootPage>
   @override
   void initState() {
     super.initState();
-    _path = drawPath();
   }
 
   @override
@@ -48,6 +47,13 @@ class _RootPageState extends State<RootPage>
 
   @override
   Widget build(BuildContext context) {
+    final size = Size(MediaQuery.of(context).size.width,
+        MediaQuery.of(context).size.width / 2);
+    _path = Path();
+    _path.moveTo(-MediaQuery.of(context).size.width * 0.25, size.height / 2);
+    _path.quadraticBezierTo(
+        size.width / 2, -size.height, size.width, size.height / 2);
+
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (notification) {
         final scrollDelta = notification.scrollDelta;
@@ -72,14 +78,16 @@ class _RootPageState extends State<RootPage>
                 position: ClipPosition.bottom,
                 list: [
                   BezierCurveSection(
-                    start: Offset(0, 150),
-                    top: Offset(MediaQuery.of(context).size.width / 2, 117.5),
-                    end: Offset(MediaQuery.of(context).size.width, 150),
+                    start: Offset(0, MediaQuery.of(context).size.height * 0.10),
+                    top: Offset(MediaQuery.of(context).size.width / 2,
+                        MediaQuery.of(context).size.height * 0.10 - 32.5),
+                    end: Offset(MediaQuery.of(context).size.width,
+                        MediaQuery.of(context).size.height * 0.10),
                   ),
                 ],
               ),
               child: Container(
-                height: 150,
+                height: MediaQuery.of(context).size.height * 0.10,
                 color: Colors.red,
               ),
             ),
@@ -93,8 +101,9 @@ class _RootPageState extends State<RootPage>
                     ),
                   ),
                   Positioned(
-                    top: calculate().dy + 30,
-                    left: calculate().dx + 30,
+                    top: calculate().dy +
+                        MediaQuery.of(context).size.height * 0.06,
+                    left: calculate().dx,
                     child: Image.asset(
                       (isNight)
                           ? 'assets/weather/moon.png'
@@ -144,15 +153,6 @@ class _RootPageState extends State<RootPage>
         ),
       ),
     );
-  }
-
-  Path drawPath() {
-    Size size = Size(300, 150);
-    Path path = Path();
-    path.moveTo(-117.5, size.height / 2);
-    path.quadraticBezierTo(
-        size.width / 2, -size.height, size.width + 117.5, size.height / 2);
-    return path;
   }
 }
 
