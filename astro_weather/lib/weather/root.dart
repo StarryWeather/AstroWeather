@@ -93,8 +93,8 @@ class _RootPageState extends State<RootPage>
                     ),
                   ),
                   Positioned(
-                    top: calculate().dy,
-                    left: calculate().dx,
+                    top: calculate().dy + 30,
+                    left: calculate().dx + 30,
                     child: Image.asset(
                       (isNight)
                           ? 'assets/weather/moon.png'
@@ -149,9 +149,9 @@ class _RootPageState extends State<RootPage>
   Path drawPath() {
     Size size = Size(300, 150);
     Path path = Path();
-    path.moveTo(0, size.height / 2);
+    path.moveTo(-117.5, size.height / 2);
     path.quadraticBezierTo(
-        size.width / 2, -size.height, size.width + 35, size.height / 2);
+        size.width / 2, -size.height, size.width + 117.5, size.height / 2);
     return path;
   }
 }
