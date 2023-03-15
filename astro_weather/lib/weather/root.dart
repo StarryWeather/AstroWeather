@@ -73,30 +73,31 @@ class _RootPageState extends State<RootPage>
       child: Scaffold(
         body: Column(
           children: [
-            ClipPath(
-              clipper: ProsteBezierCurve(
-                position: ClipPosition.bottom,
-                list: [
-                  BezierCurveSection(
-                    start: Offset(0, MediaQuery.of(context).size.height * 0.10),
-                    top: Offset(MediaQuery.of(context).size.width / 2,
-                        MediaQuery.of(context).size.height * 0.10 - 32.5),
-                    end: Offset(MediaQuery.of(context).size.width,
-                        MediaQuery.of(context).size.height * 0.10),
-                  ),
-                ],
-              ),
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.10,
-                color: Colors.red,
-              ),
-            ),
             Expanded(
               child: Stack(
                 children: <Widget>[
+                  ClipPath(
+                    clipper: ProsteBezierCurve(
+                      position: ClipPosition.bottom,
+                      list: [
+                        BezierCurveSection(
+                          start: Offset(
+                              0, MediaQuery.of(context).size.height * 0.10),
+                          top: Offset(MediaQuery.of(context).size.width / 2,
+                              MediaQuery.of(context).size.height * 0.10 - 32.5),
+                          end: Offset(MediaQuery.of(context).size.width,
+                              MediaQuery.of(context).size.height * 0.10),
+                        ),
+                      ],
+                    ),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.10,
+                      color: Colors.red,
+                    ),
+                  ),
                   Positioned(
                     top: calculate().dy +
-                        MediaQuery.of(context).size.height * 0.06,
+                        MediaQuery.of(context).size.height * 0.15,
                     left: calculate().dx,
                     child: Image.asset(
                       (isNight)
