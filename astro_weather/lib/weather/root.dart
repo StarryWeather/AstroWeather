@@ -95,12 +95,6 @@ class _RootPageState extends State<RootPage>
               child: Stack(
                 children: <Widget>[
                   Positioned(
-                    top: 0,
-                    child: CustomPaint(
-                      painter: PathPainter(_path),
-                    ),
-                  ),
-                  Positioned(
                     top: calculate().dy +
                         MediaQuery.of(context).size.height * 0.06,
                     left: calculate().dx,
@@ -146,7 +140,7 @@ class _RootPageState extends State<RootPage>
               ),
               child: Container(
                 color: Colors.purple,
-                height: 150,
+                height: 100,
               ),
             )
           ],
@@ -154,23 +148,4 @@ class _RootPageState extends State<RootPage>
       ),
     );
   }
-}
-
-class PathPainter extends CustomPainter {
-  Path path;
-
-  PathPainter(this.path);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = Colors.redAccent.withOpacity(0.3)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3.0;
-
-    canvas.drawPath(this.path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
