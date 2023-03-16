@@ -16,14 +16,7 @@ class RootPage extends StatefulWidget {
   State<RootPage> createState() => _RootPageState();
 }
 
-class _RootPageState extends State<RootPage>
-    with SingleTickerProviderStateMixin {
-  // **get time of day**
-  double timeOfDay = 0.0;
-  bool isNight = false;
-
-  late Path _path;
-
+class _RootPageState extends State<RootPage>{
   @override
   void initState() {
     super.initState();
