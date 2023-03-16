@@ -3,7 +3,7 @@ import 'package:astro_weather/weather/infopage/info.dart';
 import 'package:astro_weather/weather/starspage/stars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 
@@ -45,15 +45,21 @@ class SunMoonState extends State<SunMoon> with SingleTickerProviderStateMixin {
     final size = Size(MediaQuery.of(context).size.width,
         MediaQuery.of(context).size.width / 2);
     _path = Path();
-    _path.moveTo(-MediaQuery.of(context).size.width * 0.25, size.height / 2);
-    _path.quadraticBezierTo(
-        size.width / 2, -size.height, size.width, size.height / 2);
+    _path.moveTo(-size.width * 0.15, size.height / 2);
+    // checks if mobile or website
+    if (kIsWeb) {
+      _path.quadraticBezierTo(
+          size.width / 2, -size.height, size.width * 1.09, size.height / 2);
+    } else {
+      _path.quadraticBezierTo(
+          size.width / 2, -size.height, size.width * 0.90, size.height / 2);
+    }
 
     return Expanded(
       child: Stack(
         children: <Widget>[
           Positioned(
-            top: calculate().dy,
+            top: calculate().dy + size.height * 0.3,
             left: calculate().dx,
             child: Image.asset(
               (isNight) ? 'assets/weather/moon.png' : 'assets/weather/sun.png',

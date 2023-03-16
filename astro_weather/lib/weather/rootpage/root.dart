@@ -16,7 +16,7 @@ class RootPage extends StatefulWidget {
   State<RootPage> createState() => _RootPageState();
 }
 
-class _RootPageState extends State<RootPage>{
+class _RootPageState extends State<RootPage> {
   @override
   void initState() {
     super.initState();
@@ -42,10 +42,11 @@ class _RootPageState extends State<RootPage>{
       },
       child: Scaffold(
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(child: Stars()),
-            Container(child: SunMoon()),
-            Container(child: Land()),
+            Stars(),
+            SunMoon(),
+            Land(),
           ],
         ),
       ),
