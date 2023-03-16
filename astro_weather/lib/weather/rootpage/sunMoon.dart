@@ -42,15 +42,16 @@ class SunMoonState extends State<SunMoon> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: LayoutBuilder(
-        builder: (context, Constraints) {
-          final size = Size(Constraints.maxWidth,Constraints.maxHeight);
-          _path = Path();
-          _path.moveTo(-MediaQuery.of(context).size.width * 0.25, size.height / 2);
-          _path.quadraticBezierTo(
-              size.width / 2, -size.height, size.width, size.height / 2);
+    final size = Size(MediaQuery.of(context).size.width,
+        MediaQuery.of(context).size.width / 2);
+    _path = Path();
+    _path.moveTo(-MediaQuery.of(context).size.width * 0.25, size.height / 2);
+    _path.quadraticBezierTo(
+        size.width / 2, -size.height, size.width, size.height / 2);
 
+    return Expanded(
+      child: Stack(
+        children: <Widget>[
           Positioned(
             top: calculate().dy,
             left: calculate().dx,
@@ -59,7 +60,7 @@ class SunMoonState extends State<SunMoon> with SingleTickerProviderStateMixin {
               width: 100,
               height: 100,
             ),
-          );
+          ),
           Slider(
             value: timeOfDay,
             onChanged: (value) {
@@ -77,8 +78,8 @@ class SunMoonState extends State<SunMoon> with SingleTickerProviderStateMixin {
             min: 0.0,
             max: 1.0,
             divisions: 48,
-          );
-        },
+          ),
+        ],
       ),
     );
   }

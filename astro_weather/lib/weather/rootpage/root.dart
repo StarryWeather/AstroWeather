@@ -31,13 +31,6 @@ class _RootPageState extends State<RootPage>
 
   @override
   Widget build(BuildContext context) {
-    final size = Size(MediaQuery.of(context).size.width,
-        MediaQuery.of(context).size.width / 2);
-    _path = Path();
-    _path.moveTo(-MediaQuery.of(context).size.width * 0.25, size.height / 2);
-    _path.quadraticBezierTo(
-        size.width / 2, -size.height, size.width, size.height / 2);
-
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (notification) {
         final scrollDelta = notification.scrollDelta;
@@ -57,9 +50,9 @@ class _RootPageState extends State<RootPage>
       child: Scaffold(
         body: Column(
           children: [
-            Stars(),
-            SunMoon(),
-            Land(),
+            Container(child: Stars()),
+            Container(child: SunMoon()),
+            Container(child: Land()),
           ],
         ),
       ),
