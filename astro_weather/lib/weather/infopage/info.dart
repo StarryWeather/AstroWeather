@@ -29,10 +29,8 @@ class _InfoPageState extends State<InfoPage> {
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.07),
-
-            // Orange box in the second row
             Container(
-              width: MediaQuery.of(context).size.width * 0.75,
+              width: MediaQuery.of(context).size.width * 0.85,
               height: MediaQuery.of(context).size.height * 0.20,
               decoration: BoxDecoration(
                 color: Colors.orange,
@@ -40,21 +38,20 @@ class _InfoPageState extends State<InfoPage> {
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.07),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.35,
+                  width: MediaQuery.of(context).size.width * 0.375,
                   height: MediaQuery.of(context).size.height * 0.20,
                   decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                SizedBox(width: MediaQuery.of(context).size.width * 0.07),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.10),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.35,
+                  width: MediaQuery.of(context).size.width * 0.375,
                   height: MediaQuery.of(context).size.height * 0.20,
                   decoration: BoxDecoration(
                     color: Colors.purple,
