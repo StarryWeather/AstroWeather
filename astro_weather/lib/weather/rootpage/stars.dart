@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
+import 'package:starsview/starsview.dart';
 
 class Stars extends StatefulWidget {
   const Stars({super.key});
@@ -27,7 +28,10 @@ class StarsState extends State<Stars> {
         ),
         child: Container(
           height: MediaQuery.of(context).size.height * 0.10,
-          color: Colors.red,
+          color: Colors.black,
+          child: const StarsView(
+            fps: 60,
+          ),
         ),
       ),
     );

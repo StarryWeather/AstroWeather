@@ -13,7 +13,7 @@ class _InfoPageState extends State<InfoPage> {
     return Scaffold(
       body: GestureDetector(
         onVerticalDragUpdate: (details) {
-          if (details.delta.dy < 0) {
+          if (details.delta.dy > 0) {
             Navigator.pop(context);
           }
         },

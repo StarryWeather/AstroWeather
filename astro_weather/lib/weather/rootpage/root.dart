@@ -1,6 +1,6 @@
 import 'package:astro_weather/weather/infopage/info.dart';
-import 'package:astro_weather/weather/rootpage/land.dart';
 import 'package:astro_weather/weather/rootpage/stars.dart';
+import 'package:astro_weather/weather/rootpage/land.dart';
 import 'package:astro_weather/weather/rootpage/sunMoon.dart';
 import 'package:astro_weather/weather/starspage/stars.dart';
 import 'package:flutter/material.dart';
@@ -38,9 +38,23 @@ class _RootPageState extends State<RootPage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Stars(),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const StarPage()));
+              },
+              child: Stars(),
+            ),
+
             SunMoon(),
-            Land(),
+
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const InfoPage()));
+              },
+              child: Land(),
+            ),           
           ],
         ),
       ),

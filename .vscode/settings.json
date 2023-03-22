@@ -1,0 +1,29 @@
+{
+  "files.exclude": {
+    "README.md": true,
+    "server.js": true,
+    "package-lock.json": true,
+    "package.json": true,
+    ".gitignore": true,
+    ".env": true,
+    "config": true,
+    "controllers": true,
+    "models": true,
+    "routes": true,
+    "astro_weather\\.dart_tool": true,
+    "astro_weather\\android": true,
+    "astro_weather\\assets": true,
+    "astro_weather\\build": true,
+    "astro_weather\\ios": true,
+    "astro_weather\\linux": true,
+    "astro_weather\\macos": true,
+    "astro_weather\\web": true,
+    "astro_weather\\windows": true,
+    "astro_weather\\.flutter-plugins-dependencies": true,
+    "astro_weather\\.flutter-plugins": true,
+    "astro_weather\\.gitignoreold": true,
+    "astro_weather\\.metadata": true,
+    "astro_weather\\analysis_options.yaml": true,
+    "astro_weather\\pubspec.lock": true
+  }
+}

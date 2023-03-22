@@ -10,6 +10,24 @@ class StarPage extends StatefulWidget {
 class _StarPageState extends State<StarPage> {
   @override
   Widget build(BuildContext context) {
-    return Text('StarPage');
+    return Scaffold(
+      body: GestureDetector(
+        onVerticalDragUpdate: (details) {
+          if (details.delta.dy < 0) {
+            Navigator.pop(context);
+          }
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Text('stars page'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
