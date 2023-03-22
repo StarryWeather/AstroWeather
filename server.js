@@ -52,4 +52,15 @@ app.listen(port, () => {
     console.log(`Server running on port ${port}`)
 });
 
-//"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix astro_weather && npm run build --prefix astro_weather"
+/*
+Start Scripts:
+"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix astro_weather && npm run build --prefix astro_weather"
+
+Gitignore:
+/node_modules
+.env
+.DS_Store
+npm-debug.log
+/*.env
+
+ */
