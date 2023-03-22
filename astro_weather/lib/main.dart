@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AstroWeather',
-      home: RootPage(),
+      home: LoginPage(),
     );
   }
 }

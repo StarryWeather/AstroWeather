@@ -41,9 +41,9 @@ class _EarthState extends State<Earth> with SingleTickerProviderStateMixin {
     //EDIT THIS FOR SIZING
     _scene = scene;
     if (widget.interative) {
-      _scene.camera.position.z = 20;
+      _scene.camera.position.z = 15;
     } else {
-      _scene.camera.position.z = 20;
+      _scene.camera.position.z = 15;
     }
 
     _earth = Object(
@@ -59,8 +59,8 @@ class _EarthState extends State<Earth> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height /4,
+      width: MediaQuery.of(context).size.width /4,
       child: TweenAnimationBuilder<double>(
           duration: Duration(seconds: 0),
           curve: Curves.easeIn,
