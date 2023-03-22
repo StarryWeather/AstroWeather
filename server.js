@@ -62,5 +62,4 @@ Gitignore:
 .DS_Store
 npm-debug.log
 /*.env
-
- */
+*/
