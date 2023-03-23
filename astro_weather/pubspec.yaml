@@ -35,3 +35,7 @@ flutter:
   assets:
   - assets/earth/
   - assets/weather/
+  fonts:
+  - family : KdamThmorPro
+    fonts:
+      - asset: Fonts/KdamThmorPro-Regular.ttf
