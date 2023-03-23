@@ -6,18 +6,14 @@ import 'package:astro_weather/weather/starspage/stars.dart';
 import 'package:flutter/material.dart';
 
 class RootPage extends StatefulWidget {
-  const RootPage({super.key});
+  final String accessToken;
+  const RootPage({required this.accessToken, Key? key}) : super(key: key);
 
   @override
   State<RootPage> createState() => _RootPageState();
 }
 
 class _RootPageState extends State<RootPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -41,20 +37,18 @@ class _RootPageState extends State<RootPage> {
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const StarPage()));
+                    MaterialPageRoute(builder: (context) => StarPage()));
               },
               child: Stars(),
             ),
-
             SunMoon(),
-
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const InfoPage()));
+                    MaterialPageRoute(builder: (context) => InfoPage()));
               },
               child: Land(),
-            ),           
+            ),
           ],
         ),
       ),

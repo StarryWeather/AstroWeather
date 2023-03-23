@@ -59,12 +59,12 @@ class SunMoonState extends State<SunMoon> with SingleTickerProviderStateMixin {
       child: Stack(
         children: <Widget>[
           Positioned(
-            top: calculate().dy + size.height * 0.3,
+            top: calculate().dy + size.height * 0.01,
             left: calculate().dx,
             child: Image.asset(
               (isNight) ? 'assets/weather/moon.png' : 'assets/weather/sun.png',
-              width: 100,
-              height: 100,
+              width: MediaQuery.of(context).size.width * 0.35,
+              height: MediaQuery.of(context).size.height * 0.35,
             ),
           ),
           Slider(
