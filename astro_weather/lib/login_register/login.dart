@@ -36,6 +36,7 @@ class LoginPageState extends State<LoginPage> {
                     shape: BoxShape.rectangle,
                     color: Color.fromARGB(160, 95, 95, 95),
                     border: Border.all(width: 5.0, color: Colors.white),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(32.0),
