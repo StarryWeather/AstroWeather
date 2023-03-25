@@ -1,145 +1,65 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+// Imports
+const express = require("express");
+const connectDb = require("./config/dbConnection");
+const errorHandler = require("./config/errorHandler");
+const dotenv = require("dotenv").config();
+const cors = require("cors");
+const path = require("path");
 
-const path = require('path');           
-const PORT = process.env.PORT || 5000;  
-
-
+// Assignments
+const port = process.env.PORT || 5000;
 const app = express();
 
-app.set('port', (process.env.PORT || 5000));
+/* Set port with express
+app.set("port", port);
+*/
+
+// Print to console database details
+connectDb();
+
+// Declare "body" parser for a given data stream received from client
+app.use(express.json());
+
+// Declare use of cors for security management
 app.use(cors());
-app.use(bodyParser.json());
 
+// Error Handler
+app.use(errorHandler);
 
-// const url = 'mongodb+srv://user:uEJHxFYK4uU2CmNM@testdb.zvqhhrl.mongodb.net/?retryWrites=true&w=majority';
-// const MongoClient = require("mongodb").MongoClient;
-// const client = new MongoClient(url);
-// client.connect(console.log("mongodb connected"));
-require('dotenv').config();
-const url = process.env.MONGODB_URI;
-const MongoClient = require('mongodb').MongoClient; 
-const client = new MongoClient(url);
-client.connect();
+// Define cors
+app.use((req, res, next) => {
+    res.setHeader("Acccess-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, DELETE');
+    next();
+});
 
+// Define URL routing to internal routing
+app.use("/api/locations", require("./routes/locationRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 
-
-if (process.env.NODE_ENV === 'production') 
-{
-  // Set static folder
-  app.use(express.static('frontend/build'));
-
-  app.get('*', (req, res) => 
- {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-  });
+// Server static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('astro_weather/build/web'));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'astro_weather', 'build', 'web', 'index.html'));
+    });
 }
 
-
-
-app.post('/api/addcard', async (req, res, next) =>
-{
-  // incoming: userId, color
-  // outgoing: error
-	
-  const { userId, card } = req.body;
-
-  const newCard = {Card:card,UserId:userId};
-  var error = '';
-
-  try
-  {
-    const db = client.db("COP4331Cards");
-    const result = db.collection('Cards').insertOne(newCard);
-  }
-  catch(e)
-  {
-    error = e.toString();
-  }
-
-  cardList.push( card );
-
-  var ret = { error: error };
-  res.status(200).json(ret);
+// Start backend
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`)
 });
 
+/*
+Start Scripts:
+"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix astro_weather && npm run build --prefix astro_weather"
 
-app.post('/api/login', async (req, res, next) => 
-{
-  // incoming: login, password
-  // outgoing: id, firstName, lastName, error
-	
- var error = '';
-
-  const { login, password } = req.body;
-
-  const db = client.db("Test");
-  const results = await db.collection('Users').find({Login:login,Password:password}).toArray();
-
-  var id = -1;
-  var fn = '';
-  var ln = '';
-
-  if( results.length > 0 )
-  {
-    id = results[0].UserID;
-    fn = results[0].FirstName;
-    ln = results[0].LastName;
-  }
-
-  var ret = { id:id, firstName:fn, lastName:ln, error:''};
-  res.status(200).json(ret);
-});
-
-app.post('/api/searchcards', async (req, res, next) => 
-{
-  // incoming: userId, search
-  // outgoing: results[], error
-
-  var error = '';
-
-  const { userId, search } = req.body;
-
-  var _search = search.trim();
-  
-  const db = client.db("COP4331Cards");
-  const results = await db.collection('Cards').find({"Card":{$regex:_search+'.*', $options:'r'}}).toArray();
-  
-  var _ret = [];
-  for( var i=0; i<results.length; i++ )
-  {
-    _ret.push( results[i].Card );
-  }
-  
-  var ret = {results:_ret, error:error};
-  res.status(200).json(ret);
-});
-
-
-
-
-
-
-
-app.use((req, res, next) => 
-{
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  );
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PATCH, DELETE, OPTIONS'
-  );
-  next();
-});
-
-
-app.listen(PORT, () => 
-{
-  console.log('Server listening on port ' + PORT);
-});
-
-
+Gitignore:
+/node_modules
+.env
+.DS_Store
+npm-debug.log
+/*.env
+*/
