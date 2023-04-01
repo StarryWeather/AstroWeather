@@ -4,8 +4,10 @@ import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../weather/rootpage/root.dart';
-import 'earthsetter.dart';
 import 'package:page_transition/page_transition.dart';
+
+import 'earthState.dart';
+import 'rocket.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

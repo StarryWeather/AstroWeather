@@ -24,11 +24,11 @@ class earthStateState extends State<earthState> with TickerProviderStateMixin {
         child: !earthIsInteracting
             ? Earth(
                 key: Key('Earth1'),
-                interative: false,
+                interactive: false,
               )
             : Earth(
                 key: Key('Earth2'),
-                interative: true,
+                interactive: true,
               ),
       ),
     );
