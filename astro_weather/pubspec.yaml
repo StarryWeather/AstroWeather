@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  page_transition:
+  page_transition: ^2.0.9
 
   animated_background: ^2.0.0
 

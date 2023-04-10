@@ -141,7 +141,7 @@ class LoginPageState extends State<LoginPage> {
                                     Navigator.push(
                                       context,
                                       PageTransition(
-                                        type: PageTransitionType.leftToRightPop,
+                                        type: PageTransitionType.leftToRight,
                                         child: RootPage(
                                           accessToken:
                                               responseJSON['accessToken'],
