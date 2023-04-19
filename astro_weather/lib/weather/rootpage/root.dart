@@ -44,7 +44,8 @@ class _RootPageState extends State<RootPage> {
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: AssetImage('assets/weather/clouds.png'),
+                              image:
+                                  AssetImage('assets/weather/testClouds.png'),
                             ),
                           ),
                           child: SunMoon(),

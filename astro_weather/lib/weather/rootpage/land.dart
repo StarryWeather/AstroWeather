@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 
@@ -9,7 +8,7 @@ class Land extends StatefulWidget {
   State<Land> createState() => LandState();
 }
 
-class LandState extends State<Land>{
+class LandState extends State<Land> {
   @override
   Widget build(BuildContext context) {
     return ClipPath(
@@ -26,6 +25,57 @@ class LandState extends State<Land>{
       child: Container(
         color: Colors.green,
         height: 100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(121, 158, 158, 158),
+                  border: Border.all(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              width: 120,
+              height: 50,
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "78°",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontFamily: 'KdamThmorPro',
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(121, 158, 158, 158),
+                  border: Border.all(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              width: 120,
+              height: 50,
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "53% Rain",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontFamily: 'KdamThmorPro',
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
