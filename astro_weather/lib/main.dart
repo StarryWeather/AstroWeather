@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_register/login.dart';
+import 'Eric.dart';
 import 'weather/rootpage/root.dart';
 
 void main() {

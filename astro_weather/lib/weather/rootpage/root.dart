@@ -31,26 +31,52 @@ class _RootPageState extends State<RootPage> {
         }
       },
       child: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => StarPage()));
-              },
-              child: Stars(),
-            ),
-            SunMoon(),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => InfoPage()));
-              },
-              child: Land(),
-            ),
-          ],
-        ),
+        body: SizedBox.expand(
+            child: Container(
+                color: Colors.lightBlue,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Stack(
+                      children: [
+                        Container(
+                          //this might need to be a stack find out later
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage('assets/weather/clouds.png'),
+                            ),
+                          ),
+                          child: SunMoon(),
+                          height: MediaQuery.of(context).size.height,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => StarPage()));
+                          },
+                          child: Stars(),
+                        ),
+                        Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => InfoPage()));
+                              },
+                              child: Land(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ))),
       ),
     );
   }
