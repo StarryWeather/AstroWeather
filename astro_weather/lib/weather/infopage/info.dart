@@ -24,6 +24,7 @@ class _InfoPageState extends State<InfoPage> {
   @override
   void initState() {
     super.initState();
+    // !!***pull locations here***!!
     sliderController = CarouselSliderController();
   }
 
@@ -36,7 +37,7 @@ class _InfoPageState extends State<InfoPage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/weather/ground.jpg'),
-            opacity: 0.87,
+            opacity: 0.84,
             fit: BoxFit.cover,
           ),
         ),
@@ -51,6 +52,12 @@ class _InfoPageState extends State<InfoPage> {
                 }
               },
               child: CarouselSlider.builder(
+                onSlideStart: () {
+                  // !!***pull first location here***!!
+                },
+                onSlideChanged: (index) {
+                  // !!***pull location info here***!!
+                },
                 unlimitedMode: true,
                 controller: sliderController,
                 slideBuilder: (index) {
@@ -71,6 +78,12 @@ class _InfoPageState extends State<InfoPage> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // !!*** create new location ***!!
+          },
+          backgroundColor: Color.fromARGB(255, 52, 125, 181),
+          child: Icon(Icons.add)),
     );
   }
 }
