@@ -148,14 +148,7 @@ class RegisterPageState extends State<RegisterPage> {
                             Expanded(
                               child: OutlinedButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    PageTransition(
-                                      type: PageTransitionType.bottomToTop,
-                                      child: LoginPage(),
-                                      duration: Duration(milliseconds: 400),
-                                    ),
-                                  );
+                                  Navigator.pop(context);
                                 },
                                 child: const Text('Go Back'),
                               ),
