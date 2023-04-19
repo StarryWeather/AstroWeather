@@ -1,4 +1,4 @@
-import 'package:astro_weather/weather/starspage/stars.dart';
+import 'package:astro_weather/screens/starspage/stars.dart';
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 

@@ -1,8 +1,8 @@
-import 'package:astro_weather/weather/infopage/info.dart';
-import 'package:astro_weather/weather/rootpage/stars.dart';
-import 'package:astro_weather/weather/rootpage/land.dart';
-import 'package:astro_weather/weather/rootpage/sunMoon.dart';
-import 'package:astro_weather/weather/starspage/stars.dart';
+import 'package:astro_weather/screens/infopage/info.dart';
+import 'package:astro_weather/screens/rootpage/stars.dart';
+import 'package:astro_weather/screens/rootpage/land.dart';
+import 'package:astro_weather/screens/rootpage/sunMoon.dart';
+import 'package:astro_weather/screens/starspage/stars.dart';
 import 'package:flutter/material.dart';
 
 class RootPage extends StatefulWidget {

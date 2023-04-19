@@ -1,6 +1,6 @@
 import 'dart:ui';
-import 'package:astro_weather/weather/infopage/info.dart';
-import 'package:astro_weather/weather/starspage/stars.dart';
+import 'package:astro_weather/screens/infopage/info.dart';
+import 'package:astro_weather/screens/starspage/stars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/foundation.dart';
