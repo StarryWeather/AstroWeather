@@ -1,13 +1,12 @@
-import 'package:astro_weather/login_register/register.dart';
+import 'package:astro_weather/screens/registerpage/register.dart';
 import 'package:flutter/material.dart';
 import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../weather/rootpage/root.dart';
+import '../rootpage/root.dart';
 import 'package:page_transition/page_transition.dart';
-
-import 'earthState.dart';
-import 'rocket.dart';
+import '../../widgets/earth/earthState.dart';
+import '../../widgets/rocket/rocket.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

@@ -1,4 +1,4 @@
-import 'package:astro_weather/weather/infopage/city.dart';
+import 'package:astro_weather/screens/infopage/city.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 

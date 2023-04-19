@@ -1,11 +1,11 @@
-import 'package:astro_weather/login_register/login.dart';
+import 'package:astro_weather/screens/loginpage/login.dart';
 import 'package:flutter/material.dart';
 import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../weather/rootpage/root.dart';
+import '../rootpage/root.dart';
 
-import 'earthState.dart';
+import '../../widgets/earth/earthState.dart';
 import 'package:page_transition/page_transition.dart';
 
 class RegisterPage extends StatefulWidget {
