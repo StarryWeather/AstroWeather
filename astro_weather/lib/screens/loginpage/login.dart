@@ -1,8 +1,9 @@
-import 'package:astro_weather/screens/registerpage/register.dart';
 import 'package:flutter/material.dart';
 import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../../widgets/menuBars/menuBars.dart';
+import '../registerpage/register.dart';
 import '../rootpage/root.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../widgets/earth/earthState.dart';
@@ -30,8 +31,15 @@ class LoginPageState extends State<LoginPage> {
           ),
           Column(
             children: [
+              Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.03)),//page hight: 3%
+              Row(
+                children: [
+                  Padding(padding: EdgeInsets.only(left: MediaQuery.of(context).size.height*0.01)),
+                  menuBar(width: MediaQuery.of(context).size.height*0.05,hight: MediaQuery.of(context).size.height*0.05),//page hight: 5%
+                ],
+              ),
               Padding(
-                padding: EdgeInsets.all(32.0),
+                padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.03),//page hight: 3% top + 3% bottom 
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
@@ -40,9 +48,10 @@ class LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(32.0),
+                    padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.05), //page hight: 5% + 5%
                     child: Column(
                       children: [
+
                         //welcome back,
                         const Text(
                           'Welcome to AstroWeather',
@@ -140,7 +149,7 @@ class LoginPageState extends State<LoginPage> {
                                     Navigator.push(
                                       context,
                                       PageTransition(
-                                        type: PageTransitionType.leftToRight,
+                                        type: PageTransitionType.rightToLeft,
                                         child: RootPage(
                                           accessToken:
                                               responseJSON['accessToken'],
@@ -176,9 +185,8 @@ class LoginPageState extends State<LoginPage> {
                             ),
                           ],
                         ),
-                        //sign in with google
 
-                        //register
+                        //to here
                       ],
                     ),
                   ),

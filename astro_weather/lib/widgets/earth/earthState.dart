@@ -34,11 +34,3 @@ class earthStateState extends State<earthState> with TickerProviderStateMixin {
     );
   }
 }
-
-//For Later redirecting we can use:
-// body: GestureDetector(
-//   onTap: () {
-//     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-//       return EarthPage();
-//     }));
-//   }

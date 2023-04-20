@@ -17,13 +17,14 @@ dependencies:
   sleek_circular_slider:
 
   animated_background: ^2.0.0
-
   starsview: ^0.0.2
-  cupertino_icons: ^0.1.2
   neon: ^0.0.1
   google_fonts: ^2.3.1
   line_icons: ^2.0.1
   flutter_cube: ^0.1.1
+  cupertino_icons: ^1.0.2
+  rive: ^0.9.1
+  flutter_svg: ^1.1.6
   proste_bezier_curve:
 
 dev_dependencies:
@@ -38,6 +39,7 @@ flutter:
   - assets/rocket/
   - assets/earth/
   - assets/weather/
+  - assets/riveAssets/
   fonts:
   - family : KdamThmorPro
     fonts:
