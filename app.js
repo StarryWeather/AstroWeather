@@ -6,13 +6,19 @@ const dotenv = require("dotenv").config();
 const cors = require("cors");
 const path = require("path");
 
+var createError = require('http-errors');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+
 // Assignments
-const port = process.env.PORT || 5000;
+//const port = process.env.PORT || 5000;
 const app = express();
 
-/* Set port with express
-app.set("port", port);
-*/
+// Log on dev build
+app.use(logger('dev'));
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Print to console database details
 connectDb();
@@ -38,19 +44,21 @@ app.use((req, res, next) => {
 app.use("/api/locations", require("./routes/locationRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 
-// Server static assets if in production
-if (process.env.NODE_ENV === 'production') {
-    // Set static folder
-    app.use(express.static('astro_weather/build/web'));
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'astro_weather', 'build', 'web', 'index.html'));
-    });
-}
+// // Start backend
+// app.listen(port, () => {
+//     console.log(`Server running on port ${port}`)
+// });
 
-// Start backend
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`)
-});
+module.exports = app;
+
+
+
+
+
+
+
+
+
 
 /*
 Start Scripts:
@@ -62,4 +70,13 @@ Gitignore:
 .DS_Store
 npm-debug.log
 /*.env
+
+// Server static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('astro_weather/build/web'));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'astro_weather', 'build', 'web', 'index.html'));
+    });
+}
 */
