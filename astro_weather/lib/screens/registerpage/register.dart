@@ -1,9 +1,7 @@
-import 'package:astro_weather/screens/loginpage/login.dart';
 import 'package:flutter/material.dart';
 import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../../widgets/menuBars/menuBars.dart';
 import '../rootpage/root.dart';
 
 import '../../widgets/earth/earthState.dart';
@@ -30,14 +28,7 @@ class RegisterPageState extends State<RegisterPage> {
             fps: 60,
           ),
           Column(
-            children:  [
-              Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.03)),//page hight: 3%
-              Row(
-                children: [
-                  Padding(padding: EdgeInsets.only(left: MediaQuery.of(context).size.height*0.01)),
-                  menuBar(width: MediaQuery.of(context).size.height*0.05,hight: MediaQuery.of(context).size.height*0.05),//page hight: 5%
-                ],
-              ),              
+            children:  [   
               Padding(
                 padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.03),//page hight: 3% top + 3% bottom 
                 child: DecoratedBox(
@@ -48,7 +39,7 @@ class RegisterPageState extends State<RegisterPage> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.05),
+                    padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.05), //page hight: 5% + 5%
                     child: Column(
                       children: [
                         //welcome back,

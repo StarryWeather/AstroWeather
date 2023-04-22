@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'screens/loginpage/login.dart';
-import 'Eric.dart';
-import 'screens/rootpage/root.dart';
 
 void main() {
   runApp(const MyApp());

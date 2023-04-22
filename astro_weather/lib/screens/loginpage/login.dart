@@ -40,6 +40,7 @@ class LoginPageState extends State<LoginPage> {
               ),
               Padding(
                 padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.03),//page hight: 3% top + 3% bottom 
+              Navbar(UserName: 'Please Login!',),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
