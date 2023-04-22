@@ -18,13 +18,19 @@ class NavBarState extends State<Navbar> {
 
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-      body: IconButton(
-        icon: Icon(Icons.menu, color: Colors.white,),
-        onPressed: () {
-        },
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Colors.red,
       ),
+      child: Text('hi')
+      
     );
   }
 }
 
+// ElevatedButton.icon(
+//         label: const Text('',style: TextStyle(color: Colors.white),),
+//         icon: Icon(Icons.menu, color: Colors.white,),
+//         onPressed: () {
+//         }, 
+//       ),
