@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../../widgets/menuBars/menuBars.dart';
 import '../registerpage/register.dart';
 import '../rootpage/root.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../widgets/earth/earthState.dart';
-import '../../widgets/rocket/rocket.dart';
+import '../sideBar/sidebar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,16 +30,19 @@ class LoginPageState extends State<LoginPage> {
           ),
           Column(
             children: [
-              Padding(padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.03)),//page hight: 3%
               Row(
                 children: [
-                  Padding(padding: EdgeInsets.only(left: MediaQuery.of(context).size.height*0.01)),
-                  menuBar(width: MediaQuery.of(context).size.height*0.05,hight: MediaQuery.of(context).size.height*0.05),//page hight: 5%
+                  Padding(
+                    padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
+                    child: Navbar(UserName: 'Please Login!',),
+                  ),
                 ],
               ),
-              Padding(
-                padding: EdgeInsets.all(MediaQuery.of(context).size.height*0.03),//page hight: 3% top + 3% bottom 
-              Navbar(UserName: 'Please Login!',),
+              Container(
+                padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.03),//page hight: 3% top + 3% bottom 
+                constraints: BoxConstraints.tightForFinite(
+                  width: 700
+                ),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
