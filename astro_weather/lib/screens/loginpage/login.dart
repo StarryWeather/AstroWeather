@@ -6,7 +6,7 @@ import '../registerpage/register.dart';
 import '../rootpage/root.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../widgets/earth/earthState.dart';
-import '../sideBar/sidebar.dart';
+import '../sideBar/NavBar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

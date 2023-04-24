@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'screens/loginpage/login.dart';
 
+
+import 'package:astro_weather/screens/sideBar/sidebar.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AstroWeather',
-      home: LoginPage(),
+      home: SideMenu(),
     );
   }
 }

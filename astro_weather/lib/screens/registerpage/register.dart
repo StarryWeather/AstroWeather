@@ -5,7 +5,7 @@ import 'dart:convert';
 import '../rootpage/root.dart';
 import '../../widgets/earth/earthState.dart';
 import 'package:page_transition/page_transition.dart';
-import '../sideBar/sidebar.dart';
+import '../sideBar/NavBar.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

@@ -39,7 +39,7 @@ flutter:
   - assets/rocket/
   - assets/earth/
   - assets/weather/
-  - assets/riveAssets/
+  - assets/RiveAssets/
   fonts:
   - family : KdamThmorPro
     fonts:

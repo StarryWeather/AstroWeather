@@ -1,36 +1,57 @@
+import 'package:astro_weather/models/rive_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
+import '../../utils/rive_utils.dart';
+import '../../widgets/SideMenu/SideMenuBrowsers.dart';
+import '../../widgets/SideMenu/SideMenuInfoCard.dart';
 
-
-class Navbar extends StatefulWidget {
-  const Navbar({super.key, required this.UserName});
-  final String UserName;
+class SideMenu extends StatefulWidget {
+  const SideMenu({super.key});
 
   @override
-  State<Navbar> createState() => NavBarState(UserName: UserName);
+  State<SideMenu> createState() => _SideMenuState();
 }
 
-class NavBarState extends State<Navbar> {
-  final String UserName;
-
-  NavBarState({
-    required this.UserName,
-  });
-
+class _SideMenuState extends State<SideMenu> {
+  RiveAssets selectedMenu = sideMenus.first;
   @override
-  Widget build(BuildContext context){
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.red,
-      ),
-      child: Text('hi')
-      
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Container(
+          width: 288,
+          height: double.infinity,
+          color: Color(0xFF17203A),
+          child: SafeArea(
+            child: Column(
+              children: [
+                SideMenuInfoCard(name: 'Fake name', userType: 'User',),
+                Padding(
+                  padding: const EdgeInsets.only(left: 24, top: 32, bottom: 16),
+                  child: Text("Browse".toUpperCase(),style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white70),),
+                ),
+                ...sideMenus.map(
+                  (menu) => SideMenuBrowsers(
+                    menu: menu,
+                    riveonInit: (artboard) {
+                      StateMachineController controller = RiveUtils.getRiveController(artboard, StateMachineName: menu.stateMachineName);
+                      menu.input = controller.findSMI("active") as SMIBool;
+                    },
+                    press: () {
+                      menu.input!.change(true);
+                      Future.delayed(Duration(seconds: 1), () {
+                        menu.input!.change(false);
+                      });
+                      setState(() {
+                        selectedMenu = menu;
+                      });
+                    },
+                    isActive: selectedMenu == menu,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
     );
   }
 }
-
-// ElevatedButton.icon(
-//         label: const Text('',style: TextStyle(color: Colors.white),),
-//         icon: Icon(Icons.menu, color: Colors.white,),
-//         onPressed: () {
-//         }, 
-//       ),
