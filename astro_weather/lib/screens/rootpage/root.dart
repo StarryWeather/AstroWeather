@@ -4,16 +4,21 @@ import 'package:astro_weather/screens/rootpage/rootLand.dart';
 import 'package:astro_weather/screens/rootpage/rootSunMoon.dart';
 import 'package:astro_weather/screens/starspage/stars.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 class RootPage extends StatefulWidget {
   final String accessToken;
   const RootPage({required this.accessToken, Key? key}) : super(key: key);
-
   @override
   State<RootPage> createState() => _RootPageState();
 }
 
 class _RootPageState extends State<RootPage> {
+  void getLocation() async
+  {
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+    print(position);
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -41,15 +46,19 @@ class _RootPageState extends State<RootPage> {
                       children: [
                         Container(
                           //this might need to be a stack find out later
+                          child: SunMoon(),
+                          height: MediaQuery.of(context).size.height,
+                        ),
+                        Container(
+                          //this might need to be a stack find out later
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               fit: BoxFit.fill,
                               image:
-                                  AssetImage('assets/weather/testClouds.png'),
+                                  AssetImage('assets/weather/clouds.png'),
                             ),
                           ),
-                          child: SunMoon(),
-                          height: MediaQuery.of(context).size.height,
+                          height: MediaQuery.of(context).size.height/2,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -73,6 +82,12 @@ class _RootPageState extends State<RootPage> {
                               child: Land(),
                             ),
                           ),
+                        ),
+                        Container(
+                          child: ElevatedButton(
+                                onPressed: getLocation,
+                                child: const Text('location'),
+                              ),
                         ),
                       ],
                     ),

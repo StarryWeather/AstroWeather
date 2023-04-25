@@ -1,4 +1,5 @@
 import 'package:astro_weather/screens/infopage/city.dart';
+import 'package:astro_weather/screens/rootpage/root.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
@@ -32,7 +33,13 @@ class _InfoPageState extends State<InfoPage> {
   Widget build(BuildContext context) {
     var DevWidth = MediaQuery.of(context).size.width;
     var DevHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
+    return GestureDetector(
+      onVerticalDragUpdate: (details) {
+        if (details.delta.dy > 0) {
+          Navigator.pop(context);
+        }
+      },
+      child : Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -84,6 +91,7 @@ class _InfoPageState extends State<InfoPage> {
           },
           backgroundColor: Color.fromARGB(255, 52, 125, 181),
           child: Icon(Icons.add)),
+    ),
     );
   }
 }
