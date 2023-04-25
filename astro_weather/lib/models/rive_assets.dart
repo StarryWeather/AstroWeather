@@ -72,3 +72,16 @@ List<RiveAssets> bottonNavs = [
     title: "Profile"
   ),
 ];
+
+List<RiveAssets> sideMenu2 = [
+  RiveAssets("assets/RiveAssets/icons.riv",
+    artboard: "TIMER",
+    stateMachineName: "TIMER_Interactivity",
+    title: "History"
+  ),
+  RiveAssets("assets/RiveAssets/icons.riv",
+    artboard: "BELL",
+    stateMachineName: "BELL_Interactivity",
+    title: "History"
+  ),
+];
