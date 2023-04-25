@@ -16,6 +16,8 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   void getLocation() async
   {
+    await Geolocator.checkPermission();
+    await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
     print(position);
   }
