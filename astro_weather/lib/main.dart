@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '/screens/sideBar/sidebar.dart';
 import 'screens/loginpage/login.dart';
-
-
-import 'package:astro_weather/screens/sideBar/sidebar.dart';
 
 void main() {
   runApp(const MyApp());
