@@ -23,16 +23,19 @@ class SideMenuBrowsers extends StatelessWidget {
         ),
         Stack(
           children: [
-            isActive ? Positioned(
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.fastOutSlowIn,
               height: 56,//edit!
-              width: 288,
+              width: isActive ? 288 : 0,
+              left: 0,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color(0xFF6792FF),
-                  borderRadius: BorderRadius.all(Radius.circular(10))
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
               ),
-            ): SizedBox(),
+            ),
             ListTile(
               onTap: press,
               leading: SizedBox(
