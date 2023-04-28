@@ -15,6 +15,7 @@ dependencies:
   page_transition: ^2.0.9
   flutter_carousel_slider: ^1.1.0
   sleek_circular_slider:
+  email_validator:
 
   animated_background: ^2.0.0
   starsview: ^0.0.2
