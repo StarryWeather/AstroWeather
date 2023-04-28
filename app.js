@@ -5,6 +5,7 @@ const errorHandler = require("./config/errorHandler");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
 const path = require("path");
+const nodemailer = require("nodemailer");
 
 var createError = require('http-errors');
 var cookieParser = require('cookie-parser');
@@ -16,6 +17,7 @@ const app = express();
 
 // Log on dev build
 app.use(logger('dev'));
+
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,33 +52,3 @@ app.use("/api/users", require("./routes/userRoutes"));
 // });
 
 module.exports = app;
-
-
-
-
-
-
-
-
-
-
-/*
-Start Scripts:
-"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix astro_weather && npm run build --prefix astro_weather"
-
-Gitignore:
-/node_modules
-.env
-.DS_Store
-npm-debug.log
-/*.env
-
-// Server static assets if in production
-if (process.env.NODE_ENV === 'production') {
-    // Set static folder
-    app.use(express.static('astro_weather/build/web'));
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'astro_weather', 'build', 'web', 'index.html'));
-    });
-}
-*/
