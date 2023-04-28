@@ -7,6 +7,8 @@ import '../rootpage/root.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../widgets/earth/earthState.dart';
 import '../sideBar/NavBar.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:astro_weather/global.dart' as globals;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,6 +19,46 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   bool isEmailValid = true;
   bool isPasswordValid = true;
+  void getLocation() async
+  {
+    print("test");
+    await Geolocator.checkPermission();
+    await Geolocator.requestPermission();
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+    print(position);
+                                 var url = Uri.parse(
+                                      'https://astrosphericpublicaccess.azurewebsites.net/api/GetForecastData_V1');
+                                  var data = {
+                                    'Latitude': position.latitude,
+                                    'Longitude': position.longitude,
+                                    'APIKey' : "21176ACC7A29F61969EF655CB5A1562D36DB1D60C02B6DACA1684FFE3F69219A8EDC6305"
+                                  };
+                                  var jsonData = jsonEncode(data);
+                                  var response = await http.post(url,
+                                      headers: {
+                                        "Content-Type": "application/json"
+                                      },
+                                      body: jsonData);
+                                  // check if valid
+                                  if (response.statusCode == 200) {
+
+                                    // true: go to root
+                                    debugPrint('Made it in here: pass');
+                                    var responseJSON =
+                                        json.decode(response.body);
+                                    debugPrint(responseJSON['TimeZone']);
+                                    var test = responseJSON['RDPS_Temperature'][0]['Value']['ActualValue'];
+                                    
+                              
+                                    globals.currentTemp = test.toString();
+                                    debugPrint(globals.currentTemp);
+                                    //var responseJSON = json.decode(response.body);
+                                  } else {
+                                    // false: display email/password invalid
+                                    debugPrint('Made it in here: fail');
+
+                                  }
+  }
   @override
   Widget build(BuildContext context) {
     final emailController = TextEditingController();
@@ -144,6 +186,7 @@ class LoginPageState extends State<LoginPage> {
                                       body: jsonData);
                                   // check if valid
                                   if (response.statusCode == 200) {
+                                    
                                     // true: go to root
                                     debugPrint('Made it in here: pass');
                                     var responseJSON =
