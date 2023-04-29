@@ -32,10 +32,10 @@ class LoginPageState extends State<LoginPage> {
           const StarsView(
             fps: 60,
           ),
-
           Column(
             children: [
               
+              SizedBox(height: 64,),
               Container(
                 padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.03),//page hight: 3% top + 3% bottom 
                 constraints: BoxConstraints.tightForFinite(
