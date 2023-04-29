@@ -2,8 +2,6 @@
 const asyncHandler = require("express-async-handler");
 const Location = require("../models/locationModel");
 
-// CRUD OPERATIONS OF INFO
-
 //@desc Get all locations
 //@route GET /api/locations
 //@access private
@@ -23,17 +21,25 @@ const createLocation = asyncHandler(async (req, res) => {
     console.log("The request body is: ", req.body);
 
     // Take in request from client and validate
-    const {email, password} = req.body;
-    if (!email || !password) {
+    const {jwt, lat, long} = req.body;
+    if (!jwt || !lat || !long) {
         res.status(400);
-        throw new Error("All fields are mandatory");
+        throw new Error("Missing necessary location data");
     }
+
+    // Decode JWT into user ID
+    const {user: {id}} = jwt.verify(req.params.token, process.env.ACCESS_TOKEN_SECRET);
+    if (!decodedID) {
+        res.status(400);
+        throw new Error("Error decoding user ID");
+    };
 
     // Create location object and send to database
     const location = await Location.create({
-        email,
-        password,
-        user_id: req.user.id, //from jwt
+        //user_id: req.user.id, //from jwt
+        user_id: decodedID,
+        latitude: lat,
+        longitude: long,
     });
 
     // Send response back to client in JSON format with the status code

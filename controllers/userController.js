@@ -4,6 +4,8 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv").config();
+const { token } = require("morgan");
 
 //@desc Register a user
 //@route POST /api/users/register
@@ -16,9 +18,9 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("All fields are mandatory");
     }
 
-    // Validate if the user exists
-    const available = await User.findOne({email});
-    if (!available) {
+    // Validate if the email is present in the db
+    const exists = await User.findOne({email});
+    if (exists) {
         res.status(400);
         throw new Error("User already exists!");
     }
@@ -29,12 +31,26 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // Create new user object and send to database
     const user = await User.create({
-        email,
+        email: email,
         password: hashedPassword,
         confirmed: false,
     });
 
-    // Email
+    // Email functionality
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+//            type: "OAuth2",
+            user: process.env.EMAIL_USERNAME,
+            pass: process.env.EMAIL_PASSWORD,
+//            clientId: process.env.OAUTH_CLIENTID,
+//            clientSecret: process.env.OAUTH_CLIENTSECRET,
+//            refreshToken: process.env.OAUTH_REFRESHTOKEN,
+        },
+        debug: true,
+        logger: true
+    });
+
     // Create json web token to send in account confirmation email
     jwt.sign(
         {
@@ -44,9 +60,8 @@ const registerUser = asyncHandler(async (req, res) => {
         }, 
         process.env.EMAIL_TOKEN_SECRET,
         {expiresIn: "30m"},
-        // Callback function
-        (err, token) => {
-            const url = `http://https://hidden-tor-21438.herokuapp.com/api/confirm/${token}`;
+        (err, emailToken) => {
+            const url = `https://hidden-tor-21438.herokuapp.com/api/users/confirm/${emailToken}`;
 
             transporter.sendMail({
                 to: user.email,
@@ -59,7 +74,7 @@ const registerUser = asyncHandler(async (req, res) => {
     // Create response
     console.log(`User created ${user}`);
     if (user) {
-        res.status(201).json({_id: user.id, email: user.email});
+        res.status(201).json({email: user.email}); //_id: user.id,
     } else {
         res.status(400);
         throw new Error("User data not valid");
@@ -88,7 +103,11 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
     // Compare entered password with hashed passwords in database
-    if (user && (await bcrypt.compare(password, user.password))) {
+    // Could refactor as in reset function
+    if (!(await bcrypt.compare(password, user.password))) {
+        res.status(401);
+        throw new Error("Email or password invalid");
+    } else {
 
         // Create json web token to validate sign in
         const accessToken = jwt.sign(
@@ -99,12 +118,9 @@ const loginUser = asyncHandler(async (req, res) => {
                 },
             }, 
             process.env.ACCESS_TOKEN_SECRET,
-            {expiresIn: "20m"}
+            {expiresIn: "30m"}
         );
         res.status(200).json({accessToken});
-    } else {
-        res.status(401);
-        throw new Error("Email or password invalid");
     }
 });
 
@@ -116,18 +132,115 @@ const currentUser = asyncHandler(async (req, res) => {
 });
 
 //@desc Verify user account from email
-//@route POST /api/users/confirm/:token
+//@route GET /api/users/confirm/:token
 //@access private
 const confirmUser = asyncHandler(async (req, res) => {
     try {
-        const decodedID = jwt.verify(req.params.token, process.env.EMAIL_TOKEN_SECRET);
-        await User.findByIdAndUpdate(decodedID, {confirmed: true});
+        const {user: {id}} = jwt.verify(req.params.token, process.env.EMAIL_TOKEN_SECRET);
+        await User.findByIdAndUpdate(id, {confirmed: true});
     } catch (e) {
         res.status(400);
         throw new Error("Email validation error");
     }
 
-    return res.redirect("https://hidden-tor-21438.herokuapp.com/")
+    return res.redirect("https://hidden-tor-21438.herokuapp.com/#/")
+});
+
+//@desc Email verification prompt to reset password
+//@route GET /api/users/reset
+//@access public
+// FIX PATHING TO PROMPT AT WEBSITE PAGE
+const passwordPrompt = asyncHandler(async (req, res) => {
+    const {email} = req.body;
+    if (!email) {
+        res.status(400);
+        throw new Error("Please enter an email");
+    }
+
+    // Find user in database with email
+    const user = await User.findOne({email});
+
+    // Verify if user is email validated
+    if (user.confirmed != true) {
+        console.log(user.confirmed);
+        res.status(401);
+        throw new Error("Please verify your email address to continue");
+    }
+
+    // Email functionality
+    const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: process.env.EMAIL_USERNAME,
+            pass: process.env.EMAIL_PASSWORD,
+        },
+        debug: true,
+        logger: true
+    });
+
+    // Create json web token to send in password reset email
+    jwt.sign(
+        {
+            user: {
+                id: user.id,
+            },
+        }, 
+        process.env.EMAIL_TOKEN_SECRET,
+        {expiresIn: "5m"},
+        (err, emailToken) => {
+            // CHANGE URL TO FRONTEND PAGE
+            const url = `https://hidden-tor-21438.herokuapp.com/api/users/reset/${emailToken}`;
+
+            transporter.sendMail({
+                to: user.email,
+                subject: "Reset your password",
+                html: `Click this link to reset your password to Astroweather, or paste into your web browser in order to access the site: <a href="${url}">${url}</a>`,
+            });
+        },
+    );
+
+    // Create response
+    if (user) {
+        res.status(201).json({email: user.email});
+    } else {
+        res.status(500);
+        throw new Error("Unvalidated Email Error");
+    }
+});
+
+//@desc Reset user password after email confirmation
+//@route GET /api/users/reset/:token
+//@access private
+const resetPassword = asyncHandler(async (req, res) => {
+    const {oldPassword, newPassword} = req.body;
+
+    // Check for present fields
+    if (!oldPassword || !newPassword) {
+        res.status(400);
+        throw new Error("All fields are mandatory");
+    }
+
+    // Decode token from email to retrieve respective user from id
+    const {user: {id}} = jwt.verify(req.params.token, process.env.EMAIL_TOKEN_SECRET);
+    const user = await User.findById(id);
+
+    // Check for errors in decoding token and retrieving user
+    if (!(await bcrypt.compare(oldPassword, user.password))) {
+        res.status(401);
+        throw new Error("Incorrect password");
+    } else {
+        // Hash password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        console.log("New Hashed Password: ", hashedPassword);
+
+        // Update password and send response
+        if (await User.findByIdAndUpdate(id, {password: hashedPassword})) {
+            return res.redirect("https://hidden-tor-21438.herokuapp.com/#/")
+        } else {
+            res.status(500);
+            throw new Error("Error resetting password");
+        }
+    }
 });
 
 module.exports = {
@@ -135,4 +248,6 @@ module.exports = {
     loginUser, 
     currentUser,
     confirmUser,
+    passwordPrompt,
+    resetPassword,
 };

@@ -46,9 +46,4 @@ app.use((req, res, next) => {
 app.use("/api/locations", require("./routes/locationRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
 
-// // Start backend
-// app.listen(port, () => {
-//     console.log(`Server running on port ${port}`)
-// });
-
 module.exports = app;
