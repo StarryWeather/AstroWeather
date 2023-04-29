@@ -1,13 +1,15 @@
+import 'package:astro_weather/screens/sideBar/sidebar.dart';
+import 'package:astro_weather/utils/rive_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../../models/sidebarBtn.dart';
 import '../registerpage/register.dart';
 import '../rootpage/root.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../widgets/earth/earthState.dart';
-import '../sideBar/NavBar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,6 +24,7 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
+    late SMIBool isSideMenuClosed;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 0, 0),
       body: Stack(
@@ -29,13 +32,10 @@ class LoginPageState extends State<LoginPage> {
           const StarsView(
             fps: 60,
           ),
+
           Column(
             children: [
-              Row(
-                children: [
-                  sideMenuBtn(press: () {  }, riveOnInit: (Artboard value) {  },),
-                ],
-              ),
+              
               Container(
                 padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.03),//page hight: 3% top + 3% bottom 
                 constraints: BoxConstraints.tightForFinite(
@@ -200,30 +200,3 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-class sideMenuBtn extends StatelessWidget {
-  const sideMenuBtn({
-    Key? key, required this.press, required this.riveOnInit
-  }): super(key: key);
-  
-  final VoidCallback press;
-  final ValueChanged<Artboard> riveOnInit;
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-    child: GestureDetector(
-      onTap: press,
-      child: Container(
-        margin: EdgeInsets.only(left: 16, top: 16),
-        height: 40,
-        width: 40,
-        child: RiveAnimation.asset(
-          "assets/RiveAssets/sideMenuButton.riv",
-          onInit: riveOnInit,
-          ),
-        ),
-      ),
-    );
-  }
-} 

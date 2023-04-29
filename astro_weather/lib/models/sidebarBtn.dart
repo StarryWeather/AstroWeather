@@ -18,6 +18,16 @@ class sideMenuBtn extends StatelessWidget {
         margin: EdgeInsets.only(left: 16, top: 16),
         height: 40,
         width: 40,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              offset: Offset(0,2),
+              blurRadius: 8,
+            ),
+          ]
+        ),
         child: RiveAnimation.asset(
           "assets/RiveAssets/sideMenuButton.riv",
           onInit: riveOnInit,

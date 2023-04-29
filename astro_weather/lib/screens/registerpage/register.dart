@@ -5,7 +5,6 @@ import 'dart:convert';
 import '../rootpage/root.dart';
 import '../../widgets/earth/earthState.dart';
 import 'package:page_transition/page_transition.dart';
-import '../sideBar/NavBar.dart';
 import 'package:email_validator/email_validator.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -39,17 +38,8 @@ class RegisterPageState extends State<RegisterPage> {
           ),
           Column(
             children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(
-                        MediaQuery.of(context).size.width * 0.01),
-                    child: Navbar(
-                      UserName: 'Please Login!',
-                    ),
-                  ),
-                ],
-              ),
+              
+              
               Padding(
                 padding: EdgeInsets.all(MediaQuery.of(context).size.height *
                     0.03), //page hight: 3% top + 3% bottom
