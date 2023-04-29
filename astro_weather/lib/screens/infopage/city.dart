@@ -39,7 +39,7 @@ class _CityInfoState extends State<CityInfo> {
               color: Color.fromARGB(16, 190, 190, 190),
               borderRadius: BorderRadius.circular(15),
             ),
-            height: MediaQuery.of(context).size.height * 0.10,
+            height: MediaQuery.of(context).size.height * 0.30,
             alignment: Alignment.center,
             child: Text(
               cityName,

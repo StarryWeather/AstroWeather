@@ -38,7 +38,6 @@ class _RootPageState extends State<RootPage> {
                                     debugPrint('Made it in here: pass');
                                     var responseJSON =
                                         json.decode(response.body);
-                                    debugPrint(responseJSON['TimeZone']);
                                     var temps = responseJSON['data'][0]['temp'];
                                     
                                     temps = ((temps)*1.8)+32;
@@ -46,6 +45,7 @@ class _RootPageState extends State<RootPage> {
                                     globals.currentTemp = temps.toString();
 
                                     var clouds = responseJSON['data'][0]['clouds'];
+                                    globals.cloudCover = clouds;
                                     if(clouds > 70)
                                     {
                                       globals.cloudIndex = 2;
@@ -61,9 +61,14 @@ class _RootPageState extends State<RootPage> {
 
                                     var desc = responseJSON['data'][0]['weather']['description'];
                                     globals.weatherDesc = desc;
-                                    debugPrint(globals.currentTemp.toString());
-                                    debugPrint(globals.cloudIndex.toString());
 
+                                    var dn = responseJSON['data'][0]['pod'];
+                                    globals.DN = dn;
+                                    debugPrint("Temp : "+globals.currentTemp.toString());
+                                    debugPrint("Cloud Phase : " +globals.cloudIndex.toString());
+                                    debugPrint("Cloud Cover : " +globals.cloudCover.toString());
+                                    debugPrint("Day or Night : "+globals.DN.toString());
+                                    debugPrint("Weather Description : "+ globals.weatherDesc);
                                     updateState();
                                     //var responseJSON = json.decode(response.body);
                                   } else {
@@ -76,12 +81,14 @@ class _RootPageState extends State<RootPage> {
   var temp;
   var cloudIndex;
   var weatherDesc;
+  var DN;
   void updateState()
   {
     setState(() {
       this.temp = globals.currentTemp;
       this.cloudIndex = globals.cloudIndex;
       this.weatherDesc = globals.weatherDesc;
+      this.DN = globals.DN;
     });
 
   }
@@ -104,7 +111,7 @@ class _RootPageState extends State<RootPage> {
       child: Scaffold(
         body: SizedBox.expand(
             child: Container(
-                color: Colors.lightBlue,
+                color: ( DN == "d") ? Colors.lightBlue : Colors.black,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

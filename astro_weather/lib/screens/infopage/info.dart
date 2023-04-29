@@ -2,6 +2,7 @@ import 'package:astro_weather/screens/infopage/city.dart';
 import 'package:astro_weather/screens/rootpage/root.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
+import 'package:astro_weather/global.dart' as globals;
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -29,6 +30,16 @@ class _InfoPageState extends State<InfoPage> {
     sliderController = CarouselSliderController();
   }
 
+  var temp;
+  var weatherDesc;
+  void updateState()
+  {
+    setState(() {
+      this.temp = globals.currentTemp;
+      this.weatherDesc = globals.weatherDesc;
+    });
+
+  }
   @override
   Widget build(BuildContext context) {
     var DevWidth = MediaQuery.of(context).size.width;
