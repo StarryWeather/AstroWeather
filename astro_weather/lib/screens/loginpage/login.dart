@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -32,10 +33,7 @@ class LoginPageState extends State<LoginPage> {
             children: [
               Row(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
-                    child: Navbar(UserName: 'Please Login!',),
-                  ),
+                  sideMenuBtn(),
                 ],
               ),
               Container(
@@ -146,8 +144,7 @@ class LoginPageState extends State<LoginPage> {
                                   if (response.statusCode == 200) {
                                     // true: go to root
                                     debugPrint('Made it in here: pass');
-                                    var responseJSON =
-                                        json.decode(response.body);
+                                    var responseJSON = json.decode(response.body);
                                     //var responseJSON = json.decode(response.body);
                                     Navigator.push(
                                       context,
@@ -203,3 +200,30 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+class sideMenuBtn extends StatelessWidget {
+  const sideMenuBtn({
+    Key? key, required this.press, required this.riveOnInit
+  }): super(key: key);
+  
+  final VoidCallback press;
+  final ValueChanged<Artboard> riveOnInit;
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+    child: GestureDetector(
+      onTap: press,
+      child: Container(
+        margin: EdgeInsets.only(left: 16, top: 16),
+        height: 40,
+        width: 40,
+        child: RiveAnimation.asset(
+          "assets/RiveAssets/sideMenuButton.riv",
+          onInit: riveOnInit,
+          ),
+        ),
+      ),
+    );
+  }
+} 

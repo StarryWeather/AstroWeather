@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '/screens/sideBar/sidebar.dart';
 import 'screens/loginpage/login.dart';
 
 void main() {
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AstroWeather',
-      home: SideMenu(),
+      home: LoginPage(),
     );
   }
 }
