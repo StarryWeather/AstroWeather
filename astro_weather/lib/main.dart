@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'screens/navigator.dart';
 
+import 'screens/rootpage/root.dart';
+
 void main() {
   runApp(const MyApp());
 }

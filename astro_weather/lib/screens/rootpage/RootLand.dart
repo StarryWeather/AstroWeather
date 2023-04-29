@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
-
+import 'package:astro_weather/global.dart' as globals;
 class Land extends StatefulWidget {
   const Land({super.key});
 
@@ -40,7 +40,7 @@ class LandState extends State<Land> {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  "78°",
+                  globals.currentTemp.toString(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
