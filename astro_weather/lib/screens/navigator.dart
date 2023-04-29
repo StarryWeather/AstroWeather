@@ -4,8 +4,8 @@ import 'package:astro_weather/screens/sideBar/sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
-import 'models/sidebarBtn.dart';
-import 'utils/rive_utils.dart';
+import '../models/sidebarBtn.dart';
+import '../utils/rive_utils.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});

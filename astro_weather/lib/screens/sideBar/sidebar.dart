@@ -13,7 +13,7 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> {
-  RiveAssets selectedMenu = sideMenus.first;
+  RiveAssets selectedMenu = sideMenus.elementAt(1);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +50,7 @@ class _SideMenuState extends State<SideMenu> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 24, top: 32, bottom: 16),
-                  child: Text("History".toUpperCase(),style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white70),),
+                  child: Text("Other".toUpperCase(),style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white70),),
                 ),
                 ...sideMenu2.map(
                   (menu) => SideMenuBrowsers(
