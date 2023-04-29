@@ -39,6 +39,9 @@ class _MapState extends State<Map> {
                   onCameraMove: (CameraPosition cameraPositiona) {
                       cameraPosition = cameraPositiona; //when map is dragging 
                   },
+                  onTap: (latLng) {
+                  print('${latLng.latitude}, ${latLng.longitude}');
+                  },
                   onCameraIdle: () async { //when map drag stops
                      List<Placemark> placemarks = await placemarkFromCoordinates(cameraPosition!.target.latitude, cameraPosition!.target.longitude);
                      setState(() { //get place name from lat and lang
