@@ -33,7 +33,7 @@ class LoginPageState extends State<LoginPage> {
             children: [
               Row(
                 children: [
-                  sideMenuBtn(),
+                  sideMenuBtn(press: () {  }, riveOnInit: (Artboard value) {  },),
                 ],
               ),
               Container(
