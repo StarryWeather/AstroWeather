@@ -27,6 +27,9 @@ dependencies:
   rive: ^0.9.1
   flutter_svg: ^1.1.6
   geolocator: ^9.0.2
+  geocoding: ^2.0.1
+  google_maps_flutter: ^2.2.5
+  google_maps_flutter_web: ^0.4.0+8
   proste_bezier_curve:
 
 dev_dependencies:

@@ -3,6 +3,8 @@ import 'package:astro_weather/screens/rootpage/root.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:astro_weather/global.dart' as globals;
+import 'package:page_transition/page_transition.dart';
+import '../infopage/map.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -98,6 +100,14 @@ class _InfoPageState extends State<InfoPage> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
+            Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        type: PageTransitionType.rightToLeft,
+                                        child: Map(),
+                                        duration: Duration(milliseconds: 400),
+                                      ),
+                                    );
             // !!*** create new location ***!!
           },
           backgroundColor: Color.fromARGB(255, 52, 125, 181),
