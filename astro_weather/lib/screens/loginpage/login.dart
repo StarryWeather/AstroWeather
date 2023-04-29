@@ -1,14 +1,15 @@
+import 'package:astro_weather/screens/sideBar/sidebar.dart';
+import 'package:astro_weather/utils/rive_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../../models/sidebarBtn.dart';
 import '../registerpage/register.dart';
 import '../rootpage/root.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../widgets/earth/earthState.dart';
-import '../sideBar/NavBar.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:astro_weather/global.dart' as globals;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -63,6 +64,7 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
+    late SMIBool isSideMenuClosed;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 0, 0),
       body: Stack(
@@ -72,14 +74,8 @@ class LoginPageState extends State<LoginPage> {
           ),
           Column(
             children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.01),
-                    child: Navbar(UserName: 'Please Login!',),
-                  ),
-                ],
-              ),
+              
+              SizedBox(height: 64,),
               Container(
                 padding: EdgeInsets.all(MediaQuery.of(context).size.width*0.03),//page hight: 3% top + 3% bottom 
                 constraints: BoxConstraints.tightForFinite(
@@ -189,8 +185,7 @@ class LoginPageState extends State<LoginPage> {
                                     
                                     // true: go to root
                                     debugPrint('Made it in here: pass');
-                                    var responseJSON =
-                                        json.decode(response.body);
+                                    var responseJSON = json.decode(response.body);
                                     //var responseJSON = json.decode(response.body);
                                     Navigator.push(
                                       context,
