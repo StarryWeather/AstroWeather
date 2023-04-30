@@ -47,11 +47,10 @@ const createLocation = asyncHandler(async (req, res) => {
                 longitude: long,
             }]
         });
-
     // Send response back to client in JSON format with the status code
-    res.status(201).json(location);
+    res.status(201).json(newLocation);
     } else {
-        var newLocation = {latitude: lat, longitude: long};
+        const newLocation = {latitude: lat, longitude: long};
         location.update(
             { user_id: id },
             { $push: {savedLocations: newLocation}},
