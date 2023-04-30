@@ -22,6 +22,14 @@ Future<void> getLocation(lat, long) async {
     var clouds = responseJSON['data'][0]['clouds'];
     var desc = responseJSON['data'][0]['weather']['description'];
     var dn = responseJSON['data'][0]['pod'];
+    var cityName = responseJSON['data'][0]['city_name'];
+    var windSpeed = responseJSON['data'][0]['wind_spd'];
+    var windDirection = responseJSON['data'][0]['wind_cdir'];
+    var humidity = responseJSON['data'][0]['rh'];
+    var precip = responseJSON['data'][0]['precip'];
+    var feelsLikeTemp = responseJSON['data'][0]['app_temp'];
+    var uv = responseJSON['data'][0]['uv'];
+    var airQuality = responseJSON['data'][0]['aqi'];
 
     //seting data to global:
     globals.latitude = lat;
@@ -29,7 +37,7 @@ Future<void> getLocation(lat, long) async {
     globals.currentTemp = temps;
     globals.cloudCover = clouds;
     globals.weatherDescription = desc;
-    globals.DN = dn;
+    globals.DayNight = dn;
     
 
     if (clouds > 70) {

@@ -6,7 +6,7 @@ library my_prj.globals;
   var cloudCover;
   var weatherDescription;
   var cloudIndex;
-  var DN;
+  var DayNight;
   bool isRaining = false;
   bool isSnowing = false;
   //Google MapsAPI:

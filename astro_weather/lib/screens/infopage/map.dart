@@ -82,15 +82,28 @@ class _MapState extends State<Map> {
                       Radius.circular(12.0),
                     ),
                   ),
-                  child: Text(
-                    "Lat: " + lat.toString() + "\nLong: " + lon.toString(),
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
-                Container(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('location'),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Lat: " + lat.toString() + "\nLong: " + lon.toString(),
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      FloatingActionButton(
+                        onPressed: () {
+                          // !!*** create new location ***!!
+                        },
+                        backgroundColor: Colors.blue[500],
+                        child: Text(
+                          "+",
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontFamily: 'KdamThmorPro',
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

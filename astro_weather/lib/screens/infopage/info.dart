@@ -28,47 +28,44 @@ class _InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onVerticalDragUpdate: (details) {
-        if (details.delta.dy > 0) {
-          Navigator.pop(context);
-        }
-      },
-      child: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/weather/ground.jpg'),
-              opacity: 0.84,
-              fit: BoxFit.cover,
+        onVerticalDragUpdate: (details) {
+          if (details.delta.dy > 0) {
+            Navigator.pop(context);
+          }
+        },
+        child: Scaffold(
+          body: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/weather/ground.jpg'),
+                opacity: 0.84,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
             child: Center(
               child: CarouselSlider.builder(
                 onSlideStart: () {},
                 onSlideChanged: (index) {},
                 controller: sliderController,
-
                 slideBuilder: (index) {
-                  return LocationInfoItem(itemLocation: _StaticLocations[index], OnDeleteItem: 'null',);
+                  return LocationInfoItem(
+                    itemLocation: _StaticLocations[index],
+                    OnDeleteItem: 'null',
+                  );
                 },
                 slideTransform: ZoomOutSlideTransform(),
-
                 slideIndicator: CircularSlideIndicator(
-                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * .015),
-
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.height * .015),
                   indicatorBackgroundColor: Colors.grey,
                   currentIndicatorColor: Colors.white,
                 ),
                 initialPage: 0,
-                
                 itemCount: _StaticLocations.length,
               ),
             ),
-        ),
-
-
-
-        floatingActionButton: FloatingActionButton(
+          ),
+          floatingActionButton: FloatingActionButton(
             onPressed: () {
               Navigator.push(
                 context,
@@ -81,8 +78,16 @@ class _InfoPageState extends State<InfoPage> {
               // !!*** create new location ***!!
             },
             backgroundColor: Colors.blue[500],
-            child: Icon(Icons.add)),
-      ),
-    );
+            child: Text(
+              "+",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontFamily: 'KdamThmorPro',
+              ),
+            ),
+          ),
+        ));
   }
 }

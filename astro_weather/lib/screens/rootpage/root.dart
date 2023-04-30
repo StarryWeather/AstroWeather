@@ -37,7 +37,7 @@ class _RootPageState extends State<RootPage> {
       this.temp = globals.currentTemp;
       this.cloudIndex = globals.cloudIndex;
       this.weatherDesc = globals.weatherDescription;
-      this.DN = globals.DN;
+      this.DN = globals.DayNight;
     });
   }
 
