@@ -51,8 +51,8 @@ const createLocation = asyncHandler(async (req, res) => {
             }]
         });
         console.log("Successfully added location");
-    // Send response back to client in JSON format with the status code
-    res.status(201);
+        // Send response back to client in JSON format with the status code
+        res.status(201);
     } else {
         res.status(204);
         console.log("Location exists");
