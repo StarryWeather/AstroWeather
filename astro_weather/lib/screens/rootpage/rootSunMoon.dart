@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:astro_weather/screens/infopage/info.dart';
 import 'package:astro_weather/screens/starspage/stars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

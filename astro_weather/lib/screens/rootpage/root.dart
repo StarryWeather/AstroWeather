@@ -1,4 +1,3 @@
-import 'package:astro_weather/screens/infopage/info.dart';
 import 'package:astro_weather/screens/rootpage/rootStars.dart';
 import 'package:astro_weather/screens/rootpage/rootLand.dart';
 import 'package:astro_weather/screens/rootpage/rootSunMoon.dart';
@@ -9,6 +8,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:astro_weather/global.dart' as globals;
+
+import '../infopage/info.dart';
 
 class RootPage extends StatefulWidget {
   final String accessToken;
