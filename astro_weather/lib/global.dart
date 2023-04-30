@@ -1,4 +1,6 @@
 library my_prj.globals;
+import 'models/LocationInfo.dart';
+
   //WeatherAPI:
   var latitude;
   var longitude;
@@ -15,3 +17,5 @@ library my_prj.globals;
   //Login:
   var userAccessToken;
   var userName;
+  //User's Saved Locations
+  List<LocationInfo> StaticLocations = [];

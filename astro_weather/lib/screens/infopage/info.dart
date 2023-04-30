@@ -5,6 +5,7 @@ import '../../models/LocationInfo.dart';
 import '../../widgets/InfoLocations/LocationsInfo_item.dart';
 import '../InfoPage/map.dart';
 import 'city.dart';
+import 'package:astro_weather/global.dart' as globals;
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -14,14 +15,11 @@ class InfoPage extends StatefulWidget {
 }
 
 class _InfoPageState extends State<InfoPage> {
-  final savedLocations = LocationInfo.UserLocationList();
-  List<LocationInfo> _StaticLocations = [];
-
   CarouselSliderController sliderController = CarouselSliderController();
 
   @override
   void initState() {
-    _StaticLocations = savedLocations;
+    globals.StaticLocations =  LocationInfo.UserLocationList();
     super.initState();
   }
 
@@ -49,7 +47,7 @@ class _InfoPageState extends State<InfoPage> {
                 controller: sliderController,
                 slideBuilder: (index) {
                   return LocationInfoItem(
-                    itemLocation: _StaticLocations[index],
+                    itemLocation: globals.StaticLocations[index],
                     OnDeleteItem: 'null',
                   );
                 },
@@ -61,7 +59,7 @@ class _InfoPageState extends State<InfoPage> {
                   currentIndicatorColor: Colors.white,
                 ),
                 initialPage: 0,
-                itemCount: _StaticLocations.length,
+                itemCount: globals.StaticLocations.length,
               ),
             ),
           ),
