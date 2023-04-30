@@ -42,6 +42,7 @@ const createLocation = asyncHandler(async (req, res) => {
 
     // Decide on if you're creating a new location object or apending to database
     if (!location) {
+        console.log("Location does not exist");
         const newLocation = await Location.create({
             _id: id,
             savedLocations: [{
@@ -52,6 +53,7 @@ const createLocation = asyncHandler(async (req, res) => {
     // Send response back to client in JSON format with the status code
     res.status(201).json(newLocation);
     } else {
+        console.log("Location exists");
         const coordinates = {latitude: lat, longitude: long};
         const updatedLocation = Location.findByIdAndUpdate(id, {$push: {savedLocations: coordinates}});
         res.status(201);
