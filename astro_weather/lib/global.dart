@@ -28,4 +28,6 @@ import 'models/LocationInfo.dart';
       LocationInfo(Lat: '73.824', Long: '-55.598'),
       LocationInfo(Lat: '55.123', Long: '90.133'),
     ];
-  List<LocationData> datalist = [];
+  List<LocationData> datalist = [
+    LocationData(cityName: "cityName", windSpeed: "windSpeed", windDirection: "windDirection", humidity: "humidity", precip: "precip", currentTemp: "currentTemp", feelsLikeTemp: "feelsLikeTemp", uv: "uv", airQuality: "airQuality"),
+  ];
