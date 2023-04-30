@@ -6,6 +6,7 @@ import 'package:rive/rive.dart';
 import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../../models/LocationInfo.dart';
 import '../../models/sidebarBtn.dart';
 import '../../utils/weatherAPI.dart';
 import '../registerpage/register.dart';
@@ -118,7 +119,9 @@ class LoginPageState extends State<LoginPage> {
                 globals.userAccessToken = responseJSON['accessToken'];
 
                 await getData();
+                //turn this into an api call
 
+                
                 // ignore: use_build_context_synchronously
                 Navigator.push(
                   context,

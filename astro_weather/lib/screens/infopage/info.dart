@@ -19,7 +19,6 @@ class _InfoPageState extends State<InfoPage> {
 
   @override
   void initState() {
-    globals.StaticLocations =  LocationInfo.UserLocationList();
     super.initState();
   }
 
@@ -47,7 +46,7 @@ class _InfoPageState extends State<InfoPage> {
                 controller: sliderController,
                 slideBuilder: (index) {
                   return LocationInfoItem(
-                    itemLocation: globals.StaticLocations[index],
+                    data: globals.datalist[index],
                     OnDeleteItem: 'null',
                   );
                 },

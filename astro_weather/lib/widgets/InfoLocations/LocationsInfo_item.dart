@@ -4,43 +4,22 @@ import '../../utils/weatherAPI.dart';
 
 class LocationInfoItem extends StatefulWidget {
   const LocationInfoItem(
-      {super.key, required this.itemLocation, required this.OnDeleteItem});
-  final itemLocation;
+      {super.key, required this.data, required this.OnDeleteItem});
+  final data;
   final OnDeleteItem;
 
   @override
-  State<LocationInfoItem> createState() =>
-      _LocationInfoItemState(itemLocation, OnDeleteItem);
+  State<LocationInfoItem> createState() => _LocationInfoItemState(data, OnDeleteItem);
 }
 
 class _LocationInfoItemState extends State<LocationInfoItem> {
-  final LocationInfo location;
+  final LocationData data;
   final onDelete;
-  
-  late LocationData locationData;
 
-  late String cityName2,
-      windSpeed2,
-      windDirection2,
-      humidity2,
-      precipitation2,
-      currentTemp2,
-      forecast2,
-      uv2,
-      airQuality2;
-
-  _LocationInfoItemState(this.location, this.onDelete);
-
-  Future<LocationData> dataGetter() async {
-    return await getLocationList(location.Lat, location.Long);
-  }
+  _LocationInfoItemState(this.data, this.onDelete);
 
   @override
-  void initState(){
-    locationData = dataGetter() as LocationData;
-
-
-
+  void initState() async {
     super.initState();
   }
 
@@ -62,12 +41,14 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
         ),
         child: Stack(
           children: [
-              Padding(
-                padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.05),
-                child: Column(children: [
+            Padding(
+              padding:
+                  EdgeInsets.all(MediaQuery.of(context).size.height * 0.05),
+              child: Column(
+                children: [
                   Center(
                     child: Text(
-                      locationData.cityName,
+                      data.cityName,
                       style: TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
@@ -85,14 +66,17 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
                         border: Border.all(width: 3.0, color: Colors.grey),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child:Padding(
+                      child: Padding(
                         padding: const EdgeInsets.all(10),
-                        child: Text('hi',style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontFamily: 'KdamThmorPro',
-                        ),),
+                        child: Text(
+                          'hi',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontFamily: 'KdamThmorPro',
+                          ),
+                        ),
                       ),
                     ),
                   ),
