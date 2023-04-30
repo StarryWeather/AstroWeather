@@ -1,6 +1,3 @@
-import 'dart:html';
-
-import 'package:astro_weather/screens/sideBar/sidebar.dart';
 import 'package:astro_weather/utils/rive_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -41,7 +38,7 @@ class LoginPageState extends State<LoginPage> {
           Column(
             children: [
               SizedBox(
-                height: 64,
+                height: 12,
               ),
               LoginBuilder(context, emailController, passwordController),
               earthState(),
@@ -123,11 +120,8 @@ class LoginPageState extends State<LoginPage> {
                 await getData();
                 //turn this into an api call
 
-                for(LocationInfo i in  globals.StaticLocations){
+                for(LocationInfo i in  globals.OldLocations){
                   globals.datalist.add(await getLocationList(i.Lat,i.Long));
-                }
-                for(LocationData i in globals.datalist){
-                  print(i.cityName);
                 }
 
                 // ignore: use_build_context_synchronously

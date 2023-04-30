@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:astro_weather/models/LocationInfo.dart';
+import 'package:astro_weather/utils/weatherAPI.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -131,11 +132,8 @@ class addButton extends StatelessWidget {
         if (response.statusCode == 201 || response.statusCode == 204) {
           //var responseJSON = json.decode(response.body);
           // add into staticlocations.
-          globals.StaticLocations.add(
-              LocationInfo(Lat: globals.mapLat, Long: globals.mapLon));
-          print(globals.StaticLocations[3].Lat);
+          globals.datalist.add(await getLocationList(globals.mapLat, globals.mapLon));
 
-          // ignore: use_build_context_synchronously
         } else {
           // false: display email/password invalid
           debugPrint('failedto add');

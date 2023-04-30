@@ -22,7 +22,7 @@ import 'models/LocationInfo.dart';
   var userName;
 
   //User's Saved Locations
-  List<LocationInfo> StaticLocations = [
+  List<LocationInfo> OldLocations = [
       //TEMP
       LocationInfo(Lat: '-16.975', Long: '23.322'),
       LocationInfo(Lat: '73.824', Long: '-55.598'),

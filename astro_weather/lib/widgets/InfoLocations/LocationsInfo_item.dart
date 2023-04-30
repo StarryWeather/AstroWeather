@@ -4,19 +4,19 @@ import '../../utils/weatherAPI.dart';
 
 class LocationInfoItem extends StatefulWidget {
   const LocationInfoItem(
-      {super.key, required this.data, required this.OnDeleteItem});
-  final data;
+      {super.key, required this.numIndex, required this.OnDeleteItem});
+  final numIndex;
   final OnDeleteItem;
 
   @override
-  State<LocationInfoItem> createState() => _LocationInfoItemState(data, OnDeleteItem);
+  State<LocationInfoItem> createState() => _LocationInfoItemState(numIndex, OnDeleteItem);
 }
 
 class _LocationInfoItemState extends State<LocationInfoItem> {
-  final LocationData data;
+  final int numIndex;
   final onDelete;
 
-  _LocationInfoItemState(this.data, this.onDelete);
+  _LocationInfoItemState(this.numIndex, this.onDelete);
 
   @override
   void initState() async {
@@ -48,7 +48,7 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
                 children: [
                   Center(
                     child: Text(
-                      data.cityName,
+                      "hi",//data.cityName,
                       style: TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,

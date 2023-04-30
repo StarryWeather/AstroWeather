@@ -17,6 +17,7 @@ class InfoPage extends StatefulWidget {
 class _InfoPageState extends State<InfoPage> {
   CarouselSliderController sliderController = CarouselSliderController();
 
+
   @override
   void initState() {
     super.initState();
@@ -46,8 +47,8 @@ class _InfoPageState extends State<InfoPage> {
                 controller: sliderController,
                 slideBuilder: (index) {
                   return LocationInfoItem(
-                    data: globals.datalist[index],
-                    OnDeleteItem: 'null',
+                    numIndex: 'null',
+                    OnDeleteItem: 'null', 
                   );
                 },
                 slideTransform: ZoomOutSlideTransform(),
@@ -58,7 +59,7 @@ class _InfoPageState extends State<InfoPage> {
                   currentIndicatorColor: Colors.white,
                 ),
                 initialPage: 0,
-                itemCount: globals.StaticLocations.length,
+                itemCount: globals.datalist.length,
               ),
             ),
           ),
