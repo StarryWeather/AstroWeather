@@ -60,44 +60,7 @@ class _MapState extends State<Map> {
                         "Lat: " + lat.toString() + "\nLong: " + lon.toString(),
                         style: TextStyle(fontSize: 18),
                       ),
-                      FloatingActionButton(
-                        onPressed: () async {
-                          // API LOGIN CALL
-                          var url = Uri.parse(
-                              'https://hidden-tor-21438.herokuapp.com/api/locations/');
-                          var data = {
-                            'accessToken': globals.userAccessToken,
-                            'lat': globals.mapLat,
-                            'long': globals.mapLon
-                          };
-                          var jsonData = jsonEncode(data);
-                          var response = await http.post(url,
-                              headers: {"Content-Type": "application/json"},
-                              body: jsonData);
-
-                          if (response.statusCode == 200) {
-                            //var responseJSON = json.decode(response.body);
-                            // add into staticlocations.
-                            globals.StaticLocations.add(LocationInfo(Lat: globals.mapLat, Long: globals.mapLon));
-                            print(globals.StaticLocations[3].Lat);
-    
-                            // ignore: use_build_context_synchronously
-                          } else {
-                            // false: display email/password invalid
-                            debugPrint('failedto add');
-                          }
-                        },
-                        backgroundColor: Colors.blue[500],
-                        child: Text(
-                          "+",
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontFamily: 'KdamThmorPro',
-                          ),
-                        ),
-                      ),
+                      addButton(),
                     ],
                   ),
                 ),
@@ -109,37 +72,85 @@ class _MapState extends State<Map> {
 
   GoogleMap ourMap() {
     return GoogleMap(
-          //Map widget from google_maps_flutter package
-          zoomGesturesEnabled: true, //enable Zoom in, out on map
-          initialCameraPosition: CameraPosition(
-            //innital position in map
-            target: startLocation, //initial position
-            zoom: 10.0, //initial zoom level
-          ),
-          mapType: MapType.normal, //map type
-          onMapCreated: (controller) {
-            //method called when map is created
-            setState(() {
-              mapController = controller;
-            });
-          },
-          onCameraMove: (CameraPosition cameraPositiona) {
-            cameraPosition = cameraPositiona; //when map is dragging
-          },
-          onTap: (latLng) {
-            globals.mapLat =
-                double.parse(latLng.latitude.toString()).toStringAsFixed(3);
-            globals.mapLon =
-                double.parse(latLng.longitude.toString()).toStringAsFixed(3);
-            updateState();
-            print('${latLng.latitude}, ${latLng.longitude}');
-          },
-          /*onCameraIdle: () async { //when map drag stops
+      //Map widget from google_maps_flutter package
+      zoomGesturesEnabled: true, //enable Zoom in, out on map
+      initialCameraPosition: CameraPosition(
+        //innital position in map
+        target: startLocation, //initial position
+        zoom: 10.0, //initial zoom level
+      ),
+      mapType: MapType.normal, //map type
+      onMapCreated: (controller) {
+        //method called when map is created
+        setState(() {
+          mapController = controller;
+        });
+      },
+      onCameraMove: (CameraPosition cameraPositiona) {
+        cameraPosition = cameraPositiona; //when map is dragging
+      },
+      onTap: (latLng) async {
+        globals.mapLat =
+            double.parse(await latLng.latitude.toString()).toStringAsFixed(3);
+        globals.mapLon =
+            double.parse(await latLng.longitude.toString()).toStringAsFixed(3);
+        updateState();
+
+        print('${latLng.latitude}, ${latLng.longitude}');
+      },
+      /*onCameraIdle: () async { //when map drag stops
                    List<Placemark> placemarks = await placemarkFromCoordinates(cameraPosition!.target.latitude, cameraPosition!.target.longitude);
                    setState(() { //get place name from lat and lang
                       location = placemarks.first.administrativeArea.toString() + ", " +  placemarks.first.street.toString();
                    });
                 },*/
-        );
+    );
+  }
+}
+
+class addButton extends StatelessWidget {
+  const addButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () async {
+        // API LOGIN CALL
+        var url = Uri.parse('http://astroweather.space/api/locations/');
+        var data = {
+          'accessToken': globals.userAccessToken,
+          'lat': globals.mapLat,
+          'long': globals.mapLon
+        };
+        var jsonData = jsonEncode(data);
+        var response = await http.post(url,
+            headers: {"Content-Type": "application/json"}, body: jsonData);
+
+        if (response.statusCode == 201 || response.statusCode == 204) {
+          //var responseJSON = json.decode(response.body);
+          // add into staticlocations.
+          globals.StaticLocations.add(
+              LocationInfo(Lat: globals.mapLat, Long: globals.mapLon));
+          print(globals.StaticLocations[3].Lat);
+
+          // ignore: use_build_context_synchronously
+        } else {
+          // false: display email/password invalid
+          debugPrint('failedto add');
+        }
+      },
+      backgroundColor: Colors.blue[500],
+      child: Text(
+        "+",
+        style: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontFamily: 'KdamThmorPro',
+        ),
+      ),
+    );
   }
 }

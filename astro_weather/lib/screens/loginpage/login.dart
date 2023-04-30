@@ -106,7 +106,7 @@ class LoginPageState extends State<LoginPage> {
             onPressed: () async {
               // API LOGIN CALL
               var url = Uri.parse(
-                  'https://hidden-tor-21438.herokuapp.com/api/users/login');
+                  'http://astroweather.space/api/users/login');
               var data = {
                 'email': emailController.text,
                 'password': passwordController.text
