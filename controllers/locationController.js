@@ -51,7 +51,6 @@ const createLocation = asyncHandler(async (req, res) => {
             }]
         });
         console.log("Successfully added location");
-        return res.status(201);
     } else {
         console.log("Location exists");
         const coordinates = {latitude: lat, longitude: long};
