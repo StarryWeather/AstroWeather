@@ -1,6 +1,7 @@
 import 'package:astro_weather/screens/rootpage/rootStars.dart';
 import 'package:astro_weather/screens/rootpage/rootLand.dart';
 import 'package:astro_weather/screens/rootpage/rootSunMoon.dart';
+import 'package:astro_weather/utils/weatherAPI.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 import 'package:astro_weather/screens/starspage/stars.dart';
 import 'package:flutter/material.dart';
@@ -19,68 +20,20 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-  void getLocation() async {
+  Future<void> getData() async {
     await Geolocator.checkPermission();
     await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.low);
-    print(position);
-    var url = Uri.parse('https://api.weatherbit.io/v2.0/current?lat=' +
-        position.latitude.toString() +
-        '&lon=' +
-        position.longitude.toString() +
-        '&key=dffbf9e2ee24421f8cb8e89f078664df');
-
-    var response =
-        await http.post(url, headers: {"Content-Type": "application/json"});
-    // check if valid
-    if (response.statusCode == 200) {
-      // true: go to root
-      debugPrint('Made it in here: pass');
-      var responseJSON = json.decode(response.body);
-      var temps = responseJSON['data'][0]['temp'];
-
-      temps = ((temps) * 1.8) + 32;
-      temps = temps.round();
-      globals.currentTemp = temps.toString();
-
-      var clouds = responseJSON['data'][0]['clouds'];
-      globals.cloudCover = clouds;
-      if (clouds > 70) {
-        globals.cloudIndex = 2;
-      } else if (clouds > 50) {
-        globals.cloudIndex = 1;
-      } else {
-        globals.cloudIndex = 0;
-      }
-
-      var desc = responseJSON['data'][0]['weather']['description'];
-      globals.weatherDesc = desc;
-
-      var dn = responseJSON['data'][0]['pod'];
-      globals.DN = dn;
-
-      globals.latitude = responseJSON['data'][0]['lat'];
-      globals.longitude = responseJSON['data'][0]['lon'];
-
-      debugPrint("Temp : " + globals.currentTemp.toString());
-      debugPrint("Cloud Phase : " + globals.cloudIndex.toString());
-      debugPrint("Cloud Cover : " + globals.cloudCover.toString());
-      debugPrint("Day or Night : " + globals.DN.toString());
-      debugPrint("Weather Description : " + globals.weatherDesc);
-      updateState();
-      //var responseJSON = json.decode(response.body);
-    } else {
-      // false: display email/password invalid
-      debugPrint('Made it in here: fail');
-    }
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+    await getLocation(position.latitude.toString(),position.longitude.toString());
+    updateState();
   }
 
   var temp;
   var cloudIndex;
   var weatherDesc;
   var DN;
-  void updateState() {
+
+  void updateState(){
     setState(() {
       this.temp = globals.currentTemp;
       this.cloudIndex = globals.cloudIndex;
@@ -90,8 +43,8 @@ class _RootPageState extends State<RootPage> {
   }
 
   @override
-  void initState() {
-    getLocation();
+  void initState(){
+    getData();
     super.initState();
   }
 
