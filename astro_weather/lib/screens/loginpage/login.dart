@@ -116,7 +116,7 @@ class LoginPageState extends State<LoginPage> {
                                 var responseJSON = json.decode(response.body);                                    
                                 globals.userAccessToken = responseJSON['accessToken'];
 
-                                getData();
+                                await getData();
 
                                 // ignore: use_build_context_synchronously
                                 Navigator.push(
