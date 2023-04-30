@@ -34,9 +34,11 @@ const createLocation = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Error decoding user ID");
     };
+    console.log("Decoded jwt");
 
     // Find user entry in locations table
     let location = await Location.findById(id);
+    console.log("Find user entry");
 
     // Decide on if you're creating a new location object or apending to database
     if (!location) {
@@ -51,7 +53,7 @@ const createLocation = asyncHandler(async (req, res) => {
     res.status(201).json(newLocation);
     } else {
         const coordinates = {latitude: lat, longitude: long};
-        Location.findByIdAndUpdate(id, {$push: {savedLocations: coordinates}});
+        const updatedLocation = Location.findByIdAndUpdate(id, {$push: {savedLocations: coordinates}});
         res.status(201);
     }
 });
