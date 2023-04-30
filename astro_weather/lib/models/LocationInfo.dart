@@ -17,6 +17,32 @@ class LocationInfo{
       LocationInfo(Lat: '55.123', Long: '90.133'),
     ];
   }
+}
 
 
+class LocationData{
+  String cityName;
+  String windSpeed;
+  String windDirection;
+  String humidity;
+  String precip;
+  String currentTemp;
+  String feelsLikeTemp;
+  String uv;
+  String airQuality;
+
+  LocationData({
+    required this.cityName,
+    required this.windSpeed,
+    required this.windDirection,
+    required this.humidity,
+    required this.precip,
+    required this.currentTemp,
+    required this.feelsLikeTemp,
+    required this.uv,
+    required this.airQuality,
+  });
+  static List<LocationData> dataList(){
+    return [];
+  }
 }

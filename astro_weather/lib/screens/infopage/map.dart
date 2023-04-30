@@ -42,39 +42,7 @@ class _MapState extends State<Map> {
           backgroundColor: Colors.deepPurpleAccent,
         ),
         body: Stack(children: [
-          GoogleMap(
-            //Map widget from google_maps_flutter package
-            zoomGesturesEnabled: true, //enable Zoom in, out on map
-            initialCameraPosition: CameraPosition(
-              //innital position in map
-              target: startLocation, //initial position
-              zoom: 10.0, //initial zoom level
-            ),
-            mapType: MapType.normal, //map type
-            onMapCreated: (controller) {
-              //method called when map is created
-              setState(() {
-                mapController = controller;
-              });
-            },
-            onCameraMove: (CameraPosition cameraPositiona) {
-              cameraPosition = cameraPositiona; //when map is dragging
-            },
-            onTap: (latLng) {
-              globals.mapLat =
-                  double.parse(latLng.latitude.toString()).toStringAsFixed(3);
-              globals.mapLon =
-                  double.parse(latLng.longitude.toString()).toStringAsFixed(3);
-              updateState();
-              print('${latLng.latitude}, ${latLng.longitude}');
-            },
-            /*onCameraIdle: () async { //when map drag stops
-                     List<Placemark> placemarks = await placemarkFromCoordinates(cameraPosition!.target.latitude, cameraPosition!.target.longitude);
-                     setState(() { //get place name from lat and lang
-                        location = placemarks.first.administrativeArea.toString() + ", " +  placemarks.first.street.toString();
-                     });
-                  },*/
-          ),
+          ourMap(),
           Positioned(
             bottom: 0,
             child: Row(
@@ -137,5 +105,41 @@ class _MapState extends State<Map> {
             ),
           ),
         ]));
+  }
+
+  GoogleMap ourMap() {
+    return GoogleMap(
+          //Map widget from google_maps_flutter package
+          zoomGesturesEnabled: true, //enable Zoom in, out on map
+          initialCameraPosition: CameraPosition(
+            //innital position in map
+            target: startLocation, //initial position
+            zoom: 10.0, //initial zoom level
+          ),
+          mapType: MapType.normal, //map type
+          onMapCreated: (controller) {
+            //method called when map is created
+            setState(() {
+              mapController = controller;
+            });
+          },
+          onCameraMove: (CameraPosition cameraPositiona) {
+            cameraPosition = cameraPositiona; //when map is dragging
+          },
+          onTap: (latLng) {
+            globals.mapLat =
+                double.parse(latLng.latitude.toString()).toStringAsFixed(3);
+            globals.mapLon =
+                double.parse(latLng.longitude.toString()).toStringAsFixed(3);
+            updateState();
+            print('${latLng.latitude}, ${latLng.longitude}');
+          },
+          /*onCameraIdle: () async { //when map drag stops
+                   List<Placemark> placemarks = await placemarkFromCoordinates(cameraPosition!.target.latitude, cameraPosition!.target.longitude);
+                   setState(() { //get place name from lat and lang
+                      location = placemarks.first.administrativeArea.toString() + ", " +  placemarks.first.street.toString();
+                   });
+                },*/
+        );
   }
 }

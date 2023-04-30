@@ -16,35 +16,30 @@ class LocationInfoItem extends StatefulWidget {
 class _LocationInfoItemState extends State<LocationInfoItem> {
   final LocationInfo location;
   final onDelete;
+  
+  late LocationData locationData;
 
-  late String cityName,
-      windSpeed,
-      windDirection,
-      humidity,
-      precipitation,
-      currentTemp,
-      forecast,
-      uv,
-      airQuality;
+  late String cityName2,
+      windSpeed2,
+      windDirection2,
+      humidity2,
+      precipitation2,
+      currentTemp2,
+      forecast2,
+      uv2,
+      airQuality2;
 
   _LocationInfoItemState(this.location, this.onDelete);
-  Future<void> dataGetter() async {
-    await getLocation(location.Lat, location.Long);
+
+  Future<LocationData> dataGetter() async {
+    return await getLocationList(location.Lat, location.Long);
   }
 
   @override
-  void initState() {
-    dataGetter();
+  void initState(){
+    locationData = dataGetter() as LocationData;
 
-    cityName = "Orlando";
-    windSpeed = "9";
-    windDirection = "NE";
-    humidity = "52";
-    precipitation = "dry";
-    currentTemp = "78";
-    forecast = "Cloudy";
-    uv = "UV is Fake";
-    airQuality = "horrible smell";
+
 
     super.initState();
   }
@@ -72,7 +67,7 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
                 child: Column(children: [
                   Center(
                     child: Text(
-                      cityName,
+                      locationData.cityName,
                       style: TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
