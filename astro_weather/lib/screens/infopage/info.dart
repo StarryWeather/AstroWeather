@@ -13,14 +13,14 @@ class InfoPage extends StatefulWidget {
 }
 
 class _InfoPageState extends State<InfoPage> {
-  final locations = LocationInfo.UserLocationList();
-  List<LocationInfo> foundlocations = [];
+  final savedLocations = LocationInfo.UserLocationList();
+  List<LocationInfo> _StaticLocations = [];
 
   CarouselSliderController sliderController = CarouselSliderController();
 
   @override
   void initState() {
-    foundlocations = locations;
+    _StaticLocations = savedLocations;
     super.initState();
   }
 
@@ -41,55 +41,47 @@ class _InfoPageState extends State<InfoPage> {
               fit: BoxFit.cover,
             ),
           ),
-          child: Container(
             child: Center(
-              child: GestureDetector(
-                onVerticalDragUpdate: (details) {
-                  if (details.delta.dy > 0) {
-                    Navigator.pop(context);
-                  }
-                },
-                child: CarouselSlider.builder(
-                  onSlideStart: () {
-                    // !!***pull first location here***!!
-                  },
-                  onSlideChanged: (index) {
 
-                  },
-                  unlimitedMode: true,
-                  controller: sliderController,
-                  slideBuilder: (index) {
-                    return CityInfo(locations[index]);
-                  },
-                  slideTransform: ZoomOutSlideTransform(),
-                  slideIndicator: CircularSlideIndicator(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * .01),
-                    indicatorBackgroundColor:
-                        Color.fromRGBO(255, 255, 255, 0.138),
-                    currentIndicatorColor: Color.fromRGBO(255, 255, 255, 0.622),
-                    indicatorBorderColor: Color.fromRGBO(82, 82, 82, 0.137),
-                  ),
-                  itemCount: locations.length,
-                  initialPage: 0,
+              child: CarouselSlider.builder(
+                onSlideStart: () {},
+                onSlideChanged: (index) {},
+                controller: sliderController,
+
+                slideBuilder: (index) {
+                  return CityInfo(_StaticLocations[index]);
+                },
+                slideTransform: ZoomOutSlideTransform(),
+
+                slideIndicator: CircularSlideIndicator(
+                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * .015),
+
+                  indicatorBackgroundColor: Colors.grey,
+                  currentIndicatorColor: Colors.white,
                 ),
+                initialPage: 0,
+                
+                itemCount: _StaticLocations.length,
               ),
             ),
-          ),
         ),
+
+
+
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.rightToLeft,
-                                        child: Map(),
-                                        duration: Duration(milliseconds: 400),
-                                      ),
-                                    );
-            // !!*** create new location ***!!
-          },
-          backgroundColor: Color.fromARGB(255, 52, 125, 181),
-          child: Icon(Icons.add)),
+            onPressed: () {
+              Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.rightToLeft,
+                  child: Map(),
+                  duration: Duration(milliseconds: 400),
+                ),
+              );
+              // !!*** create new location ***!!
+            },
+            backgroundColor: Color.fromARGB(255, 52, 125, 181),
+            child: Icon(Icons.add)),
       ),
     );
   }

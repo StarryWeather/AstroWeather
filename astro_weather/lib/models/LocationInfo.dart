@@ -6,13 +6,17 @@ class LocationInfo{
 
   LocationInfo({
     required this.Lat,
-    required this.Long,
+    required this.Long,//get number of locations saved for user from backend here
   });
 
   static List<LocationInfo> UserLocationList(){
     return[
-      LocationInfo(Lat: '13.242', Long: '21.322')
+      //get locations saved by user here
+      LocationInfo(Lat: '13.242', Long: '21.322'),
+      LocationInfo(Lat: '81.341', Long: '61.903'),
+      LocationInfo(Lat: '55.123', Long: '90.133'),
     ];
   }
+
 
 }
