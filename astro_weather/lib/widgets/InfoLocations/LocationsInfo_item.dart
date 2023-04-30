@@ -34,7 +34,7 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
 
   @override
   void initState() {
-    //dataGetter();
+    dataGetter();
 
     cityName = "Orlando";
     windSpeed = "9";

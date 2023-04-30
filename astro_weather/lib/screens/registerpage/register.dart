@@ -150,10 +150,7 @@ class RegisterPageState extends State<RegisterPage> {
                                         PageTransition(
                                           type:
                                               PageTransitionType.leftToRightPop,
-                                          child: RootPage(
-                                            accessToken:
-                                                responseJSON['accessToken'],
-                                          ),
+                                          child: RootPage(),
                                           duration: Duration(milliseconds: 400),
                                         ),
                                       );

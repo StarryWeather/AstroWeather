@@ -6,10 +6,10 @@ import 'package:rive/rive.dart';
 
 import '../models/sidebarBtn.dart';
 import '../utils/rive_utils.dart';
+import 'package:astro_weather/global.dart' as globals;
 
 class Navigation extends StatefulWidget {
-  const Navigation({super.key});
-
+  const Navigation({Key? key}) : super(key: key);
   @override
   State<Navigation> createState() => _NavigationState();
 }
@@ -39,7 +39,7 @@ class _NavigationState extends State<Navigation>
       CurvedAnimation(
           parent: _animationController, curve: Curves.fastOutSlowIn),
     );
-    CurrentPage = RootPage(accessToken: '',);
+    CurrentPage = RootPage();
     super.initState();
   }
 

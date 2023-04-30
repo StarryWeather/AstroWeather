@@ -12,20 +12,12 @@ import 'package:astro_weather/global.dart' as globals;
 import '../infopage/info.dart';
 
 class RootPage extends StatefulWidget {
-  final String accessToken;
-  const RootPage({required this.accessToken, Key? key}) : super(key: key);
+  const RootPage({Key? key}) : super(key: key);
   @override
   State<RootPage> createState() => _RootPageState();
 }
 
 class _RootPageState extends State<RootPage> {
-  Future<void> getData() async {
-    await Geolocator.checkPermission();
-    await Geolocator.requestPermission();
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
-    await getLocation(position.latitude.toString(),position.longitude.toString());
-    updateState();
-  }
 
   var temp;
   var cloudIndex;
@@ -43,7 +35,7 @@ class _RootPageState extends State<RootPage> {
 
   @override
   void initState(){
-    getData();
+    updateState();
     super.initState();
   }
 

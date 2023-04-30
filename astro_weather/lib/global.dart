@@ -12,3 +12,6 @@ library my_prj.globals;
   //Google MapsAPI:
   var mapLat;
   var mapLon;
+  //Login:
+  var userAccessToken;
+  var userName;
