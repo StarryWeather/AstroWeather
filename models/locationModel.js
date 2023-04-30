@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 // Schema for locations in the mongoDB database
 const locationSchema = mongoose.Schema(
     {
-        user_id: {
+        _id: {
             type: mongoose.Schema.Types.ObjectId,
             required: [true],
             ref: "User",
