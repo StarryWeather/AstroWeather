@@ -27,23 +27,48 @@ const createLocation = asyncHandler(async (req, res) => {
         throw new Error("Missing necessary location data");
     }
 
+    // Take in user access token from body
+    const {token} = req.body;
+
     // Decode JWT into user ID
-    const {user: {id}} = jwt.verify(req.params.token, process.env.ACCESS_TOKEN_SECRET);
-    if (!decodedID) {
+    const {user: {id}} = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    if (!id) {
         res.status(400);
         throw new Error("Error decoding user ID");
     };
 
-    // Create location object and send to database
-    const location = await Location.create({
-        //user_id: req.user.id, //from jwt
-        user_id: decodedID,
-        latitude: lat,
-        longitude: long,
-    });
+    // Find user entry in locations table
+    let location = await Location.findById(id);
+
+    // Decide on if you're creating a new location object or apending to database
+    if (!location) {
+        const newLocation = await Location.create({
+            user_id: id,
+            savedLocations: [{
+                latitude: lat,
+                longitude: long,
+            }]
+        });
 
     // Send response back to client in JSON format with the status code
     res.status(201).json(location);
+    } else {
+        var newLocation = {latitude: lat, longitude: long};
+        location.update(
+            { user_id: id },
+            { $push: {savedLocations: newLocation}},
+            function (err, success) {
+                if (err) {
+                    res.status(500);
+                    throw new Error("Error updating location");
+                } else {
+                    res.status(201).json(newLocation);
+                }
+            }
+        )
+        // let updated = await Location.findById(id);
+        // res.status(201).json(updated);
+    }
 });
 
 

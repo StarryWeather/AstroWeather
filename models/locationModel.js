@@ -8,14 +8,18 @@ const locationSchema = mongoose.Schema(
             required: [true],
             ref: "User",
         },
-        latitude: {
-            type: String,
-            required: [true, "Invalid or missing latitude"],
-        },
-        longitude: {
-            type: String,
-            required: [true, "Invalid or missing longitude"],
-        }
+        savedLocations: [
+            {
+                latitude: {
+                    type: Number,
+                    required: [true, "Invalid or missing latitude"],
+                },
+                longitude: {
+                    type: Number,
+                    required: [true, "Invalid or missing longitude"],
+                }
+            }
+        ]
     },
     {
         timestamps: true,
