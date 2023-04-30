@@ -61,7 +61,7 @@ const registerUser = asyncHandler(async (req, res) => {
         process.env.EMAIL_TOKEN_SECRET,
         {expiresIn: "30m"},
         (err, emailToken) => {
-            const url = `https://hidden-tor-21438.herokuapp.com/api/users/confirm/${emailToken}`;
+            const url = `http://astroweather.space/api/users/confirm/${emailToken}`;
 
             transporter.sendMail({
                 to: user.email,
@@ -143,7 +143,7 @@ const confirmUser = asyncHandler(async (req, res) => {
         throw new Error("Email validation error");
     }
 
-    return res.redirect("https://hidden-tor-21438.herokuapp.com/#/")
+    return res.redirect("http://astroweather.space/#/")
 });
 
 //@desc Email verification prompt to reset password
@@ -189,7 +189,7 @@ const passwordPrompt = asyncHandler(async (req, res) => {
         {expiresIn: "5m"},
         (err, emailToken) => {
             // CHANGE URL TO FRONTEND PAGE
-            const url = `https://hidden-tor-21438.herokuapp.com/api/users/reset/${emailToken}`;
+            const url = `http://astroweather.space/api/users/reset/${emailToken}`;
 
             transporter.sendMail({
                 to: user.email,
@@ -235,7 +235,7 @@ const resetPassword = asyncHandler(async (req, res) => {
 
         // Update password and send response
         if (await User.findByIdAndUpdate(id, {password: hashedPassword})) {
-            return res.redirect("https://hidden-tor-21438.herokuapp.com/#/")
+            return res.redirect("http://astroweather.space/#/")
         } else {
             res.status(500);
             throw new Error("Error resetting password");
