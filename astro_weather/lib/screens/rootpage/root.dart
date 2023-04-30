@@ -23,6 +23,7 @@ class _RootPageState extends State<RootPage> {
   var cloudIndex;
   var weatherDesc;
   var DN;
+  var skyColor;
 
   void updateState(){
     setState(() {
@@ -30,6 +31,7 @@ class _RootPageState extends State<RootPage> {
       this.cloudIndex = globals.cloudIndex;
       this.weatherDesc = globals.weatherDescription;
       this.DN = globals.DayNight;
+      this.skyColor = globals.skyColor;
     });
   }
 
@@ -58,7 +60,7 @@ class _RootPageState extends State<RootPage> {
       child: Scaffold(
         body: SizedBox.expand(
             child: Container(
-                color: (DN == "d") ? Colors.lightBlue : Colors.black,
+                color: skyColor,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

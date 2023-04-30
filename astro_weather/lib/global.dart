@@ -8,6 +8,7 @@ import 'models/LocationInfo.dart';
   var cloudCover;
   var weatherDescription;
   var cloudIndex;
+  var skyColor;
   var DayNight;
   bool isRaining = false;
   bool isSnowing = false;

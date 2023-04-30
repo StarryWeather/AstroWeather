@@ -37,13 +37,34 @@ Future<void> getGlobalLocation(lat, long) async {
     globals.weatherDescription = desc;
     globals.DayNight = dn;
 
-    if (clouds > 70) {
+    if (clouds > 75) {
       globals.cloudIndex = 2;
     } else if (clouds > 50) {
       globals.cloudIndex = 1;
+    } else if (clouds > 25) {
+      globals.cloudIndex = 0;
     } else {
       globals.cloudIndex = 0;
     }
+
+    if(dn == "n")
+    {
+      globals.skyColor = Color.fromARGB(255, 0, 0, 0);
+    }
+    else if(globals.cloudIndex == 3)
+    {
+      globals.skyColor = Color.fromARGB(255, 23, 62, 97);
+    } else if(globals.cloudIndex == 2)
+    {
+      globals.skyColor = Color.fromARGB(255, 35, 97, 151);
+    } else if(globals.cloudIndex == 1)
+    {
+      globals.skyColor = Color.fromARGB(255, 36, 114, 182);
+    } else if(globals.cloudIndex ==0)
+    {
+      globals.skyColor = Color.fromARGB(255, 40, 139, 226);
+    }
+
     //Crash:
   } else {
     debugPrint('WeatherAPI FAILED!');
