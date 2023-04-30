@@ -64,6 +64,7 @@ const createLocation = asyncHandler(async (req, res) => {
         }
     }
     res.status(201);
+    return;
 });
 
 
