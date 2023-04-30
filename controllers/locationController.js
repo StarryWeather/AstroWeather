@@ -50,13 +50,19 @@ const createLocation = asyncHandler(async (req, res) => {
                 longitude: long,
             }]
         });
+        console.log("Successfully added location");
     // Send response back to client in JSON format with the status code
     res.status(201);
     } else {
         console.log("Location exists");
         const coordinates = {latitude: lat, longitude: long};
-        const updatedLocation = Location.findByIdAndUpdate({_id: id}, {$push: {savedLocations: coordinates}});
-        res.status(201);
+        const updatedLocation = await Location.findByIdAndUpdate(id, {$push: {savedLocations: coordinates}});
+        if (!updateLocation) {
+            res.status(404);
+            throw new Error("Error updating location");
+        } else {
+            res.status(204);
+        }
     }
 });
 
