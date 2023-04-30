@@ -66,9 +66,9 @@ class _MapState extends State<Map> {
                           var url = Uri.parse(
                               'https://hidden-tor-21438.herokuapp.com/api/locations/');
                           var data = {
+                            'accessToken': globals.userAccessToken,
                             'lat': globals.mapLat,
-                            'long': globals.mapLon,
-                            'jwt': globals.userAccessToken
+                            'long': globals.mapLon
                           };
                           var jsonData = jsonEncode(data);
                           var response = await http.post(url,
