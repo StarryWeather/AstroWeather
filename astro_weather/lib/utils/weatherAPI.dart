@@ -13,20 +13,24 @@ Future<void> getLocation(lat, long) async {
     var responseJSON = json.decode(response.body);
 
     //getting data:
+    var lat = responseJSON['data'][0]['lat'];
+    var long = responseJSON['data'][0]['lon'];
     var temps = responseJSON['data'][0]['temp'];
     temps = ((temps) * 1.8) + 32;
     temps = temps.round();
+    temps = temps.toString();
     var clouds = responseJSON['data'][0]['clouds'];
     var desc = responseJSON['data'][0]['weather']['description'];
     var dn = responseJSON['data'][0]['pod'];
 
     //seting data to global:
-    globals.latitude = responseJSON['data'][0]['lat'];
-    globals.longitude = responseJSON['data'][0]['lon'];
-    globals.currentTemp = temps.toString();
+    globals.latitude = lat;
+    globals.longitude = long;
+    globals.currentTemp = temps;
     globals.cloudCover = clouds;
     globals.weatherDescription = desc;
     globals.DN = dn;
+    
 
     if (clouds > 70) {
       globals.cloudIndex = 2;
