@@ -7,7 +7,6 @@ import 'package:astro_weather/screens/starspage/stars.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:astro_weather/global.dart' as globals;
 
 import '../infopage/info.dart';

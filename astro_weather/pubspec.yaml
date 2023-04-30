@@ -42,7 +42,6 @@ flutter:
   uses-material-design: true
   
   assets:
-  - assets/rocket/
   - assets/earth/
   - assets/weather/
   - assets/RiveAssets/

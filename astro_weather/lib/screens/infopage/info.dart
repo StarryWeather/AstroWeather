@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../models/LocationInfo.dart';
+import '../../widgets/InfoLocations/LocationsInfo_item.dart';
 import '../InfoPage/map.dart';
 import 'city.dart';
 
@@ -42,14 +43,13 @@ class _InfoPageState extends State<InfoPage> {
             ),
           ),
             child: Center(
-
               child: CarouselSlider.builder(
                 onSlideStart: () {},
                 onSlideChanged: (index) {},
                 controller: sliderController,
 
                 slideBuilder: (index) {
-                  return CityInfo(_StaticLocations[index]);
+                  return LocationInfoItem(itemLocation: _StaticLocations[index], OnDeleteItem: 'null',);
                 },
                 slideTransform: ZoomOutSlideTransform(),
 
@@ -80,7 +80,7 @@ class _InfoPageState extends State<InfoPage> {
               );
               // !!*** create new location ***!!
             },
-            backgroundColor: Color.fromARGB(255, 52, 125, 181),
+            backgroundColor: Colors.blue[500],
             child: Icon(Icons.add)),
       ),
     );
