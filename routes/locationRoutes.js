@@ -13,7 +13,7 @@ const {
 const validateToken = require("../config/validateTokenHandler");
 
 // Listen for CRUD request at the specified endpoint ("/") in server.js (api/locations/)
-//router.use(validateToken)
+//router.use(validateToken) THIS IS CAUSING H12 ON HEROKU; TIMEOUT
 router.route("/").get(getLocations).post(createLocation);
 router.route("/:id").put(updateLocation).delete(deleteLocation).get(getLocation);
 
