@@ -1,7 +1,11 @@
+import 'dart:convert';
+
+import 'package:astro_weather/models/LocationInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:astro_weather/global.dart' as globals;
+import 'package:http/http.dart' as http;
 
 class Map extends StatefulWidget {
   @override
@@ -89,8 +93,31 @@ class _MapState extends State<Map> {
                         style: TextStyle(fontSize: 18),
                       ),
                       FloatingActionButton(
-                        onPressed: () {
-                          // !!*** create new location ***!!
+                        onPressed: () async {
+                          // API LOGIN CALL
+                          var url = Uri.parse(
+                              'https://hidden-tor-21438.herokuapp.com/api/users/');
+                          var data = {
+                            'latitude': globals.mapLat,
+                            'longitude': globals.mapLon,
+                            'token': globals.userAccessToken
+                          };
+                          var jsonData = jsonEncode(data);
+                          var response = await http.post(url,
+                              headers: {"Content-Type": "application/json"},
+                              body: jsonData);
+
+                          if (response.statusCode != 200) {
+                            //var responseJSON = json.decode(response.body);
+                            // add into staticlocations.
+                            globals.StaticLocations.add(LocationInfo(Lat: globals.mapLat, Long: globals.mapLon));
+                            print(globals.StaticLocations[3].Lat);
+    
+                            // ignore: use_build_context_synchronously
+                          } else {
+                            // false: display email/password invalid
+                            debugPrint('failedto add');
+                          }
                         },
                         backgroundColor: Colors.blue[500],
                         child: Text(
