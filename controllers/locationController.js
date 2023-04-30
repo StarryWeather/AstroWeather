@@ -16,7 +16,7 @@ const getLocations = asyncHandler(async (req, res) => {
 
 //@desc Create new location
 //@route POST /api/locations
-//@access private
+//@access public
 const createLocation = asyncHandler(async (req, res) => {
     console.log("The request body is: ", req.body);
 
