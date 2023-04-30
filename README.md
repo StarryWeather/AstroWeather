@@ -1,10 +1,14 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1961cd1 (Updated README with random slogan)
 # AstroWeather
 Environmental data from the sky to the sea
 
 Currently under development
+<<<<<<< HEAD
 =======
 # AstroWeather
 >>>>>>> bfb56fe (Initial commit)
@@ -14,3 +18,5 @@ Currently under development
 =======
 # AstroWeather
 >>>>>>> ba5d0c1 (Update README.md)
+=======
+>>>>>>> 1961cd1 (Updated README with random slogan)
