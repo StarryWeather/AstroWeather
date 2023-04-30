@@ -1,6 +1,7 @@
 // Imports
 const asyncHandler = require("express-async-handler");
 const Location = require("../models/locationModel");
+const jwt = require("jsonwebtoken");
 
 //@desc Get all locations
 //@route GET /api/locations
