@@ -96,18 +96,18 @@ class _MapState extends State<Map> {
                         onPressed: () async {
                           // API LOGIN CALL
                           var url = Uri.parse(
-                              'https://hidden-tor-21438.herokuapp.com/api/users/');
+                              'https://hidden-tor-21438.herokuapp.com/api/locations/');
                           var data = {
-                            'latitude': globals.mapLat,
-                            'longitude': globals.mapLon,
-                            'token': globals.userAccessToken
+                            'lat': globals.mapLat,
+                            'long': globals.mapLon,
+                            'jwt': globals.userAccessToken
                           };
                           var jsonData = jsonEncode(data);
                           var response = await http.post(url,
                               headers: {"Content-Type": "application/json"},
                               body: jsonData);
 
-                          if (response.statusCode != 200) {
+                          if (response.statusCode == 200) {
                             //var responseJSON = json.decode(response.body);
                             // add into staticlocations.
                             globals.StaticLocations.add(LocationInfo(Lat: globals.mapLat, Long: globals.mapLon));
