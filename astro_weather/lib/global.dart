@@ -1,12 +1,14 @@
 library my_prj.globals;
-
+  //WeatherAPI:
   var latitude;
-  var mapLat;
   var longitude;
-  var mapLon;
-  var DN;
   var currentTemp;
-  var cloudIndex;
   var cloudCover;
-  var weatherDesc;
-  bool snow = false;
+  var weatherDescription;
+  var cloudIndex;
+  var DN;
+  bool isRaining = false;
+  bool isSnowing = false;
+  //Google MapsAPI:
+  var mapLat;
+  var mapLon;

@@ -25,7 +25,7 @@ Future<void> getLocation(lat, long) async {
     globals.longitude = responseJSON['data'][0]['lon'];
     globals.currentTemp = temps.toString();
     globals.cloudCover = clouds;
-    globals.weatherDesc = desc;
+    globals.weatherDescription = desc;
     globals.DN = dn;
 
     if (clouds > 70) {
