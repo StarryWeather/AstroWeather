@@ -53,18 +53,8 @@ const createLocation = asyncHandler(async (req, res) => {
         const coordinates = {latitude: lat, longitude: long};
         const updatedLocation = Location.findByIdAndUpdate(
             { _id: id },
-            { $push: {savedLocations: coordinates}},
-            function (err, success) {
-                if (err) {
-                    res.status(500);
-                    throw new Error("Error updating location");
-                } else {
-                    res.status(201).json(updatedLocation);
-                }
-            }
+            { $push: {savedLocations: coordinates}}
         )
-        // let updated = await Location.findById(id);
-        // res.status(201).json(updated);
     }
 });
 
