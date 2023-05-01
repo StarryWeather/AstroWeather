@@ -12,6 +12,8 @@ class LocationInfo{
 
 
 class LocationData{
+  String Lat;
+  String Long;
   String cityName;
   String windSpeed;
   String windDirection;
@@ -23,6 +25,8 @@ class LocationData{
   String airQuality;
 
   LocationData({
+    required this.Lat,
+    required this.Long,
     required this.cityName,
     required this.windSpeed,
     required this.windDirection,

@@ -103,6 +103,8 @@ Future<LocationData> getLocationList(lat, long) async {
     var airQuality = responseJSON['data'][0]['aqi'];
 
     return LocationData(
+        Lat: lat,
+        Long: long,
         cityName: cityName.toString(),
         windSpeed: windSpeed.toString(),
         windDirection: windDirection.toString(),
@@ -116,6 +118,8 @@ Future<LocationData> getLocationList(lat, long) async {
   } else {
     debugPrint('WeatherAPI FAILED!');
     return LocationData(
+        Lat: "API FAIL!",
+        Long: "API FAIL!",
         cityName: "API FAIL!",
         windSpeed: "API FAIL!",
         windDirection: "API FAIL!",
