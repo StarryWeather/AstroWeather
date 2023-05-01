@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
+import 'package:astro_weather/global.dart' as globals;
 
 class SunMoon extends StatefulWidget {
   const SunMoon({super.key});
@@ -13,8 +14,8 @@ class SunMoon extends StatefulWidget {
 }
 
 class SunMoonState extends State<SunMoon> with SingleTickerProviderStateMixin {
-  double timeOfDay = 0.0;
-  bool isNight = false;
+  double currTime = 0.05 * (DateTime.now().hour.toDouble() + 1) - 0.35;
+  bool isNight = globals.DayNight == 'n';
 
   late Path _path;
 
@@ -25,14 +26,15 @@ class SunMoonState extends State<SunMoon> with SingleTickerProviderStateMixin {
 
   void updateTimeOfDay(double newValue) {
     setState(() {
-      timeOfDay = newValue;
+      currTime = newValue;
+      isNight = globals.DayNight == 'n';
     });
   }
 
   Offset calculate() {
     PathMetrics pathMetrics = _path.computeMetrics();
     PathMetric pathMetric = pathMetrics.elementAt(0);
-    double value = pathMetric.length * timeOfDay;
+    double value = pathMetric.length * currTime;
 
     Tangent? pos = pathMetric.getTangentForOffset(value);
     return pos!.position;
@@ -47,7 +49,7 @@ class SunMoonState extends State<SunMoon> with SingleTickerProviderStateMixin {
     // checks if mobile or website
     if (kIsWeb) {
       _path.quadraticBezierTo(
-          size.width / 2, -size.height, size.width * 1.09, size.height / 2);
+          size.width / 2, -size.height, size.width * 1.09, size.height / .65);
     } else {
       _path.quadraticBezierTo(
           size.width / 2, -size.height, size.width * 0.90, size.height / 2);
@@ -64,24 +66,6 @@ class SunMoonState extends State<SunMoon> with SingleTickerProviderStateMixin {
               width: MediaQuery.of(context).size.width * 0.35,
               height: MediaQuery.of(context).size.height * 0.35,
             ),
-          ),
-          Slider(
-            value: timeOfDay,
-            onChanged: (value) {
-              setState(() {
-                timeOfDay = value;
-                if (timeOfDay == 1.0 && !isNight) {
-                  timeOfDay = 0.0;
-                  isNight = true;
-                } else if (timeOfDay == 1.0 && isNight) {
-                  timeOfDay = 0.0;
-                  isNight = false;
-                }
-              });
-            },
-            min: 0.0,
-            max: 1.0,
-            divisions: 48,
           ),
         ],
       ),
