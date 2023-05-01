@@ -19,7 +19,6 @@ class PasswordPageState extends State<PasswordPage> {
   final emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    
     if (currEmail != '') {
       emailController.text = currEmail;
     }
@@ -93,8 +92,41 @@ class PasswordPageState extends State<PasswordPage> {
                             const SizedBox(width: 16),
                             Expanded(
                               child: ElevatedButton(
-                                onPressed: () async {},
-                                // API LOGIN CALL if valid password/email
+                                onPressed: () async {
+                                  // API LOGIN CALL if valid password/email
+                                  if (isEmailValid == true) {
+                                    var url = Uri.parse(
+                                        'http://astroweather.space/api/users/reset');
+                                    var data = {
+                                      'email': emailController.text,
+                                    };
+                                    var jsonData = jsonEncode(data);
+                                    var response = await http.post(url,
+                                        headers: {
+                                          "Content-Type": "application/json"
+                                        },
+                                        body: jsonData);
+                                    // check if valid
+                                    if (response.statusCode == 200) {
+                                      // true: go to root
+                                      var responseJSON =
+                                          json.decode(response.body);
+                                      //var responseJSON = json.decode(response.body);
+                                      Navigator.push(
+                                        context,
+                                        PageTransition(
+                                          type:
+                                              PageTransitionType.leftToRightPop,
+                                          child: RootPage(),
+                                          duration: Duration(milliseconds: 400),
+                                        ),
+                                      );
+                                    } else {
+                                      // false: display email/password invalid
+                                      isEmailValid = false;
+                                    }
+                                  }
+                                },
                                 child: const Text('Send Email'),
                               ),
                             ),

@@ -119,7 +119,7 @@ class RegisterPageState extends State<RegisterPage> {
           // API LOGIN CALL if valid password/email
           if (isPasswordValid == true && isEmailValid == true) {
             var url = Uri.parse(
-                'https://hidden-tor-21438.herokuapp.com/api/users/Register');
+                'http://astroweather.space/api/users/register');
             var data = {
               'email': emailController.text,
               'password': passwordController.text
@@ -129,6 +129,7 @@ class RegisterPageState extends State<RegisterPage> {
                 headers: {"Content-Type": "application/json"}, body: jsonData);
             // check if valid
             if (response.statusCode == 200) {
+              print("Please work");
               // true: go to root
               var responseJSON = json.decode(response.body);
               //var responseJSON = json.decode(response.body);
@@ -141,6 +142,7 @@ class RegisterPageState extends State<RegisterPage> {
                 ),
               );
             } else {
+              print("you fucking loser XDXX");
               // false: display email/password invalid
               isEmailValid = false;
               isPasswordValid = false;
