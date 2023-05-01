@@ -2,17 +2,17 @@ const express = require("express");
 const router = express.Router();
 const {
     getLocations, 
-    createLocation, 
-    updateLocation, 
+    createLocation,
     deleteLocation, 
-    getLocation
+    // updateLocation,
+    // getLocation
 } = require("../controllers/locationController"); // Provides methods for responses
 const validateToken = require("../config/validateTokenHandler");
 
 // Listen for CRUD request at the specified endpoint ("/") in server.js (api/locations/)
 router.use(validateToken)
 router.route("/").get(getLocations).post(createLocation).delete(deleteLocation);
-router.route("/:id").put(updateLocation).get(getLocation);
+//router.route("/:id").put(updateLocation).get(getLocation);
 
 module.exports = router;
 

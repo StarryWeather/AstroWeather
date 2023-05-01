@@ -59,44 +59,12 @@ const createLocation = asyncHandler(async (req, res) => {
     }
 });
 
-
-//@desc Update location
-//@route POST /api/locations/:id
-//@access private
-const updateLocation = asyncHandler(async (req, res) => {
-    const location = await Location.findById(req.params.id);
-    if (!location) {
-        res.status(404);
-        throw new Error("Location not found");
-    }
-
-    if (location.user_id.toString() !== req.user.id) {
-        res.status(403);
-        throw new Error("User does not have permission to update information");
-    }
-
-    const updatedLocation = await Location.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {new: true}
-    );
-
-    res.status(201).json(updatedLocation);
-});
-
-
 //@desc Delete location
 //@route DELETE /api/locations
 //@access private
 const deleteLocation = asyncHandler(async (req, res) => {
     const { _id } = req.body;
     const locations = await Location.findById(req.user.id);
-    //const { lat, long } = req.body;
-
-    // if (!lat || !long) {
-    //     res.status(400);
-    //     throw new Error("Missing latitude or longitude from location data");
-    // }
 
     if (locations._id.toString() !== req.user.id) {
         res.status(403);
@@ -114,25 +82,49 @@ const deleteLocation = asyncHandler(async (req, res) => {
 });
 
 
-// @desc Get location
-// @route GET /api/locations/:id
-// @access private
-const getLocation = asyncHandler(async (req, res) => {
-    const location = await Location.findById(req.params.id);
-    if (!location) {
-        res.status(404);
-        throw new Error("Location not found");
-    }
+// // @desc Get location
+// // @route GET /api/locations/:id
+// // @access private
+// const getLocation = asyncHandler(async (req, res) => {
+//     const location = await Location.findById(req.params.id);
+//     if (!location) {
+//         res.status(404);
+//         throw new Error("Location not found");
+//     }
 
-    res.status(200).json(location);
-});
+//     res.status(200).json(location);
+// });
+
+// //@desc Update location
+// //@route POST /api/locations/:id
+// //@access private
+// const updateLocation = asyncHandler(async (req, res) => {
+//     const location = await Location.findById(req.params.id);
+//     if (!location) {
+//         res.status(404);
+//         throw new Error("Location not found");
+//     }
+
+//     if (location.user_id.toString() !== req.user.id) {
+//         res.status(403);
+//         throw new Error("User does not have permission to update information");
+//     }
+
+//     const updatedLocation = await Location.findByIdAndUpdate(
+//         req.params.id,
+//         req.body,
+//         {new: true}
+//     );
+
+//     res.status(201).json(updatedLocation);
+// });
 
 
 // Export API functions to module
 module.exports = {
     getLocations, 
-    createLocation, 
-    updateLocation, 
-    deleteLocation, 
-    getLocation
+    createLocation,
+    deleteLocation,
+//    updateLocation, 
+//    getLocation
 };
