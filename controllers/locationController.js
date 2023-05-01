@@ -90,8 +90,9 @@ const updateLocation = asyncHandler(async (req, res) => {
 //@access private
 const deleteLocation = asyncHandler(async (req, res) => {
     const { _id } = req.body;
-    const locations = await Location.findById(req.user.id);
     console.log(_id);
+    console.log(req.user.id);
+    const locations = await Location.findById(req.user.id);
     //const { lat, long } = req.body;
 
     if (!lat || !long) {
