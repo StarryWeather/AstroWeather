@@ -16,6 +16,7 @@ class LocationInfoItem extends StatefulWidget {
   State<LocationInfoItem> createState() =>
       _LocationInfoItemState(numIndex, OnDeleteItem);
 }
+
 //_handeladd
 class _LocationInfoItemState extends State<LocationInfoItem> {
   final int numIndex;
@@ -117,10 +118,33 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
   FloatingActionButton deleteButton(onDelete) {
     return FloatingActionButton(
       onPressed: () async {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Do you want to delete '+ globals.datalist[numIndex].cityName+ "?"),
+              
+              actions: [
+                TextButton(
+                  child: Text('DELETE'),
+                  onPressed: () async {
+                    await DeleteApi();
+                    onDelete(numIndex);
+                    Navigator.pop(context);
+                  },
+                ),
+                TextButton(
+                  child: Text('Cancel'),
+                  onPressed: () async {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          },
+        );
         debugPrint(globals.datalist[numIndex].id);
         // API LOGIN CALL
-        await DeleteApi();
-        onDelete(numIndex);
       },
       backgroundColor: Color.fromARGB(190, 244, 67, 54),
       child: Text(
@@ -142,11 +166,10 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
     var response = await http.delete(url,
         headers: {
           "Content-Type": "application/json",
-          HttpHeaders.authorizationHeader:
-              "Bearer " + globals.userAccessToken
+          HttpHeaders.authorizationHeader: "Bearer " + globals.userAccessToken
         },
         body: jsonData);
-    
+
     if (response.statusCode == 200) {
       var responseJSON = json.decode(response.body);
     } else {
