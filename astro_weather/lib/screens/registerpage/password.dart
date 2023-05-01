@@ -34,64 +34,70 @@ class PasswordPageState extends State<PasswordPage> {
               Padding(
                 padding: EdgeInsets.all(MediaQuery.of(context).size.height *
                     0.03), //page hight: 3% top + 3% bottom
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Color.fromARGB(160, 95, 95, 95),
-                    border: Border.all(width: 5.0, color: Colors.white),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(MediaQuery.of(context).size.height *
-                        0.05), //page hight: 5% + 5%
-                    child: Column(
-                      children: [
-                        //welcome back,
-                        const Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontFamily: 'KdamThmorPro',
-                          ),
-                        ),
-
-                        const SizedBox(height: 16),
-
-                        // email textfield
-                        TextField(
-                          controller: emailController,
-                          onChanged: (email) {
-                            isEmailValid = EmailValidator.validate(email);
-                            currEmail = email;
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Email',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
+                child: Container(
+                  constraints: BoxConstraints.tightForFinite(width: 700),
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      color: Color.fromARGB(160, 95, 95, 95),
+                      border: Border.all(width: 5.0, color: Colors.white),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(MediaQuery.of(context).size.height *
+                          0.05), //page hight: 5% + 5%
+                      child: Column(
+                        children: [
+                          //welcome back,
+                          const Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontFamily: 'KdamThmorPro',
                             ),
-                            // set error style if email is invalid
-                            errorText: isEmailValid ? null : 'Invalid Email',
-                            errorBorder: isEmailValid
-                                ? null
-                                : OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                    borderSide: BorderSide(color: Colors.red),
-                                  ),
                           ),
-                        ),
-                        const SizedBox(height: 16),
+                
+                          const SizedBox(height: 16),
+                          ForgotPWEmail(),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: SendEmailButton(context),
+                              ),
+                              Expanded(
+                                child: GoBackButton(context),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              earthState(),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 
-                        //password textfield
+  OutlinedButton GoBackButton(BuildContext context) {
+    return OutlinedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Go Back'),
+                              );
+  }
 
-                        const SizedBox(height: 16),
-                        //sign in button
-                        Row(
-                          children: [
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: ElevatedButton(
+  ElevatedButton SendEmailButton(BuildContext context) {
+    return ElevatedButton(
                                 onPressed: () async {
                                   // API LOGIN CALL if valid password/email
                                   if (isEmailValid == true) {
@@ -128,28 +134,30 @@ class PasswordPageState extends State<PasswordPage> {
                                   }
                                 },
                                 child: const Text('Send Email'),
-                              ),
+                              );
+  }
+
+  TextField ForgotPWEmail() {
+    return TextField(
+                          controller: emailController,
+                          onChanged: (email) {
+                            isEmailValid = EmailValidator.validate(email);
+                            currEmail = email;
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
                             ),
-                            Expanded(
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Go Back'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              earthState(),
-            ],
-          ),
-        ],
-      ),
-    );
+                            // set error style if email is invalid
+                            errorText: isEmailValid ? null : 'Invalid Email',
+                            errorBorder: isEmailValid
+                                ? null
+                                : OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
+                          ),
+                        );
   }
 }
