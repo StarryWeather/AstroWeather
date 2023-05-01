@@ -1,9 +1,7 @@
-import 'package:astro_weather/screens/rootpage/rootStars.dart';
 import 'package:astro_weather/screens/rootpage/rootLand.dart';
 import 'package:astro_weather/screens/rootpage/rootSunMoon.dart';
 import 'package:astro_weather/utils/weatherAPI.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
-import 'package:astro_weather/screens/starspage/stars.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
@@ -50,11 +48,6 @@ class _RootPageState extends State<RootPage> {
             context,
             MaterialPageRoute(builder: (context) => InfoPage()),
           );
-        } else if (details.delta.dy > 0) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => StarPage()),
-          );
         }
       },
       child: Scaffold(
@@ -92,15 +85,6 @@ class _RootPageState extends State<RootPage> {
                             ),
                             height: MediaQuery.of(context).size.height / 2,
                           ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => StarPage()));
-                          },
-                          child: Stars(),
-                        ),
                         Positioned.fill(
                           child: Align(
                             alignment: Alignment.bottomCenter,

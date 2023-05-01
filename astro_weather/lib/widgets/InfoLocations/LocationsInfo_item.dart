@@ -61,154 +61,38 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                color: Color.fromARGB(155, 55, 55, 55),
-                                border:
-                                    Border.all(width: 3.0, color: Colors.grey),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Current Temperature: ' + globals.datalist[numIndex].currentTemp + '°',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontFamily: 'KdamThmorPro',
-                                      ),
-                                    ),
-                                    Text(
-                                      'Feels Like: ' + globals.datalist[numIndex].feelsLikeTemp + '°',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontFamily: 'KdamThmorPro',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                color: Color.fromARGB(155, 55, 55, 55),
-                                border:
-                                    Border.all(width: 3.0, color: Colors.grey),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Humidity: ' + globals.datalist[numIndex].humidity + '%',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontFamily: 'KdamThmorPro',
-                                      ),
-                                    ),
-                                    Text(
-                                      'Precipitation: ' + globals.datalist[numIndex].precip + ' MM/HR',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontFamily: 'KdamThmorPro',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                          ContainerMethod(
+                              'Current Temperature: ${globals.datalist[numIndex].currentTemp}°',
+                              'Feels Like: ${globals.datalist[numIndex].feelsLikeTemp}°'),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width *
+                                      0.03)),
+                          ContainerMethod(
+                            'Humidity: ${globals.datalist[numIndex].humidity}%',
+                            'Precipitation: ${globals.datalist[numIndex].precip} MM/HR',
                           ),
                         ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.03,
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                color: Color.fromARGB(155, 55, 55, 55),
-                                border:
-                                    Border.all(width: 3.0, color: Colors.grey),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Wind Speed: '+ globals.datalist[numIndex].windSpeed+' MPS',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontFamily: 'KdamThmorPro',
-                                      ),
-                                    ),
-                                    Text(
-                                      'Wind Direction: '+ globals.datalist[numIndex].windDirection,
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontFamily: 'KdamThmorPro',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                          ContainerMethod(
+                            'Wind Speed: ${globals.datalist[numIndex].windSpeed} MPS',
+                            'Wind Direction: ${globals.datalist[numIndex].windDirection}',
                           ),
-                          Container(
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                color: Color.fromARGB(155, 55, 55, 55),
-                                border:
-                                    Border.all(width: 3.0, color: Colors.grey),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Air Quality: '+globals.datalist[numIndex].airQuality + '/500',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontFamily: 'KdamThmorPro',
-                                      ),
-                                    ),
-                                    Text(
-                                      'UV: '+globals.datalist[numIndex].uv + '/11',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontFamily: 'KdamThmorPro',
-                                      ),
-                                    ),                                    
-                                  ],
-                                ),
-                              ),
-                            ),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width *
+                                      0.03)),
+                          ContainerMethod(
+                            'Air Quality: ${globals.datalist[numIndex].airQuality}/500',
+                            'UV: ${globals.datalist[numIndex].uv}/11',
                           ),
                         ],
                       ),
@@ -221,170 +105,48 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
         ),
       ),
     );
+  }
 
-    // return Container(
-    //   decoration: BoxDecoration(
-    //     color: Colors.grey,
-    //     borderRadius: BorderRadius.circular(15),
-    //   ),
-    //   child: Column(
-    //     crossAxisAlignment: CrossAxisAlignment.stretch,
-    //     children: [
-    //       // Location Name
-    //       Container(
-    //         decoration: BoxDecoration(
-    //           color: Color.fromARGB(16, 190, 190, 190),
-    //           borderRadius: BorderRadius.circular(15),
-    //         ),
-    //         height: MediaQuery.of(context).size.height * 0.30,
-    //         alignment: Alignment.center,
-    //         child: Text(
-    //           cityName,
-    //           style: TextStyle(
-    //             fontSize: 40,
-    //             fontWeight: FontWeight.normal,
-    //             color: Color.fromARGB(255, 242, 242, 242),
-    //             fontFamily: 'KdamThmorPro',
-    //             shadows: [
-    //               Shadow(
-    //                 offset: Offset(2, 2),
-    //                 blurRadius: 3,
-    //                 color: Colors.black.withOpacity(0.5),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       ),
-    //       SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-    //       Row(
-    //         crossAxisAlignment: CrossAxisAlignment.start,
-    //         children: [
-    //           Expanded(
-    //             flex: 5,
-    //             // Current Pertinent Weather Info
-    //             child: Container(
-    //               decoration: BoxDecoration(
-    //                 color: Color.fromARGB(105, 255, 153, 0),
-    //                 borderRadius: BorderRadius.circular(15),
-    //               ),
-    //               height: MediaQuery.of(context).size.height * 0.3,
-    //               alignment: Alignment.center,
-    //               child: Column(
-    //                 mainAxisAlignment: MainAxisAlignment.center,
-    //                 children: [
-    //                   Text(
-    //                     '$currentTemp\u00B0F',
-    //                     style: TextStyle(
-    //                       fontSize: 40,
-    //                       fontWeight: FontWeight.normal,
-    //                       color: Color.fromARGB(255, 242, 242, 242),
-    //                       fontFamily: 'KdamThmorPro',
-    //                       shadows: [
-    //                         Shadow(
-    //                           offset: Offset(2, 2),
-    //                           blurRadius: 3,
-    //                           color: Colors.black.withOpacity(0.5),
-    //                         ),
-    //                       ],
-    //                     ),
-    //                   ),
-    //                   Text(
-    //                     forecast,
-    //                     style: TextStyle(
-    //                       fontSize: 25,
-    //                       fontWeight: FontWeight.normal,
-    //                       color: Color.fromARGB(255, 242, 242, 242),
-    //                       fontFamily: 'KdamThmorPro',
-    //                       shadows: [
-    //                         Shadow(
-    //                           offset: Offset(2, 2),
-    //                           blurRadius: 3,
-    //                           color: Colors.black.withOpacity(0.5),
-    //                         ),
-    //                       ],
-    //                     ),
-    //                   ),
-    //                   SizedBox(
-    //                       height: MediaQuery.of(context).size.height * 0.03),
-    //                   Text(
-    //                     'High:',
-    //                     style: TextStyle(
-    //                       fontSize: 15,
-    //                       fontWeight: FontWeight.normal,
-    //                       color: Color.fromARGB(255, 242, 242, 242),
-    //                       fontFamily: 'KdamThmorPro',
-    //                       shadows: [
-    //                         Shadow(
-    //                           offset: Offset(2, 2),
-    //                           blurRadius: 3,
-    //                           color: Colors.black.withOpacity(0.5),
-    //                         ),
-    //                       ],
-    //                     ),
-    //                   ),
-    //                 ],
-    //               ),
-    //             ),
-    //           ),
-    //           // Check Stars of this location
-    //           SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-    //           Expanded(
-    //             flex: 2,
-    //             child: GestureDetector(
-    //               onTap: () {},
-    //               child: Container(
-    //                 decoration: BoxDecoration(
-    //                   image: DecorationImage(
-    //                     image: AssetImage('assets/weather/observatory.jpg'),
-    //                     opacity: 0.55,
-    //                     fit: BoxFit.cover,
-    //                   ),
-    //                   borderRadius: BorderRadius.circular(15),
-    //                 ),
-    //                 height: MediaQuery.of(context).size.height * 0.3,
-    //               ),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //       // Misc Information
-    //       SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-    //       Container(
-    //         decoration: BoxDecoration(
-    //           color: Color.fromARGB(105, 255, 153, 0),
-    //           borderRadius: BorderRadius.circular(15),
-    //         ),
-    //         height: MediaQuery.of(context).size.height * 0.15,
-    //         alignment: Alignment.center,
-    //         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-    //           SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-    //           Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-    //             Image(
-    //               image: AssetImage('assets/weather/wind.png'),
-    //               height: MediaQuery.of(context).size.height * 0.06,
-    //             ),
-    //             Text(
-    //               'mph',
-    //               style: TextStyle(
-    //                 fontSize: 15,
-    //                 fontWeight: FontWeight.normal,
-    //                 color: Color.fromARGB(255, 242, 242, 242),
-    //                 fontFamily: 'KdamThmorPro',
-    //                 shadows: [
-    //                   Shadow(
-    //                     offset: Offset(2, 2),
-    //                     blurRadius: 3,
-    //                     color: Colors.black.withOpacity(0.5),
-    //                   ),
-    //                 ],
-    //               ),
-    //             )
-    //           ]),
-    //           SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-    //         ]),
-    //       ),
-    //     ],
-    //   ),
-    // );
+  SizedBox ContainerMethod(String one, String two) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.3,
+      width: MediaQuery.of(context).size.width * 0.4,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          color: Color.fromARGB(155, 55, 55, 55),
+          border: Border.all(width: 3.0, color: Colors.grey),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          one,
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.02,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontFamily: 'KdamThmorPro',
+                          ),
+                        ),
+                        Text(
+                          two,
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.02,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontFamily: 'KdamThmorPro',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+    );
   }
 }

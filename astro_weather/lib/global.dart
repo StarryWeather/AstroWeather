@@ -22,12 +22,5 @@ import 'models/LocationInfo.dart';
   var userName;
 
   //User's Saved Locations
-  List<LocationInfo> OldLocations = [
-      //TEMP
-      LocationInfo(Lat: '-16.975', Long: '23.322'),
-      LocationInfo(Lat: '73.824', Long: '-55.598'),
-      LocationInfo(Lat: '55.123', Long: '90.133'),
-    ];
-  List<LocationData> datalist = [
-    LocationData(cityName: "cityName", windSpeed: "windSpeed", windDirection: "windDirection", humidity: "humidity", precip: "precip", currentTemp: "currentTemp", feelsLikeTemp: "feelsLikeTemp", uv: "uv", airQuality: "airQuality"),
-  ];
+  List<LocationInfo> OldLocations = [];
+  List<LocationData> datalist = [];
