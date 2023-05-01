@@ -89,9 +89,9 @@ const updateLocation = asyncHandler(async (req, res) => {
 //@route DELETE /api/locations
 //@access private
 const deleteLocation = asyncHandler(async (req, res) => {
+    console.log("USER ID IS AAAAAAHH: " + req.user.id);
     const { _id } = req.body;
     console.log(_id);
-    console.log(req.user.id);
     const locations = await Location.findById(req.user.id);
     //const { lat, long } = req.body;
 
