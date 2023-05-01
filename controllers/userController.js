@@ -217,27 +217,17 @@ const resetPassword = asyncHandler(async (req, res) => {
         throw new Error("All fields are mandatory");
     }
 
-    // Decode token from email to retrieve respective user from id
-    //const {user: {id}} = jwt.verify(req.params.token, process.env.EMAIL_TOKEN_SECRET);
-    const user = await User.findById(req.user.id);
+    // Hash password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    console.log("New Hashed Password: ", hashedPassword);
 
-    // Check for errors in decoding token and retrieving user
-    // if (!(await bcrypt.compare(oldPassword, user.password))) {
-    //     res.status(401);
-    //     throw new Error("Incorrect password");
-    // } else {
-        // Hash password
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
-        console.log("New Hashed Password: ", hashedPassword);
-
-        // Update password and send response
-        if (await User.findByIdAndUpdate(req.user.id, {password: hashedPassword})) {
-            return res.redirect("http://astroweather.space/#/")
-        } else {
-            res.status(500).json("Error");
-            throw new Error("Error resetting password");
-        }
-    // }
+    // Update password and send response
+    if (await User.findByIdAndUpdate(req.user.id, {password: hashedPassword})) {
+        res.status(200).json("Success");
+    } else {
+        res.status(500).json("Error");
+        throw new Error("Error resetting password");
+    }
 });
 
 module.exports = {
