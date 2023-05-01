@@ -11,7 +11,7 @@ const getLocations = asyncHandler(async (req, res) => {
     const locations = await Location.findById(req.user.id); //(req.params.id) url? not auth bearer header
 
     // Send response back to client
-    res.status(200).json({"locations"});
+    res.status(200).json({Error: "locations"});
 });
 
 
