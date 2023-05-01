@@ -96,6 +96,9 @@ Future<LocationData> getLocationList(lat, long) async {
     currentTemp = currentTemp.round();
     currentTemp = currentTemp.toString();
     var feelsLikeTemp = responseJSON['data'][0]['app_temp'];
+    feelsLikeTemp = ((feelsLikeTemp) * 1.8) + 32;
+    feelsLikeTemp = feelsLikeTemp.round();
+    feelsLikeTemp = feelsLikeTemp.toString();
     var uv = responseJSON['data'][0]['uv'];
     var airQuality = responseJSON['data'][0]['aqi'];
 

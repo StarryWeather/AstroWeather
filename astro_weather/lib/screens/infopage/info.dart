@@ -41,8 +41,8 @@ class _InfoPageState extends State<InfoPage> {
                 controller: sliderController,
                 slideBuilder: (index) {
                   return LocationInfoItem(
-                    numIndex: 'null',
-                    OnDeleteItem: 'null', 
+                    numIndex: index,
+                    OnDeleteItem: null, 
                   );
                 },
                 slideTransform: ZoomOutSlideTransform(),

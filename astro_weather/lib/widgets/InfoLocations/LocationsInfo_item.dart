@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/LocationInfo.dart';
 import '../../utils/weatherAPI.dart';
+import 'package:astro_weather/global.dart' as globals;
 
 class LocationInfoItem extends StatefulWidget {
   const LocationInfoItem(
@@ -9,7 +10,8 @@ class LocationInfoItem extends StatefulWidget {
   final OnDeleteItem;
 
   @override
-  State<LocationInfoItem> createState() => _LocationInfoItemState(numIndex, OnDeleteItem);
+  State<LocationInfoItem> createState() =>
+      _LocationInfoItemState(numIndex, OnDeleteItem);
 }
 
 class _LocationInfoItemState extends State<LocationInfoItem> {
@@ -17,11 +19,6 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
   final onDelete;
 
   _LocationInfoItemState(this.numIndex, this.onDelete);
-
-  @override
-  void initState() async {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +45,7 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
                 children: [
                   Center(
                     child: Text(
-                      "hi",//data.cityName,
+                      globals.datalist[numIndex].cityName,
                       style: TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
@@ -58,27 +55,164 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Container(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Color.fromARGB(155, 55, 55, 55),
-                        border: Border.all(width: 3.0, color: Colors.grey),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Text(
-                          'hi',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontFamily: 'KdamThmorPro',
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                color: Color.fromARGB(155, 55, 55, 55),
+                                border:
+                                    Border.all(width: 3.0, color: Colors.grey),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Current Temperature: ' + globals.datalist[numIndex].currentTemp + '°',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontFamily: 'KdamThmorPro',
+                                      ),
+                                    ),
+                                    Text(
+                                      'Feels Like: ' + globals.datalist[numIndex].feelsLikeTemp + '°',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontFamily: 'KdamThmorPro',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                          Container(
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                color: Color.fromARGB(155, 55, 55, 55),
+                                border:
+                                    Border.all(width: 3.0, color: Colors.grey),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Humidity: ' + globals.datalist[numIndex].humidity + '%',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontFamily: 'KdamThmorPro',
+                                      ),
+                                    ),
+                                    Text(
+                                      'Precipitation: ' + globals.datalist[numIndex].precip + ' MM/HR',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontFamily: 'KdamThmorPro',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                color: Color.fromARGB(155, 55, 55, 55),
+                                border:
+                                    Border.all(width: 3.0, color: Colors.grey),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Wind Speed: '+ globals.datalist[numIndex].windSpeed+' MPS',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontFamily: 'KdamThmorPro',
+                                      ),
+                                    ),
+                                    Text(
+                                      'Wind Direction: '+ globals.datalist[numIndex].windDirection,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontFamily: 'KdamThmorPro',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                color: Color.fromARGB(155, 55, 55, 55),
+                                border:
+                                    Border.all(width: 3.0, color: Colors.grey),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Air Quality: '+globals.datalist[numIndex].airQuality + '/500',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontFamily: 'KdamThmorPro',
+                                      ),
+                                    ),
+                                    Text(
+                                      'UV: '+globals.datalist[numIndex].uv + '/11',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontFamily: 'KdamThmorPro',
+                                      ),
+                                    ),                                    
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),

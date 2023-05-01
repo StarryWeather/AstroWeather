@@ -148,7 +148,7 @@ class _RootPageState extends State<RootPage> {
                                         child: Align(
                                           alignment: Alignment.center,
                                           child: Text(
-                                            this.temp.toString(),
+                                            this.temp.toString() + '°',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: 24,
