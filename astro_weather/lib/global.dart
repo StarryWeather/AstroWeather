@@ -16,8 +16,8 @@ import 'models/LocationInfo.dart';
   //Google MapsAPI:
   var mapLat;
   var mapLon;
-  //Login:
 
+  //Login:
   var userAccessToken;
   var userName;
   //StarsPng
@@ -28,3 +28,6 @@ import 'models/LocationInfo.dart';
     LocationInfo(Lat: latitude.toString(), Long: longitude.toString(), id: "Troll."),
   ];
   List<LocationData> datalist = [];
+
+  //Navigator:
+  var CurrentPage;

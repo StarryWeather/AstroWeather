@@ -3,7 +3,6 @@ import 'package:astro_weather/screens/rootpage/root.dart';
 import 'package:astro_weather/screens/sideBar/sidebar.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
-
 import '../models/sidebarBtn.dart';
 import '../utils/rive_utils.dart';
 import 'package:astro_weather/global.dart' as globals;
@@ -21,7 +20,6 @@ class _NavigationState extends State<Navigation>
   late Animation<double> animation;
   late Animation<double> scalAnimation;
   bool isSideMenuClosed = true;
-  late var CurrentPage;
 
   @override
   void initState() {
@@ -39,7 +37,7 @@ class _NavigationState extends State<Navigation>
       CurvedAnimation(
           parent: _animationController, curve: Curves.fastOutSlowIn),
     );
-    CurrentPage = RootPage();
+    globals.CurrentPage = RootPage();
     super.initState();
   }
 
@@ -77,8 +75,9 @@ class _NavigationState extends State<Navigation>
                 child: Transform.scale(
                   scale: scalAnimation.value,
                   child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(isSideMenuClosed ? 0:24)),
-                      child: CurrentPage),
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(isSideMenuClosed ? 0 : 24)),
+                      child: globals.CurrentPage),
                 )),
           ),
 
