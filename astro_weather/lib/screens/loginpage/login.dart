@@ -122,7 +122,7 @@ class LoginPageState extends State<LoginPage> {
                 //turn this into an api call
 
                 for (LocationInfo i in globals.OldLocations) {
-                  globals.datalist.add(await getLocationList(i.Lat, i.Long));
+                  globals.datalist.add(await getLocationList(i.Lat, i.Long, i.id));
                 }
 
                 // ignore: use_build_context_synchronously
@@ -256,7 +256,7 @@ Future<void> pullLocations() async {
     for(int x = 0; x < responseJSON['savedLocations'].length; x++)
     {
       print("Arigato!!!!");
-      globals.OldLocations.add(LocationInfo(Lat: responseJSON['savedLocations'][x]['latitude'].toString(), Long: responseJSON['savedLocations'][x]['longitude'].toString()));
+      globals.OldLocations.add(LocationInfo(Lat: responseJSON['savedLocations'][x]['latitude'].toString(), Long: responseJSON['savedLocations'][x]['longitude'].toString(), id: responseJSON['savedLocations'][x]['_id']));
     }
   
   } else {

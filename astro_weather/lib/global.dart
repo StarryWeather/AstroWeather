@@ -23,6 +23,6 @@ import 'models/LocationInfo.dart';
 
   //User's Saved Locations
   List<LocationInfo> OldLocations = [
-    LocationInfo(Lat: latitude.toString(), Long: longitude.toString()),
+    LocationInfo(Lat: latitude.toString(), Long: longitude.toString(), id: "Troll."),
   ];
   List<LocationData> datalist = [];

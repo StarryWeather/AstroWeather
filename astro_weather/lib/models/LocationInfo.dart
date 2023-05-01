@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class LocationInfo{
+  String? id;
   String? Lat;
   String? Long;
 
   LocationInfo({
+    required this.id,
     required this.Lat,
     required this.Long,//get number of locations saved for user from backend here
   });
@@ -23,8 +25,11 @@ class LocationData{
   String feelsLikeTemp;
   String uv;
   String airQuality;
+  
+  String id;
 
   LocationData({
+    required this.id,
     required this.Lat,
     required this.Long,
     required this.cityName,

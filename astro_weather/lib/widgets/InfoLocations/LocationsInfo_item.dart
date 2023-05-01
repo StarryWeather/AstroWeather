@@ -115,6 +115,7 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
     return FloatingActionButton(
             onPressed: () {
               globals.datalist.removeAt(numIndex);
+              
             },
             backgroundColor: Color.fromARGB(190, 244, 67, 54),
             child: Text(

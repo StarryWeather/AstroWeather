@@ -136,10 +136,10 @@ class addButton extends StatelessWidget {
             headers: {"Content-Type": "application/json", HttpHeaders.authorizationHeader:"Bearer " + globals.userAccessToken}, body: jsonData);
 
         if (response.statusCode == 201 || response.statusCode == 204) {
-          //var responseJSON = json.decode(response.body);
+          var responseJSON = json.decode(response.body);
           // add into staticlocations.
           globals.datalist
-              .add(await getLocationList(globals.mapLat, globals.mapLon));
+              .add(await getLocationList(globals.mapLat, globals.mapLon, responseJSON['savedLocations'][responseJSON['savedLocations'].length-1]['_id']));
         } else {
           // false: display email/password invalid
           debugPrint('failedto add');

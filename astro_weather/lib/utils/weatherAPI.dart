@@ -101,7 +101,7 @@ Future<void> getGlobalLocation(lat, long) async {
   }
 }
 
-Future<LocationData> getLocationList(lat, long) async {
+Future<LocationData> getLocationList(lat, long, id) async {
   //calling API:
   var url = Uri.parse('https://api.weatherbit.io/v2.0/current?lat=' +
       lat.toString() +
@@ -133,6 +133,7 @@ Future<LocationData> getLocationList(lat, long) async {
     var airQuality = responseJSON['data'][0]['aqi'];
 
     return LocationData(
+        id: id,
         Lat: lat,
         Long: long,
         cityName: cityName.toString(),
@@ -148,6 +149,7 @@ Future<LocationData> getLocationList(lat, long) async {
   } else {
     debugPrint('WeatherAPI FAILED!');
     return LocationData(
+        id: "API FAIL!",
         Lat: "API FAIL!",
         Long: "API FAIL!",
         cityName: "API FAIL!",
@@ -161,3 +163,5 @@ Future<LocationData> getLocationList(lat, long) async {
         airQuality: "API FAIL!");
   }
 }
+
+
