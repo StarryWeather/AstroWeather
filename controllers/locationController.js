@@ -91,6 +91,7 @@ const updateLocation = asyncHandler(async (req, res) => {
 const deleteLocation = asyncHandler(async (req, res) => {
     const { _id } = req.body;
     const locations = await Location.findById(req.user.id);
+    console.log(_id);
     //const { lat, long } = req.body;
 
     if (!lat || !long) {
@@ -98,7 +99,7 @@ const deleteLocation = asyncHandler(async (req, res) => {
         throw new Error("Missing latitude or longitude from location data");
     }
 
-    if (location._id.toString() !== req.user.id) {
+    if (locations._id.toString() !== req.user.id) {
         res.status(403);
         throw new Error("User does not have permission to update information");
     }
