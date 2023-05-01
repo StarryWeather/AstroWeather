@@ -11,31 +11,30 @@ const getLocations = asyncHandler(async (req, res) => {
     const locations = await Location.findById(req.user.id); //(req.params.id) url? not auth bearer header
 
     // Send response back to client
-    res.status(200).json(locations);
+    res.status(200).json({"locations"});
 });
 
 
 //@desc Create new location
 //@route POST /api/locations
 //@access private
-// FIX AS DOES NOT USE AUTH HEADER
 const createLocation = asyncHandler(async (req, res) => {
     // Take in request from client and validate
-    const {accessToken, lat, long} = req.body;
-    if (!accessToken || !lat || !long) {
+    const {lat, long} = req.body;
+    if (!lat || !long) {
         res.status(400);
-        throw new Error("Missing necessary location data");
+        throw new Error("Missing latitude or longitude from location data");
     }
 
-    // Decode JWT into user ID
-    const {user: {id}} = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
-    if (!id) {
-        res.status(400);
-        throw new Error("Error decoding user ID");
-    };
+    // // Decode JWT into user ID
+    // const {user: {id}} = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+    // if (!id) {
+    //     res.status(400);
+    //     throw new Error("Error decoding user ID");
+    // };
 
     // Find user entry in locations table
-    let location = await Location.findById(id);
+    let location = await Location.findById(req.user.id);
 
     // Decide on if you're creating a new location object or apending to database
     if (!location) {
