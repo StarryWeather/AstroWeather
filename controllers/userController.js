@@ -189,12 +189,12 @@ const passwordPrompt = asyncHandler(async (req, res) => {
         {expiresIn: "5m"},
         (err, emailToken) => {
             // CHANGE URL TO FRONTEND PAGE
-            const url = `http://astroweather.space/api/users/reset/${emailToken}`;
+            const url = `${emailToken}`;
 
             transporter.sendMail({
                 to: user.email,
                 subject: "Reset your password",
-                html: `Click this link to reset your password to Astroweather, or paste into your web browser in order to access the site: <a href="${url}">${url}</a>`,
+                html: `Copy this code and type it into your password reset page: <a href="${url}">${url}</a>`,
             });
         },
     );
