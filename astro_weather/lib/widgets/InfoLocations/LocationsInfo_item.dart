@@ -101,6 +101,22 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
                 ],
               ),
             ),
+            FloatingActionButton(
+            onPressed: () {
+              // !!*** create new location ***!!
+              globals.datalist.removeAt(numIndex);
+            },
+            backgroundColor: Color.fromARGB(190, 244, 67, 54),
+            child: Text(
+              "X",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontFamily: 'KdamThmorPro',
+              ),
+            ),
+          ),
           ],
         ),
       ),
