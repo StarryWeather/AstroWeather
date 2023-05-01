@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:astro_weather/models/LocationInfo.dart';
 import 'package:astro_weather/utils/weatherAPI.dart';
@@ -127,13 +128,12 @@ class addButton extends StatelessWidget {
         // API LOGIN CALL
         var url = Uri.parse('http://astroweather.space/api/locations/');
         var data = {
-          'accessToken': globals.userAccessToken,
           'lat': globals.mapLat,
           'long': globals.mapLon
         };
         var jsonData = jsonEncode(data);
         var response = await http.post(url,
-            headers: {"Content-Type": "application/json"}, body: jsonData);
+            headers: {"Content-Type": "application/json", HttpHeaders.authorizationHeader:"Bearer " + globals.userAccessToken}, body: jsonData);
 
         if (response.statusCode == 201 || response.statusCode == 204) {
           //var responseJSON = json.decode(response.body);

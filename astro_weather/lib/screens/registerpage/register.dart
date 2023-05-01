@@ -142,7 +142,7 @@ class RegisterPageState extends State<RegisterPage> {
                 ),
               );
             } else {
-              print("you fucking loser XDXX");
+              print("Register failed but like maybe not...");
               // false: display email/password invalid
               isEmailValid = false;
               isPasswordValid = false;

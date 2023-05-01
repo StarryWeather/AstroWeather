@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:astro_weather/screens/registerpage/password.dart';
 import 'package:astro_weather/utils/rive_utils.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,6 @@ class LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    
     late SMIBool isSideMenuClosed;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 0, 0),
@@ -116,6 +117,8 @@ class LoginPageState extends State<LoginPage> {
                 globals.userAccessToken = responseJSON['accessToken'];
 
                 await getData();
+
+                await pullLocations();
                 //turn this into an api call
 
                 for (LocationInfo i in globals.OldLocations) {
@@ -231,4 +234,29 @@ Future<void> getData() async {
       desiredAccuracy: LocationAccuracy.low);
   await getGlobalLocation(
       position.latitude.toString(), position.longitude.toString());
+}
+
+Future<void> pullLocations() async {
+  var url = Uri.parse('http://astroweather.space/api/locations/');
+  var response = await http.get(
+    url,
+    headers: {
+      "Content-Type": "application/json",
+      HttpHeaders.authorizationHeader: "Bearer " + globals.userAccessToken
+    },
+  );
+
+  if (response.statusCode == 200) {
+    print("PARTY TIME!!!!");
+    var responseJSON = json.decode(response.body);
+      print(responseJSON);
+    for(int x = 0; x < responseJSON['savedLocations'].length; x++)
+    {
+      print("Arigato!!!!");
+      globals.OldLocations.add(LocationInfo(Lat: responseJSON['savedLocations'][x]['latitude'].toString(), Long: responseJSON['savedLocations'][x]['longitude'].toString()));
+    }
+  
+  } else {
+    debugPrint(json.decode(response.body));
+  }
 }
