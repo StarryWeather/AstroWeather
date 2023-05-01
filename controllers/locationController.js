@@ -53,7 +53,8 @@ const createLocation = asyncHandler(async (req, res) => {
             res.status(404).json({});
             throw new Error("Error updating location");
         } else {
-            res.status(201).json(updatedLocation);
+            const updatedLocations = await Location.findById(req.user.id);
+            res.status(201).json(updatedLocations);
         }
     }
 });
