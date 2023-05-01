@@ -38,6 +38,10 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
         ),
         child: Stack(
           children: [
+            Container(
+              alignment: Alignment.topLeft,
+              child: deleteButton(),
+            ),
             Padding(
               padding:
                   EdgeInsets.all(MediaQuery.of(context).size.height * 0.05),
@@ -101,9 +105,15 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
                 ],
               ),
             ),
-            FloatingActionButton(
+          ],
+        ),
+      ),
+    );
+  }
+
+  FloatingActionButton deleteButton() {
+    return FloatingActionButton(
             onPressed: () {
-              // !!*** create new location ***!!
               globals.datalist.removeAt(numIndex);
             },
             backgroundColor: Color.fromARGB(190, 244, 67, 54),
@@ -116,11 +126,7 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
                 fontFamily: 'KdamThmorPro',
               ),
             ),
-          ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 
   SizedBox ContainerMethod(String one, String two) {
@@ -136,33 +142,33 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(10),
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          one,
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.02,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontFamily: 'KdamThmorPro',
-                          ),
-                        ),
-                        Text(
-                          two,
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.02,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontFamily: 'KdamThmorPro',
-                          ),
-                        ),
-                      ],
-                    ),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  one,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.02,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontFamily: 'KdamThmorPro',
                   ),
                 ),
-              ),
+                Text(
+                  two,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.02,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontFamily: 'KdamThmorPro',
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
