@@ -1,3 +1,7 @@
+import 'dart:html';
+import 'dart:io';
+
+import 'package:astro_weather/screens/loginpage/login.dart';
 import 'package:flutter/material.dart';
 import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
@@ -16,19 +20,16 @@ class ResetPage extends StatefulWidget {
 class ResetPageState extends State<ResetPage> {
   bool isPasswordValid = true;
   late String passwordError = '';
-  late String currPassword = '';
+  late String verification = '';
   late String newPassword = '';
-  final oldpassController = TextEditingController();
+  final verificationController = TextEditingController();
   final newpassController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    
-    if (currPassword != '') {
-      oldpassController.text = currPassword;
-    }
     if (newPassword != '') {
       newpassController.text = newPassword;
     }
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 0, 0),
       body: Stack(
@@ -65,28 +66,17 @@ class ResetPageState extends State<ResetPage> {
                         ),
 
                         const SizedBox(height: 16),
-
-                        // email textfield
                         TextField(
-                          controller: oldpassController,
+                          controller: verificationController,
                           obscureText: true,
-                          onChanged: (password) {
-                            validatePassword(password);
-                            currPassword = password;
+                          onChanged: (code) {
+                            verification = code;
                           },
                           decoration: InputDecoration(
-                            hintText: 'Old Password',
+                            hintText: 'Input Verification Code',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            // set error style if password is invalid
-                            errorText: isPasswordValid ? null : passwordError,
-                            errorBorder: isPasswordValid
-                                ? null
-                                : OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                    borderSide: BorderSide(color: Colors.red),
-                                  ),
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -121,15 +111,46 @@ class ResetPageState extends State<ResetPage> {
                             const SizedBox(width: 16),
                             Expanded(
                               child: ElevatedButton(
-                                onPressed: () async {},
-                                // API LOGIN CALL if valid password/email
+                                onPressed: () async {
+                                  // API LOGIN CALL
+                                  var url = Uri.parse(
+                                      'http://astroweather.space/api/users/resetPassword');
+                                  var data = {
+                                    'newPassword': newpassController.text,
+                                  };
+                                  var jsonData = jsonEncode(data);
+                                  var response = await http.post(url,
+                                      headers: {
+                                        "Content-Type": "application/json",
+                                        HttpHeaders.authorizationHeader:
+                                            "Bearer " +
+                                                verificationController.text,
+                                      },
+                                      body: jsonData);
+
+                                  if (response.statusCode == 200) {
+                                    // ignore: use_build_context_synchronously
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPage()),
+                                    );
+                                  } else {
+                                    // false: display email/password invalid
+                                    debugPrint('Password Update Failed!');
+                                  }
+                                },
                                 child: const Text('Update Password'),
                               ),
                             ),
                             Expanded(
                               child: OutlinedButton(
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => LoginPage()),
+                                  );
                                 },
                                 child: const Text('Go Back'),
                               ),
@@ -148,6 +169,7 @@ class ResetPageState extends State<ResetPage> {
       ),
     );
   }
+
   void validatePassword(String password) {
     bool hasUppercase = password.contains(RegExp(r'[A-Z]'));
     bool hasLowercase = password.contains(RegExp(r'[a-z]'));

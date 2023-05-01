@@ -1,3 +1,4 @@
+import 'package:astro_weather/screens/registerpage/reset.dart';
 import 'package:flutter/material.dart';
 import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
@@ -44,8 +45,9 @@ class PasswordPageState extends State<PasswordPage> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(MediaQuery.of(context).size.height *
-                          0.05), //page hight: 5% + 5%
+                      padding: EdgeInsets.all(
+                          MediaQuery.of(context).size.height *
+                              0.05), //page hight: 5% + 5%
                       child: Column(
                         children: [
                           //welcome back,
@@ -80,87 +82,77 @@ class PasswordPageState extends State<PasswordPage> {
 
   Text forgotPWText() {
     return const Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontFamily: 'KdamThmorPro',
-                          ),
-                        );
+      'Forgot Password?',
+      style: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+        fontFamily: 'KdamThmorPro',
+      ),
+    );
   }
 
   OutlinedButton GoBackButton(BuildContext context) {
     return OutlinedButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Go Back'),
-                              );
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      child: const Text('Go Back'),
+    );
   }
 
   ElevatedButton SendEmailButton(BuildContext context) {
     return ElevatedButton(
-                                onPressed: () async {
-                                  // API LOGIN CALL if valid password/email
-                                  if (isEmailValid == true) {
-                                    var url = Uri.parse(
-                                        'http://astroweather.space/api/users/reset');
-                                    var data = {
-                                      'email': emailController.text,
-                                    };
-                                    var jsonData = jsonEncode(data);
-                                    var response = await http.post(url,
-                                        headers: {
-                                          "Content-Type": "application/json"
-                                        },
-                                        body: jsonData);
-                                    // check if valid
-                                    if (response.statusCode == 200) {
-                                      // true: go to root
-                                      var responseJSON =
-                                          json.decode(response.body);
-                                      //var responseJSON = json.decode(response.body);
-                                      Navigator.push(
-                                        context,
-                                        PageTransition(
-                                          type:
-                                              PageTransitionType.leftToRightPop,
-                                          child: RootPage(),
-                                          duration: Duration(milliseconds: 400),
-                                        ),
-                                      );
-                                    } else {
-                                      // false: display email/password invalid
-                                      isEmailValid = false;
-                                    }
-                                  }
-                                },
-                                child: const Text('Send Email'),
-                              );
+      onPressed: () async {
+        // API LOGIN CALL if valid password/email
+        if (isEmailValid == true) {
+          var url = Uri.parse('http://astroweather.space/api/users/reset');
+          var data = {
+            'email': emailController.text,
+          };
+          var jsonData = jsonEncode(data);
+          var response = await http.post(url,
+              headers: {"Content-Type": "application/json"}, body: jsonData);
+          // check if valid
+          if (response.statusCode == 201) {
+            // true: go to root
+            var responseJSON = json.decode(response.body);
+            //var responseJSON = json.decode(response.body);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ResetPage()),
+            );
+          } else {
+            // false: display email/password invalid
+            isEmailValid = false;
+          }
+        }
+      },
+      child: const Text('Send Email'),
+    );
   }
 
   TextField ForgotPWEmail() {
     return TextField(
-                          controller: emailController,
-                          onChanged: (email) {
-                            isEmailValid = EmailValidator.validate(email);
-                            currEmail = email;
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Email',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            // set error style if email is invalid
-                            errorText: isEmailValid ? null : 'Invalid Email',
-                            errorBorder: isEmailValid
-                                ? null
-                                : OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                    borderSide: BorderSide(color: Colors.red),
-                                  ),
-                          ),
-                        );
+      controller: emailController,
+      onChanged: (email) {
+        isEmailValid = EmailValidator.validate(email);
+        currEmail = email;
+      },
+      decoration: InputDecoration(
+        hintText: 'Email',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        // set error style if email is invalid
+        errorText: isEmailValid ? null : 'Invalid Email',
+        errorBorder: isEmailValid
+            ? null
+            : OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide(color: Colors.red),
+              ),
+      ),
+    );
   }
 }
