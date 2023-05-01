@@ -95,10 +95,10 @@ const deleteLocation = asyncHandler(async (req, res) => {
     const locations = await Location.findById(req.user.id);
     //const { lat, long } = req.body;
 
-    if (!lat || !long) {
-        res.status(400);
-        throw new Error("Missing latitude or longitude from location data");
-    }
+    // if (!lat || !long) {
+    //     res.status(400);
+    //     throw new Error("Missing latitude or longitude from location data");
+    // }
 
     if (locations._id.toString() !== req.user.id) {
         res.status(403);
