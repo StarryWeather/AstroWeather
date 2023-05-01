@@ -231,7 +231,7 @@ const resetPassword = asyncHandler(async (req, res) => {
         console.log("New Hashed Password: ", hashedPassword);
 
         // Update password and send response
-        if (await User.findByIdAndUpdate(id, {password: hashedPassword})) {
+        if (await User.findByIdAndUpdate(req.user.id, {password: hashedPassword})) {
             return res.redirect("http://astroweather.space/#/")
         } else {
             res.status(500).json("Error");
