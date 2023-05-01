@@ -147,7 +147,7 @@ const confirmUser = asyncHandler(async (req, res) => {
 });
 
 //@desc Email verification prompt to reset password
-//@route GET /api/users/reset
+//@route POST /api/users/reset
 //@access public
 // FIX PATHING TO PROMPT AT WEBSITE PAGE
 const passwordPrompt = asyncHandler(async (req, res) => {
@@ -212,10 +212,10 @@ const passwordPrompt = asyncHandler(async (req, res) => {
 //@route GET /api/users/reset/:token
 //@access private
 const resetPassword = asyncHandler(async (req, res) => {
-    const {oldPassword, newPassword} = req.body;
+    const {newPassword} = req.body;
 
     // Check for present fields
-    if (!oldPassword || !newPassword) {
+    if (!newPassword) {
         res.status(400);
         throw new Error("All fields are mandatory");
     }
@@ -225,10 +225,10 @@ const resetPassword = asyncHandler(async (req, res) => {
     const user = await User.findById(id);
 
     // Check for errors in decoding token and retrieving user
-    if (!(await bcrypt.compare(oldPassword, user.password))) {
-        res.status(401);
-        throw new Error("Incorrect password");
-    } else {
+    // if (!(await bcrypt.compare(oldPassword, user.password))) {
+    //     res.status(401);
+    //     throw new Error("Incorrect password");
+    // } else {
         // Hash password
         const hashedPassword = await bcrypt.hash(newPassword, 10);
         console.log("New Hashed Password: ", hashedPassword);
@@ -240,7 +240,7 @@ const resetPassword = asyncHandler(async (req, res) => {
             res.status(500);
             throw new Error("Error resetting password");
         }
-    }
+    // }
 });
 
 module.exports = {
