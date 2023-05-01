@@ -108,10 +108,8 @@ const deleteLocation = asyncHandler(async (req, res) => {
         console.log("USER ID IS : " + locations);
         throw new Error("Location not found");
     } else {
-        //await Location.deleteOne(req.params.id,);
-        //Dive.update({ _id: diveId }, { "$pull": { "divers": { "user": userIdToRemove } }}
-        const updatedLocation = await Location.findByIdAndRemove(req.user.id, {$pull: { savedLocations : {_id: _id}}});
-        //const updatedLocation = await Location.findByIdAndRemove(req.user.id, {$pull: {latitude: lat, longitude: long}});
+        //const updatedLocation = await Location.findByIdAndRemove(req.user.id, {$pull: { savedLocations : {_id: _id}}});
+        const updatedLocation = await Location.findByIdAndUpdate(req.user.id, {$pull: { savedLocations : {_id: _id}}});
         res.status(200).json(updatedLocation);
     }
 });
