@@ -11,8 +11,8 @@ const validateToken = require("../config/validateTokenHandler");
 
 // Listen for CRUD request at the specified endpoint ("/") in server.js (api/locations/)
 router.use(validateToken)
-router.route("/").get(getLocations).post(createLocation);
-router.route("/:id").put(updateLocation).delete(deleteLocation).get(getLocation);
+router.route("/").get(getLocations).post(createLocation).delete(deleteLocation);
+router.route("/:id").put(updateLocation).get(getLocation);
 
 module.exports = router;
 
