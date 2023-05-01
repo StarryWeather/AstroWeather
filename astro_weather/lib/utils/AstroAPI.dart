@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:html';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:astro_weather/global.dart' as globals;
