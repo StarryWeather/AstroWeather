@@ -53,7 +53,7 @@ const createLocation = asyncHandler(async (req, res) => {
             res.status(404).json({});
             throw new Error("Error updating location");
         } else {
-            res.status(201).json(newLocation);
+            res.status(201).json(updatedLocation);
         }
     }
 });
