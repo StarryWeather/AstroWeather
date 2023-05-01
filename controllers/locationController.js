@@ -48,7 +48,7 @@ const createLocation = asyncHandler(async (req, res) => {
         res.status(201).json({});
     } else {
         const coordinates = {latitude: lat, longitude: long};
-        const updatedLocation = await Location.findByIdAndUpdate(id, {$push: {savedLocations: coordinates}});
+        const updatedLocation = await Location.findByIdAndUpdate(req.user.id, {$push: {savedLocations: coordinates}});
         if (!updatedLocation) {
             res.status(404);
             throw new Error("Error updating location");
