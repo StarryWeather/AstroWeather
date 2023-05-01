@@ -53,7 +53,7 @@ class _RootPageState extends State<RootPage> {
       child: Scaffold(
         body: SizedBox.expand(
             child: Container(
-                color: skyColor,
+              decoration: BoxDecoration(gradient: skyColor),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -111,7 +111,13 @@ class _RootPageState extends State<RootPage> {
                                   ],
                                 ),
                                 child: Container(
-                                  color: Colors.green,
+                                  decoration:BoxDecoration(
+              image: DecorationImage(
+                image: (DN == "n") ? AssetImage('assets/weather/grass.png') : AssetImage('assets/weather/night_grass.png'),
+                opacity: 1,
+                fit: BoxFit.cover,
+              ),
+            ),
                                   height: 100,
                                   child: Row(
                                     mainAxisAlignment:
