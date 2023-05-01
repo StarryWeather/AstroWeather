@@ -109,7 +109,8 @@ const deleteLocation = asyncHandler(async (req, res) => {
         throw new Error("Location not found");
     } else {
         //const updatedLocation = await Location.findByIdAndRemove(req.user.id, {$pull: { savedLocations : {_id: _id}}});
-        const updatedLocation = await Location.findByIdAndUpdate(req.user.id, {$pull: { savedLocations: {_id: { $oid: ObjectId(_id)}}}});
+        //const updatedLocation = await Location.findByIdAndUpdate(req.user.id, {$pull: { savedLocations: {_id: { $oid: ObjectId(_id)}}}});
+        const updatedLocation = await Location.findByIdAndRemove(_id);
         res.status(200).json(updatedLocation);
     }
 });
