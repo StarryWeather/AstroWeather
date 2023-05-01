@@ -114,9 +114,9 @@ const deleteLocation = asyncHandler(async (req, res) => {
 });
 
 
-@desc Get location
-@route GET /api/locations/:id
-@access private
+// @desc Get location
+// @route GET /api/locations/:id
+// @access private
 const getLocation = asyncHandler(async (req, res) => {
     const location = await Location.findById(req.params.id);
     if (!location) {
