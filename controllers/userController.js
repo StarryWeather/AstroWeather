@@ -188,13 +188,10 @@ const passwordPrompt = asyncHandler(async (req, res) => {
         process.env.EMAIL_TOKEN_SECRET,
         {expiresIn: "5m"},
         (err, emailToken) => {
-            // CHANGE URL TO FRONTEND PAGE
-            const url = `${emailToken}`;
-
             transporter.sendMail({
                 to: user.email,
                 subject: "Reset your password",
-                html: `Copy this code and type it into your password reset page: <a href="${url}">${url}</a>`,
+                html: `Copy this code and type it into your password reset page: \n\n ${emailToken}`,
             });
         },
     );
@@ -237,7 +234,7 @@ const resetPassword = asyncHandler(async (req, res) => {
         if (await User.findByIdAndUpdate(id, {password: hashedPassword})) {
             return res.redirect("http://astroweather.space/#/")
         } else {
-            res.status(500);
+            res.status(500).json("Error");
             throw new Error("Error resetting password");
         }
     // }
