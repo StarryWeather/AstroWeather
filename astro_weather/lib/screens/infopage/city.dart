@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:astro_weather/screens/starspage/stars.dart';
 
 class CityInfo extends StatefulWidget {
   final location;
@@ -132,7 +133,15 @@ class _CityInfoState extends State<CityInfo> {
               SizedBox(width: MediaQuery.of(context).size.width * 0.05),
               Expanded(
                 flex: 2,
-                child: Container(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      // !!***send location to star page***!!
+                      MaterialPageRoute(builder: (context) => StarPage()),
+                    );
+                  },
+                  child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/weather/observatory.jpg'),
@@ -144,6 +153,7 @@ class _CityInfoState extends State<CityInfo> {
                     height: MediaQuery.of(context).size.height * 0.3,
                   ),
                 ),
+              ),
             ],
           ),
           // Misc Information
