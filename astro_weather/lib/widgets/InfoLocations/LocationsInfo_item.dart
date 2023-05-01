@@ -133,7 +133,7 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
         if (response.statusCode == 200) {
           var responseJSON = json.decode(response.body);
           // add into staticlocations.
-          debugPrint("holy shit its gone rip...");
+          debugPrint("holy crap its gone rip...");
           globals.datalist.removeAt(numIndex);
         } else {
           // false: display email/password invalid
