@@ -49,16 +49,7 @@ class PasswordPageState extends State<PasswordPage> {
                       child: Column(
                         children: [
                           //welcome back,
-                          const Text(
-                            'Forgot Password?',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontFamily: 'KdamThmorPro',
-                            ),
-                          ),
-                
+                          forgotPWText(),
                           const SizedBox(height: 16),
                           ForgotPWEmail(),
                           const SizedBox(height: 16),
@@ -85,6 +76,18 @@ class PasswordPageState extends State<PasswordPage> {
         ],
       ),
     );
+  }
+
+  Text forgotPWText() {
+    return const Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontFamily: 'KdamThmorPro',
+                          ),
+                        );
   }
 
   OutlinedButton GoBackButton(BuildContext context) {
