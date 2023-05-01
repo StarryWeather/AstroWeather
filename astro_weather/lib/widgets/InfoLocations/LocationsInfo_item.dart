@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import '../../models/LocationInfo.dart';
 import '../../utils/weatherAPI.dart';
@@ -113,21 +116,41 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
 
   FloatingActionButton deleteButton() {
     return FloatingActionButton(
-            onPressed: () {
-              globals.datalist.removeAt(numIndex);
-              
+      onPressed: () async {
+        debugPrint(globals.datalist[numIndex].id);
+        // API LOGIN CALL
+        var url = Uri.parse('http://astroweather.space/api/locations/');
+        var data = {'_id': globals.datalist[numIndex].id};
+        var jsonData = jsonEncode(data);
+        var response = await http.delete(url,
+            headers: {
+              "Content-Type": "application/json",
+              HttpHeaders.authorizationHeader:
+                  "Bearer " + globals.userAccessToken
             },
-            backgroundColor: Color.fromARGB(190, 244, 67, 54),
-            child: Text(
-              "X",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontFamily: 'KdamThmorPro',
-              ),
-            ),
-          );
+            body: jsonData);
+
+        if (response.statusCode == 200) {
+          var responseJSON = json.decode(response.body);
+          // add into staticlocations.
+          debugPrint("holy shit its gone rip...");
+          globals.datalist.removeAt(numIndex);
+        } else {
+          // false: display email/password invalid
+          debugPrint('failedto delete');
+        }
+      },
+      backgroundColor: Color.fromARGB(190, 244, 67, 54),
+      child: Text(
+        "X",
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontFamily: 'KdamThmorPro',
+        ),
+      ),
+    );
   }
 
   SizedBox ContainerMethod(String one, String two) {
