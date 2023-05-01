@@ -39,7 +39,7 @@ const createLocation = asyncHandler(async (req, res) => {
     // Decide on if you're creating a new location object or apending to database
     if (!location) {
         const newLocation = await Location.create({
-            _id: id,
+            _id: req.user.id,
             savedLocations: [{
                 latitude: lat,
                 longitude: long,
