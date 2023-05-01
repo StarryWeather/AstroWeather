@@ -16,6 +16,6 @@ router.post("/register", registerUser);
 router.get("/current", validateToken, currentUser); // Ignore
 router.get("/confirm/:token", confirmUser); // Figure out how to make PUT with urls sent in emails
 router.post("/reset", passwordPrompt);
-router.post("/reset/:token", resetPassword); // Figure out how to make PUT with urls sent in emails
+router.post("/resetPassword", validateToken, resetPassword); // Figure out how to make PUT with urls sent in emails
 
 module.exports = router;

@@ -209,7 +209,7 @@ const passwordPrompt = asyncHandler(async (req, res) => {
 });
 
 //@desc Reset user password after email confirmation
-//@route POST /api/users/reset/:token
+//@route POST /api/users/reset/
 //@access private
 const resetPassword = asyncHandler(async (req, res) => {
     const {newPassword} = req.body;
@@ -221,8 +221,8 @@ const resetPassword = asyncHandler(async (req, res) => {
     }
 
     // Decode token from email to retrieve respective user from id
-    const {user: {id}} = jwt.verify(req.params.token, process.env.EMAIL_TOKEN_SECRET);
-    const user = await User.findById(id);
+    //const {user: {id}} = jwt.verify(req.params.token, process.env.EMAIL_TOKEN_SECRET);
+    const user = await User.findById(req.user.id);
 
     // Check for errors in decoding token and retrieving user
     // if (!(await bcrypt.compare(oldPassword, user.password))) {
