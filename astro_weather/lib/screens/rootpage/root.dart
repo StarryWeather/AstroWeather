@@ -16,14 +16,13 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-
   var temp;
   var cloudIndex;
   var weatherDesc;
   var DN;
   var skyColor;
 
-  void updateState(){
+  void updateState() {
     setState(() {
       this.temp = globals.currentTemp;
       this.cloudIndex = globals.cloudIndex;
@@ -34,7 +33,7 @@ class _RootPageState extends State<RootPage> {
   }
 
   @override
-  void initState(){
+  void initState() {
     updateState();
     super.initState();
   }
@@ -53,7 +52,7 @@ class _RootPageState extends State<RootPage> {
       child: Scaffold(
         body: SizedBox.expand(
             child: Container(
-              decoration: BoxDecoration(gradient: skyColor),
+                decoration: BoxDecoration(gradient: skyColor),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -111,13 +110,17 @@ class _RootPageState extends State<RootPage> {
                                   ],
                                 ),
                                 child: Container(
-                                  decoration:BoxDecoration(
-              image: DecorationImage(
-                image: (DN == "n") ? AssetImage('assets/weather/grass.png') : AssetImage('assets/weather/night_grass.png'),
-                opacity: 1,
-                fit: BoxFit.cover,
-              ),
-            ),
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: (DN == "d")
+                                          ? AssetImage(
+                                              'assets/weather/grass.png')
+                                          : AssetImage(
+                                              'assets/weather/night_grass.png'),
+                                      opacity: 1,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                   height: 100,
                                   child: Row(
                                     mainAxisAlignment:
