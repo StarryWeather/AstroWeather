@@ -90,7 +90,7 @@ const updateLocation = asyncHandler(async (req, res) => {
 //@access private
 const deleteLocation = asyncHandler(async (req, res) => {
     const locations = await Location.findById(req.params.id);
-    const { lat, long } = req.body;
+    const { id } = req.body;
 
     if (!lat || !long) {
         res.status(400);
@@ -108,7 +108,7 @@ const deleteLocation = asyncHandler(async (req, res) => {
     } else {
         //await Location.deleteOne(req.params.id,);
         //Dive.update({ _id: diveId }, { "$pull": { "divers": { "user": userIdToRemove } }}
-        const updatedLocation = await Location.findByIdAndRemove(req.user.id, {$pull: {savedLocations: coordinates}});
+        const updatedLocation = await Location.findByIdAndRemove(req.user.id, {$pull: {_id: id}});
         res.status(200).json(updatedLocation);
     }
 });
@@ -117,15 +117,15 @@ const deleteLocation = asyncHandler(async (req, res) => {
 //@desc Get location
 //@route GET /api/locations/:id
 //@access private
-const getLocation = asyncHandler(async (req, res) => {
-    const location = await Location.findById(req.params.id);
-    if (!location) {
-        res.status(404);
-        throw new Error("Location not found");
-    }
+// const getLocation = asyncHandler(async (req, res) => {
+//     const location = await Location.findById(req.params.id);
+//     if (!location) {
+//         res.status(404);
+//         throw new Error("Location not found");
+//     }
 
-    res.status(200).json(location);
-});
+//     res.status(200).json(location);
+// });
 
 
 // Export API functions to module
