@@ -1,5 +1,6 @@
 import 'package:astro_weather/screens/rootpage/rootLand.dart';
 import 'package:astro_weather/screens/rootpage/rootSunMoon.dart';
+import 'package:astro_weather/screens/rootpage/starview.dart';
 import 'package:astro_weather/utils/weatherAPI.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _RootPageState extends State<RootPage> {
         }else if (details.delta.dy > 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => StarPage()),
+            MaterialPageRoute(builder: (context) => StarView()),
           );
         }
       },

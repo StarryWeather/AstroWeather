@@ -20,6 +20,8 @@ import 'models/LocationInfo.dart';
 
   var userAccessToken;
   var userName;
+  //StarsPng
+  var StarsPng;
 
   //User's Saved Locations
   List<LocationInfo> OldLocations = [

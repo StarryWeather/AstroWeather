@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:astro_weather/screens/registerpage/password.dart';
+import 'package:astro_weather/utils/AstroAPI.dart';
 import 'package:astro_weather/utils/rive_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -115,6 +116,8 @@ class LoginPageState extends State<LoginPage> {
                 globals.userAccessToken = responseJSON['accessToken'];
 
                 await getData();
+
+                await jellyfish(globals.latitude, globals.longitude);
 
                 await pullLocations();
                 //turn this into an api call
