@@ -94,93 +94,17 @@ class _RootPageState extends State<RootPage> {
                                     MaterialPageRoute(
                                         builder: (context) => InfoPage()));
                               },
-                              child: ClipPath(
-                                clipper: ProsteBezierCurve(
-                                  position: ClipPosition.top,
-                                  list: [
-                                    BezierCurveSection(
-                                      start: Offset(
-                                          MediaQuery.of(context).size.width,
-                                          35),
-                                      top: Offset(
-                                          MediaQuery.of(context).size.width / 2,
-                                          0),
-                                      end: Offset(0, 35),
-                                    ),
-                                  ],
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: (DN == "d")
-                                          ? AssetImage(
-                                              'assets/weather/grass.png')
-                                          : AssetImage(
-                                              'assets/weather/night_grass.png'),
-                                      opacity: 1,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  height: 100,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: Color.fromARGB(
-                                                121, 158, 158, 158),
-                                            border: Border.all(
-                                              color:
-                                                  Color.fromARGB(255, 0, 0, 0),
-                                            ),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
-                                        width: 120,
-                                        height: 50,
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            this.temp.toString() + '°',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
-                                              color:
-                                                  Color.fromARGB(255, 0, 0, 0),
-                                              fontFamily: 'KdamThmorPro',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: Color.fromARGB(
-                                                121, 158, 158, 158),
-                                            border: Border.all(
-                                              color:
-                                                  Color.fromARGB(255, 0, 0, 0),
-                                            ),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
-                                        width: 240,
-                                        height: 50,
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            this.weatherDesc.toString(),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
-                                              color:
-                                                  Color.fromARGB(255, 0, 0, 0),
-                                              fontFamily: 'KdamThmorPro',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                              child: Container(
+                                height: MediaQuery.of(context).size.height*0.55,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: (DN == "d")
+                                        ? AssetImage(
+                                            'assets/weather/xpgrass.png')
+                                        : AssetImage(
+                                            'assets/weather/nightxpgrass.png'),
+                                    opacity: 1,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
                               ),
