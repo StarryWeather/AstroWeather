@@ -1,6 +1,3 @@
-/*
-TEST URL: http://localhost:5001/api/locations/1
-*/
 const express = require("express");
 const router = express.Router();
 const {
@@ -13,7 +10,7 @@ const {
 const validateToken = require("../config/validateTokenHandler");
 
 // Listen for CRUD request at the specified endpoint ("/") in server.js (api/locations/)
-//router.use(validateToken) THIS IS CAUSING H12 ON HEROKU; TIMEOUT
+//router.use(validateToken)
 router.route("/").get(getLocations).post(createLocation);
 router.route("/:id").put(updateLocation).delete(deleteLocation).get(getLocation);
 

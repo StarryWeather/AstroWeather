@@ -209,7 +209,7 @@ const passwordPrompt = asyncHandler(async (req, res) => {
 });
 
 //@desc Reset user password after email confirmation
-//@route GET /api/users/reset/:token
+//@route POST /api/users/reset/:token
 //@access private
 const resetPassword = asyncHandler(async (req, res) => {
     const {newPassword} = req.body;

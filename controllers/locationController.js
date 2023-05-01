@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 //@access private
 const getLocations = asyncHandler(async (req, res) => {
     // Contact database and get locations
-    const locations = await Location.find({user_id: req.user.id});
+    const locations = await Location.findById(req.user.id); //(req.params.id) url? not auth bearer header
 
     // Send response back to client
     res.status(200).json(locations);
@@ -18,9 +18,8 @@ const getLocations = asyncHandler(async (req, res) => {
 //@desc Create new location
 //@route POST /api/locations
 //@access private
+// FIX AS DOES NOT USE AUTH HEADER
 const createLocation = asyncHandler(async (req, res) => {
-    console.log("The request body is: ", req.body);
-
     // Take in request from client and validate
     const {accessToken, lat, long} = req.body;
     if (!accessToken || !lat || !long) {
@@ -34,15 +33,12 @@ const createLocation = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Error decoding user ID");
     };
-    console.log("Decoded jwt");
 
     // Find user entry in locations table
     let location = await Location.findById(id);
-    console.log("Find user entry");
 
     // Decide on if you're creating a new location object or apending to database
     if (!location) {
-        console.log("Location does not exist");
         const newLocation = await Location.create({
             _id: id,
             savedLocations: [{
@@ -50,26 +46,22 @@ const createLocation = asyncHandler(async (req, res) => {
                 longitude: long,
             }]
         });
-        console.log("Successfully added location");
         res.status(201).json({});
     } else {
-        console.log("Location exists");
         const coordinates = {latitude: lat, longitude: long};
         const updatedLocation = await Location.findByIdAndUpdate(id, {$push: {savedLocations: coordinates}});
         if (!updatedLocation) {
-            res.status(404).json({});
+            res.status(404);
             throw new Error("Error updating location");
         } else {
-            res.status(204).json({});
+            res.status(201).json({});
         }
     }
-    res.status(201).json({});
-    return;
 });
 
 
 //@desc Update location
-//@route PUT /api/locations/:id
+//@route POST /api/locations/:id
 //@access private
 const updateLocation = asyncHandler(async (req, res) => {
     const location = await Location.findById(req.params.id);
@@ -89,7 +81,7 @@ const updateLocation = asyncHandler(async (req, res) => {
         {new: true}
     );
 
-    res.status(200).json(updatedLocation);
+    res.status(201).json(updatedLocation);
 });
 
 
