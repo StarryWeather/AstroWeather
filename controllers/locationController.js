@@ -114,18 +114,18 @@ const deleteLocation = asyncHandler(async (req, res) => {
 });
 
 
-//@desc Get location
-//@route GET /api/locations/:id
-//@access private
-// const getLocation = asyncHandler(async (req, res) => {
-//     const location = await Location.findById(req.params.id);
-//     if (!location) {
-//         res.status(404);
-//         throw new Error("Location not found");
-//     }
+@desc Get location
+@route GET /api/locations/:id
+@access private
+const getLocation = asyncHandler(async (req, res) => {
+    const location = await Location.findById(req.params.id);
+    if (!location) {
+        res.status(404);
+        throw new Error("Location not found");
+    }
 
-//     res.status(200).json(location);
-// });
+    res.status(200).json(location);
+});
 
 
 // Export API functions to module
