@@ -45,15 +45,15 @@ const createLocation = asyncHandler(async (req, res) => {
                 longitude: long,
             }]
         });
-        res.status(201).json({});
+        res.status(201).json(newLocation);
     } else {
         const coordinates = {latitude: lat, longitude: long};
         const updatedLocation = await Location.findByIdAndUpdate(req.user.id, {$push: {savedLocations: coordinates}});
         if (!updatedLocation) {
-            res.status(404);
+            res.status(404).json({});
             throw new Error("Error updating location");
         } else {
-            res.status(201).json({});
+            res.status(201).json(newLocation);
         }
     }
 });
@@ -85,22 +85,31 @@ const updateLocation = asyncHandler(async (req, res) => {
 
 
 //@desc Delete location
-//@route DELETE /api/locations/:id
+//@route DELETE /api/locations
 //@access private
 const deleteLocation = asyncHandler(async (req, res) => {
-    const location = await Location.findById(req.params.id);
-    if (!location) {
-        res.status(404);
-        throw new Error("Location not found");
+    const locations = await Location.findById(req.params.id);
+    const { lat, long } = req.body;
+
+    if (!lat || !long) {
+        res.status(400);
+        throw new Error("Missing latitude or longitude from location data");
     }
 
-    if (location.user_id.toString() !== req.user.id) {
+    if (location._id.toString() !== req.user.id) {
         res.status(403);
         throw new Error("User does not have permission to update information");
     }
 
-    await Location.deleteOne({_id: req.params.id});
-    res.status(200).json(location);
+    if (!locations) {
+        res.status(404);
+        throw new Error("Location not found");
+    } else {
+        //await Location.deleteOne(req.params.id,);
+        //Dive.update({ _id: diveId }, { "$pull": { "divers": { "user": userIdToRemove } }}
+        const updatedLocation = await Location.findByIdAndRemove(req.user.id, {$pull: {savedLocations: coordinates}});
+        res.status(200).json(updatedLocation);
+    }
 });
 
 
