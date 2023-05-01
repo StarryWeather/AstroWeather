@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const { validate } = require("../models/userModel");
 
-const validateToken = asyncHandler(async (req, res, next) => {
+const validateEmailToken = asyncHandler(async (req, res, next) => {
     let token;
     let authorizationHeader = req.headers.Authorization || req.headers.authorization; // Header or Respective section in HTTP request
 
