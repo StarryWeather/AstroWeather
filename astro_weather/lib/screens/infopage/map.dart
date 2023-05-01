@@ -46,26 +46,32 @@ class _MapState extends State<Map> {
           ourMap(),
           Positioned(
             bottom: 0,
-            child: Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(12.0),
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12.0),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Lat: " +
+                              lat.toString() +
+                              "\nLong: " +
+                              lon.toString(),
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        addButton(),
+                      ],
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Lat: " + lat.toString() + "\nLong: " + lon.toString(),
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      addButton(),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ]));
@@ -132,8 +138,8 @@ class addButton extends StatelessWidget {
         if (response.statusCode == 201 || response.statusCode == 204) {
           //var responseJSON = json.decode(response.body);
           // add into staticlocations.
-          globals.datalist.add(await getLocationList(globals.mapLat, globals.mapLon));
-
+          globals.datalist
+              .add(await getLocationList(globals.mapLat, globals.mapLon));
         } else {
           // false: display email/password invalid
           debugPrint('failedto add');

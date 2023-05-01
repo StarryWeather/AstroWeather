@@ -1,4 +1,5 @@
 import 'package:astro_weather/screens/loginpage/login.dart';
+import 'package:astro_weather/screens/registerpage/reset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'screens/navigator.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AstroWeather',
-      home: LoginPage(),
+      home: ResetPage(),
     );
   }
 }

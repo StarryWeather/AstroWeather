@@ -1,3 +1,4 @@
+import 'package:astro_weather/screens/registerpage/password.dart';
 import 'package:astro_weather/utils/rive_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -23,10 +24,11 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   bool isEmailValid = true;
   bool isPasswordValid = true;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
+    
     late SMIBool isSideMenuClosed;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 0, 0),
@@ -40,7 +42,7 @@ class LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 12,
               ),
-              LoginBuilder(context, emailController, passwordController),
+              LoginBuilder(context),
               earthState(),
             ],
           ),
@@ -49,10 +51,7 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
-  Container LoginBuilder(
-      BuildContext context,
-      TextEditingController emailController,
-      TextEditingController passwordController) {
+  Container LoginBuilder(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(MediaQuery.of(context).size.width *
           0.03), //page hight: 3% top + 3% bottom
@@ -102,8 +101,7 @@ class LoginPageState extends State<LoginPage> {
           child: ElevatedButton(
             onPressed: () async {
               // API LOGIN CALL
-              var url = Uri.parse(
-                  'http://astroweather.space/api/users/login');
+              var url = Uri.parse('http://astroweather.space/api/users/login');
               var data = {
                 'email': emailController.text,
                 'password': passwordController.text
@@ -120,8 +118,8 @@ class LoginPageState extends State<LoginPage> {
                 await getData();
                 //turn this into an api call
 
-                for(LocationInfo i in  globals.OldLocations){
-                  globals.datalist.add(await getLocationList(i.Lat,i.Long));
+                for (LocationInfo i in globals.OldLocations) {
+                  globals.datalist.add(await getLocationList(i.Lat, i.Long));
                 }
 
                 // ignore: use_build_context_synchronously
@@ -169,7 +167,14 @@ class LoginPageState extends State<LoginPage> {
       children: [
         TextButton(
           onPressed: () {
-            // FORGOT PASSWORD PAGE
+            Navigator.push(
+              context,
+              PageTransition(
+                type: PageTransitionType.bottomToTop,
+                child: PasswordPage(),
+                duration: Duration(milliseconds: 400),
+              ),
+            );
           },
           child: Text('Forgot Password'),
         ),

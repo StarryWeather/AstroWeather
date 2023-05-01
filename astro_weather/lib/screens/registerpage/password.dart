@@ -1,0 +1,123 @@
+import 'package:flutter/material.dart';
+import 'package:starsview/starsview.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../rootpage/root.dart';
+import '../../widgets/earth/earthState.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:email_validator/email_validator.dart';
+
+class PasswordPage extends StatefulWidget {
+  const PasswordPage({super.key});
+  @override
+  State<PasswordPage> createState() => PasswordPageState();
+}
+
+class PasswordPageState extends State<PasswordPage> {
+  bool isEmailValid = true;
+  late String currEmail = '';
+  final emailController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    
+    if (currEmail != '') {
+      emailController.text = currEmail;
+    }
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+      body: Stack(
+        children: [
+          const StarsView(
+            fps: 60,
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(MediaQuery.of(context).size.height *
+                    0.03), //page hight: 3% top + 3% bottom
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Color.fromARGB(160, 95, 95, 95),
+                    border: Border.all(width: 5.0, color: Colors.white),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(MediaQuery.of(context).size.height *
+                        0.05), //page hight: 5% + 5%
+                    child: Column(
+                      children: [
+                        //welcome back,
+                        const Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontFamily: 'KdamThmorPro',
+                          ),
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        // email textfield
+                        TextField(
+                          controller: emailController,
+                          onChanged: (email) {
+                            isEmailValid = EmailValidator.validate(email);
+                            currEmail = email;
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            // set error style if email is invalid
+                            errorText: isEmailValid ? null : 'Invalid Email',
+                            errorBorder: isEmailValid
+                                ? null
+                                : OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                    borderSide: BorderSide(color: Colors.red),
+                                  ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+
+                        //password textfield
+
+                        const SizedBox(height: 16),
+                        //sign in button
+                        Row(
+                          children: [
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () async {},
+                                // API LOGIN CALL if valid password/email
+                                child: const Text('Send Email'),
+                              ),
+                            ),
+                            Expanded(
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Go Back'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              earthState(),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
