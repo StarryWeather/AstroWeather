@@ -89,8 +89,9 @@ const updateLocation = asyncHandler(async (req, res) => {
 //@route DELETE /api/locations
 //@access private
 const deleteLocation = asyncHandler(async (req, res) => {
-    const locations = await Location.findById(req.params.id);
-    const { id } = req.body;
+    const { _id } = req.body;
+    const locations = await Location.findById(req.user.id);
+    //const { lat, long } = req.body;
 
     if (!lat || !long) {
         res.status(400);
@@ -108,7 +109,8 @@ const deleteLocation = asyncHandler(async (req, res) => {
     } else {
         //await Location.deleteOne(req.params.id,);
         //Dive.update({ _id: diveId }, { "$pull": { "divers": { "user": userIdToRemove } }}
-        const updatedLocation = await Location.findByIdAndRemove(req.user.id, {$pull: {_id: id}});
+        const updatedLocation = await Location.findByIdAndRemove(req.user.id, {$pull: { savedLocations : {_id: id}}});
+        //const updatedLocation = await Location.findByIdAndRemove(req.user.id, {$pull: {latitude: lat, longitude: long}});
         res.status(200).json(updatedLocation);
     }
 });
