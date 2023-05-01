@@ -249,7 +249,10 @@ Future<void> pullLocations() async {
   if (response.statusCode == 200) {
     print("PARTY TIME!!!!");
     var responseJSON = json.decode(response.body);
-      print(responseJSON);
+    if(responseJSON == null)
+    {
+      return;
+    }
     for(int x = 0; x < responseJSON['savedLocations'].length; x++)
     {
       print("Arigato!!!!");
