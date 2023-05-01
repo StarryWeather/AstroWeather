@@ -60,37 +60,37 @@ Future<void> getGlobalLocation(lat, long) async {
     else if(globals.cloudIndex == 3)
     {
       globals.skyColor = LinearGradient(
-          colors: [Color.fromARGB(255, 76, 114, 145), Color.fromARGB(255, 130, 130, 130)],
+          colors: [Color.fromARGB(255, 19, 28, 35), Color.fromARGB(255, 76, 114, 145), Color.fromARGB(255, 130, 130, 130)],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          stops: [0.0, 1.0],
+          stops: [0.01, 0.6, 0.9],
           tileMode: TileMode.clamp,
         );
     } else if(globals.cloudIndex == 2)
     {
       globals.skyColor = LinearGradient(
-          colors: [Color.fromARGB(255, 31, 98, 153), Color.fromARGB(255, 181, 181, 181)],
+          colors: [Color.fromARGB(255, 19, 28, 35),Color.fromARGB(255, 31, 98, 153), Color.fromARGB(255, 181, 181, 181)],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          stops: [0.0, 1.0],
+          stops: [0.01, 0.6, 0.9],
           tileMode: TileMode.clamp,
         );
     } else if(globals.cloudIndex == 1)
     {
       globals.skyColor = LinearGradient(
-          colors: [Color.fromARGB(255, 32, 126, 203), Color.fromARGB(255, 154, 154, 154)],
+          colors: [Color.fromARGB(255, 19, 28, 35),Color.fromARGB(255, 32, 126, 203), Color.fromARGB(255, 154, 154, 154)],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          stops: [0.0, 1.0],
+          stops: [0.01, 0.6, 0.9],
           tileMode: TileMode.clamp,
         );
     } else if(globals.cloudIndex ==0)
     {
       globals.skyColor = LinearGradient(
-          colors: [Colors.blue, Color.fromARGB(255, 189, 189, 189)],
+          colors: [Color.fromARGB(255, 19, 28, 35),Colors.blue, Color.fromARGB(255, 189, 189, 189)],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          stops: [0.0, 1.0],
+          stops: [0.01, 0.6, 0.9],
           tileMode: TileMode.clamp,
         );
     }
