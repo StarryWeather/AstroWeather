@@ -9,12 +9,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:astro_weather/global.dart' as globals;
 import 'package:http/http.dart' as http;
 
-class Map extends StatefulWidget {
+class ourMaps extends StatefulWidget {
+  final onAddItem;
+  const ourMaps({super.key, required this.onAddItem});
   @override
-  _MapState createState() => _MapState();
+  _ourMapsState createState() => _ourMapsState(onAddItem);
 }
 
-class _MapState extends State<Map> {
+class _ourMapsState extends State<ourMaps> {
+  final onAdd;
+  _ourMapsState(this.onAdd);
   String googleApikey = "AIzaSyCcM9U9EWSRHgfbu4vhFn_MjmbjRHhrCxE";
   GoogleMapController? mapController; //contrller for Google map
   CameraPosition? cameraPosition;
@@ -61,13 +65,10 @@ class _MapState extends State<Map> {
                     child: Row(
                       children: [
                         Text(
-                          "Lat: " +
-                              lat.toString() +
-                              "\nLong: " +
-                              lon.toString(),
+                          "Lat: $lat\nLong: $lon",
                           style: TextStyle(fontSize: 18),
                         ),
-                        addButton(),
+                        addButton(onAdd: onAdd),
                       ],
                     ),
                   ),
@@ -117,9 +118,8 @@ class _MapState extends State<Map> {
 }
 
 class addButton extends StatelessWidget {
-  const addButton({
-    super.key,
-  });
+  final onAdd;
+  const addButton({super.key, required this.onAdd});
 
   @override
   Widget build(BuildContext context) {
@@ -137,11 +137,8 @@ class addButton extends StatelessWidget {
 
         if (response.statusCode == 201 || response.statusCode == 204) {
           var responseJSON = json.decode(response.body);
-          // add into staticlocations.
-          globals.datalist
-              .add(await getLocationList(globals.mapLat, globals.mapLon, responseJSON['savedLocations'][responseJSON['savedLocations'].length-1]['_id']));
+          onAdd(await getLocationList(globals.mapLat, globals.mapLon, responseJSON['savedLocations'][responseJSON['savedLocations'].length-1]['_id']));
         } else {
-          // false: display email/password invalid
           debugPrint('failedto add');
         }
       },

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:astro_weather/screens/registerpage/password.dart';
 import 'package:astro_weather/utils/rive_utils.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +8,9 @@ import 'package:starsview/starsview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../models/LocationInfo.dart';
-import '../../models/sidebarBtn.dart';
 import '../../utils/weatherAPI.dart';
+import '../navigator.dart';
 import '../registerpage/register.dart';
-import '../rootpage/root.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../widgets/earth/earthState.dart';
 import 'package:astro_weather/global.dart' as globals;
@@ -130,7 +128,7 @@ class LoginPageState extends State<LoginPage> {
                   context,
                   PageTransition(
                     type: PageTransitionType.rightToLeft,
-                    child: RootPage(),
+                    child: Navigation(),
                     duration: Duration(milliseconds: 400),
                   ),
                 );

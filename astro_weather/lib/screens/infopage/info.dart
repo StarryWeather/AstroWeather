@@ -3,9 +3,10 @@ import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../models/LocationInfo.dart';
 import '../../widgets/InfoLocations/LocationsInfo_item.dart';
-import '../InfoPage/map.dart';
 import 'city.dart';
 import 'package:astro_weather/global.dart' as globals;
+
+import 'map.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
@@ -42,7 +43,7 @@ class _InfoPageState extends State<InfoPage> {
                 slideBuilder: (index) {
                   return LocationInfoItem(
                     numIndex: index,
-                    OnDeleteItem: null, 
+                    OnDeleteItem: _handleDelete, 
                   );
                 },
                 slideTransform: ZoomOutSlideTransform(),
@@ -63,7 +64,7 @@ class _InfoPageState extends State<InfoPage> {
                 context,
                 PageTransition(
                   type: PageTransitionType.rightToLeft,
-                  child: Map(),
+                  child: ourMaps(onAddItem: _handeladd,),
                   duration: Duration(milliseconds: 400),
                 ),
               );
@@ -82,4 +83,16 @@ class _InfoPageState extends State<InfoPage> {
           ),
         ));
   }
+  void _handeladd(LocationData data){
+    setState(() {
+      globals.datalist.add(data);
+    });
+  }
+
+  void _handleDelete(int i){
+    setState(() {
+      globals.datalist.removeAt(i);
+    });
+  }
+
 }

@@ -16,7 +16,7 @@ class LocationInfoItem extends StatefulWidget {
   State<LocationInfoItem> createState() =>
       _LocationInfoItemState(numIndex, OnDeleteItem);
 }
-
+//_handeladd
 class _LocationInfoItemState extends State<LocationInfoItem> {
   final int numIndex;
   final onDelete;
@@ -43,7 +43,7 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
           children: [
             Container(
               alignment: Alignment.topLeft,
-              child: deleteButton(),
+              child: deleteButton(onDelete),
             ),
             Padding(
               padding:
@@ -114,31 +114,13 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
     );
   }
 
-  FloatingActionButton deleteButton() {
+  FloatingActionButton deleteButton(onDelete) {
     return FloatingActionButton(
       onPressed: () async {
         debugPrint(globals.datalist[numIndex].id);
         // API LOGIN CALL
-        var url = Uri.parse('http://astroweather.space/api/locations/');
-        var data = {'_id': globals.datalist[numIndex].id};
-        var jsonData = jsonEncode(data);
-        var response = await http.delete(url,
-            headers: {
-              "Content-Type": "application/json",
-              HttpHeaders.authorizationHeader:
-                  "Bearer " + globals.userAccessToken
-            },
-            body: jsonData);
-
-        if (response.statusCode == 200) {
-          var responseJSON = json.decode(response.body);
-          // add into staticlocations.
-          debugPrint("holy crap its gone rip...");
-          globals.datalist.removeAt(numIndex);
-        } else {
-          // false: display email/password invalid
-          debugPrint('failedto delete');
-        }
+        await DeleteApi();
+        onDelete(numIndex);
       },
       backgroundColor: Color.fromARGB(190, 244, 67, 54),
       child: Text(
@@ -151,6 +133,25 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
         ),
       ),
     );
+  }
+
+  Future<void> DeleteApi() async {
+    var url = Uri.parse('http://astroweather.space/api/locations/');
+    var data = {'_id': globals.datalist[numIndex].id};
+    var jsonData = jsonEncode(data);
+    var response = await http.delete(url,
+        headers: {
+          "Content-Type": "application/json",
+          HttpHeaders.authorizationHeader:
+              "Bearer " + globals.userAccessToken
+        },
+        body: jsonData);
+    
+    if (response.statusCode == 200) {
+      var responseJSON = json.decode(response.body);
+    } else {
+      debugPrint('Failed to Delete Widget!');
+    }
   }
 
   SizedBox ContainerMethod(String one, String two) {
