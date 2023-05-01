@@ -106,7 +106,8 @@ const deleteLocation = asyncHandler(async (req, res) => {
     }
 
     if (!locations) {
-        res.status(404);
+        res.status(404).json("Do not know");
+        console.log("USER ID IS : " + locations);
         throw new Error("Location not found");
     } else {
         //await Location.deleteOne(req.params.id,);
