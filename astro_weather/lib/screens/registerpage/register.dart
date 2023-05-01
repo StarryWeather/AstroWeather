@@ -23,13 +23,6 @@ class RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    if (currEmail != '') {
-      emailController.text = currEmail;
-    }
-
-    if (currPassword != '') {
-      passwordController.text = currPassword;
-    }
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 0, 0),
       body: Stack(
@@ -118,8 +111,7 @@ class RegisterPageState extends State<RegisterPage> {
         onPressed: () async {
           // API LOGIN CALL if valid password/email
           if (isPasswordValid == true && isEmailValid == true) {
-            var url = Uri.parse(
-                'http://astroweather.space/api/users/register');
+            var url = Uri.parse('http://astroweather.space/api/users/register');
             var data = {
               'email': emailController.text,
               'password': passwordController.text
@@ -210,13 +202,12 @@ class RegisterPageState extends State<RegisterPage> {
     bool hasSpecialChar = password.contains(RegExp(r'[!@#\$&*~]'));
     bool hasMinLength = password.length >= 8;
 
-    isPasswordValid = hasUppercase &&
+    bool isPasswordValid = hasUppercase &&
         hasLowercase &&
         hasDigit &&
         hasSpecialChar &&
         hasMinLength;
 
-    passwordError = '';
     List<String> errorMessages = [];
 
     if (!hasUppercase) {
@@ -239,8 +230,14 @@ class RegisterPageState extends State<RegisterPage> {
       errorMessages.add('Must have minimum 8 characters');
     }
 
+    String passwordError = '';
     if (errorMessages.isNotEmpty) {
       passwordError = errorMessages.join('\n');
     }
+
+    setState(() {
+      this.isPasswordValid = isPasswordValid;
+      this.passwordError = passwordError;
+    });
   }
 }
