@@ -55,7 +55,7 @@ class SunMoonState extends State<SunMoon> with SingleTickerProviderStateMixin {
           size.width / 2, -size.height, size.width * 0.90, size.height / 2);
     }
 
-    return Expanded(
+    return Container(
       child: Stack(
         children: <Widget>[
           Positioned(

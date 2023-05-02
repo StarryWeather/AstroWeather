@@ -48,6 +48,8 @@ class LoginPageState extends State<LoginPage> {
                 Center(
                   child: Image.asset(
                     'assets/weather/earth_spin.gif',
+                    color: Color.fromARGB(80, 0, 0, 0),
+                    colorBlendMode: BlendMode.srcATop,
                     width: 900.0,
                     height: 900.0,
                     fit: BoxFit.cover,
