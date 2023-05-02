@@ -37,6 +37,7 @@ class LoginPageState extends State<LoginPage> {
           const StarsView(
             fps: 60,
           ),
+<<<<<<< Updated upstream
           ListView(
             children: <Widget> [
                  Column(
@@ -47,6 +48,18 @@ class LoginPageState extends State<LoginPage> {
                   ],
                 ),
             ],
+=======
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                LoginBuilder(context),
+
+                //earthState(),
+                SecondEarth(),
+              ],
+            ),
+>>>>>>> Stashed changes
           ),
                     
         ],
@@ -56,14 +69,14 @@ class LoginPageState extends State<LoginPage> {
 
   SizedBox SecondEarth() {
     return SizedBox(
-          child: Image.asset(
-            'assets/weather/earth_spin.gif',
-            color: Color.fromARGB(80, 0, 0, 0),
-            colorBlendMode: BlendMode.srcATop,
-            width: 500.0,
-            height: 500.0,
-            fit: BoxFit.cover,
-          ),
+      child: Image.asset(
+        'assets/weather/earth_spin.gif',
+        color: Color.fromARGB(80, 0, 0, 0),
+        colorBlendMode: BlendMode.srcATop,
+        width: 900.0,
+        height: 900.0,
+        fit: BoxFit.cover,
+      ),
     );
   }
 
@@ -135,7 +148,7 @@ class LoginPageState extends State<LoginPage> {
                 var responseJSON = json.decode(response.body);
                 globals.userAccessToken = responseJSON['accessToken'];
 
-                globals.userName =  emailController.text;
+                globals.userName = emailController.text;
 
                 await getData();
 
