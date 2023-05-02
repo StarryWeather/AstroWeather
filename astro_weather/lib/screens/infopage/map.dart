@@ -43,31 +43,32 @@ class _ourMapsState extends State<ourMaps> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Add Location"),
-          backgroundColor: Colors.deepPurpleAccent,
-        ),
-        body: Stack(children: [
+      appBar: AppBar(
+        title: Text("Add Location"),
+        backgroundColor: Colors.deepPurpleAccent,
+      ),
+      body: Stack(
+        children: [
           ourMap(),
           Positioned(
-            bottom: 0,
+            bottom: MediaQuery.of(context).size.height * 0.5,
+            left: MediaQuery.of(context).size.width * 0.5,
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color.fromARGB(37, 255, 255, 255),
                       borderRadius: BorderRadius.all(
                         Radius.circular(12.0),
                       ),
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Lat: $lat\nLong: $lon",
-                          style: TextStyle(fontSize: 18),
-                        ),
                         addButton(onAdd: onAdd),
                       ],
                     ),
@@ -76,7 +77,30 @@ class _ourMapsState extends State<ourMaps> {
               ),
             ),
           ),
-        ]));
+          Positioned(
+            bottom: 0,
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 255, 255, 255),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12.0),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Lat: $lat\nLong: $lon",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   GoogleMap ourMap() {
@@ -123,34 +147,42 @@ class addButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
+    return OutlinedButton(
       onPressed: () async {
         // API LOGIN CALL
         var url = Uri.parse('http://astroweather.space/api/locations/');
-        var data = {
-          'lat': globals.mapLat,
-          'long': globals.mapLon
-        };
+        var data = {'lat': globals.mapLat, 'long': globals.mapLon};
         var jsonData = jsonEncode(data);
         var response = await http.post(url,
-            headers: {"Content-Type": "application/json", HttpHeaders.authorizationHeader:"Bearer " + globals.userAccessToken}, body: jsonData);
+            headers: {
+              "Content-Type": "application/json",
+              HttpHeaders.authorizationHeader:
+                  "Bearer " + globals.userAccessToken
+            },
+            body: jsonData);
 
         if (response.statusCode == 201 || response.statusCode == 204) {
           var responseJSON = json.decode(response.body);
-          onAdd(await getLocationList(globals.mapLat, globals.mapLon, responseJSON['savedLocations'][responseJSON['savedLocations'].length-1]['_id']));
+          onAdd(await getLocationList(
+              globals.mapLat,
+              globals.mapLon,
+              responseJSON['savedLocations']
+                  [responseJSON['savedLocations'].length - 1]['_id']));
         } else {
           debugPrint('failedto add');
         }
       },
-      backgroundColor: Colors.blue[500],
-      child: Text(
-        "+",
-        style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-          fontFamily: 'KdamThmorPro',
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
         ),
+      ),
+      child: Icon(
+        Icons.add,
+        size: 60.0,
+        color: Color.fromARGB(255, 255, 0, 0),
       ),
     );
   }
