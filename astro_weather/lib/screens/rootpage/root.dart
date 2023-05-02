@@ -1,6 +1,7 @@
+import 'package:astro_weather/screens/navigator.dart';
 import 'package:astro_weather/screens/rootpage/rootLand.dart';
 import 'package:astro_weather/screens/rootpage/rootSunMoon.dart';
-import 'package:astro_weather/screens/rootpage/starview.dart';
+import 'package:astro_weather/screens/starspage/starview.dart';
 import 'package:astro_weather/utils/weatherAPI.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 import 'package:flutter/material.dart';
@@ -43,21 +44,7 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onVerticalDragUpdate: (details) {
-        if (details.delta.dy < 0) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => InfoPage()),
-          );
-        } else if (details.delta.dy > 0) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => StarView()),
-          );
-        }
-      },
-      child: Scaffold(
+    return Scaffold(
         body: SizedBox.expand(
           child: Container(
             alignment: Alignment.center,
@@ -93,15 +80,6 @@ class _RootPageState extends State<RootPage> {
                         ),
                         height: MediaQuery.of(context).size.height / 2,
                       ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => StarPage()));
-                      },
-                      child: Stars(),
-                    ),
                     Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -155,13 +133,6 @@ class _RootPageState extends State<RootPage> {
                     Positioned.fill(
                       child: Align(
                         alignment: Alignment.bottomCenter,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => InfoPage()));
-                          },
                           child: Container(
                             height: MediaQuery.of(context).size.height * 0.55,
                             decoration: BoxDecoration(
@@ -176,7 +147,6 @@ class _RootPageState extends State<RootPage> {
                             ),
                           ),
                         ),
-                      ),
                     ),
                   ],
                 ),
@@ -184,7 +154,6 @@ class _RootPageState extends State<RootPage> {
             ),
           ),
         ),
-      ),
     );
   }
 }

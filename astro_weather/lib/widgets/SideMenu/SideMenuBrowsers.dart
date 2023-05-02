@@ -26,7 +26,7 @@ class SideMenuBrowsers extends StatelessWidget {
             AnimatedPositioned(
               duration: const Duration(milliseconds: 300),
               curve: Curves.fastOutSlowIn,
-              height: 56,//edit!
+              height: 56,
               width: isActive ? 288 : 0,
               left: 0,
               child: Container(

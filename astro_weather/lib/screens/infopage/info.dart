@@ -20,13 +20,7 @@ class _InfoPageState extends State<InfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onVerticalDragUpdate: (details) {
-          if (details.delta.dy > 0) {
-            Navigator.pop(context);
-          }
-        },
-        child: Scaffold(
+    return Scaffold(
           body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -81,7 +75,7 @@ class _InfoPageState extends State<InfoPage> {
               ),
             ),
           ),
-        ));
+        );
   }
   void _handeladd(LocationData data){
     setState(() {

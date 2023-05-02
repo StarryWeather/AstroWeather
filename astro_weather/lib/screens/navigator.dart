@@ -1,11 +1,15 @@
 import 'dart:math';
+import 'package:astro_weather/screens/infopage/info.dart';
 import 'package:astro_weather/screens/rootpage/root.dart';
 import 'package:astro_weather/screens/sideBar/sidebar.dart';
+import 'package:astro_weather/screens/starspage/stars.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import '../models/sidebarBtn.dart';
 import '../utils/rive_utils.dart';
 import 'package:astro_weather/global.dart' as globals;
+
+import 'starspage/starview.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -20,6 +24,12 @@ class _NavigationState extends State<Navigation>
   late Animation<double> animation;
   late Animation<double> scalAnimation;
   bool isSideMenuClosed = true;
+
+  void setCurrentPage(page) {
+    setState(() {
+      globals.CurrentPage = page;
+    });
+  }
 
   @override
   void initState() {
@@ -37,10 +47,10 @@ class _NavigationState extends State<Navigation>
       CurvedAnimation(
           parent: _animationController, curve: Curves.fastOutSlowIn),
     );
-    globals.CurrentPage = RootPage();
+    setCurrentPage(RootPage());
     super.initState();
   }
-
+  
   @override
   void dispose() {
     _animationController.dispose();
@@ -71,14 +81,15 @@ class _NavigationState extends State<Navigation>
               ..setEntry(3, 2, 0.001)
               ..rotateY(animation.value - 30 * animation.value * pi / 180),
             child: Transform.translate(
-                offset: Offset(animation.value * 265, 0),
-                child: Transform.scale(
-                  scale: scalAnimation.value,
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(isSideMenuClosed ? 0 : 24)),
-                      child: globals.CurrentPage),
-                )),
+              offset: Offset(animation.value * 265, 0),
+              child: Transform.scale(
+                scale: scalAnimation.value,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(isSideMenuClosed ? 0 : 24)),
+                    child: globals.CurrentPage),
+              ),
+            ),
           ),
 
           //Side Menu Button:
