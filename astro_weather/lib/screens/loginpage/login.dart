@@ -38,23 +38,13 @@ class LoginPageState extends State<LoginPage> {
             fps: 60,
           ),
           SingleChildScrollView(
-            child: Column(
+            child:
+             Column(
               children: [
-                SizedBox(
-                  height: 12,
-                ),
                 LoginBuilder(context),
-                //earthState(),
-                Center(
-                  child: Image.asset(
-                    'assets/weather/earth_spin.gif',
-                    color: Color.fromARGB(80, 0, 0, 0),
-                    colorBlendMode: BlendMode.srcATop,
-                    width: 900.0,
-                    height: 900.0,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+
+                earthState(),
+                //SecondEarth(),
               ],
             ),
           ),
@@ -63,10 +53,27 @@ class LoginPageState extends State<LoginPage> {
     );
   }
 
+  SizedBox SecondEarth() {
+    return SizedBox(
+          child: Image.asset(
+            'assets/weather/earth_spin.gif',
+            color: Color.fromARGB(80, 0, 0, 0),
+            colorBlendMode: BlendMode.srcATop,
+            width: 500.0,
+            height: 500.0,
+            fit: BoxFit.cover,
+          ),
+    );
+  }
+
   Container LoginBuilder(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(MediaQuery.of(context).size.width *
-          0.03), //page hight: 3% top + 3% bottom
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).size.height * 0.02,
+        bottom: MediaQuery.of(context).size.height * 0.03,
+        right: MediaQuery.of(context).size.width * 0.03,
+        left: MediaQuery.of(context).size.width * 0.03,
+      ),
       constraints: BoxConstraints.tightForFinite(width: 700),
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -126,6 +133,8 @@ class LoginPageState extends State<LoginPage> {
               if (response.statusCode == 200) {
                 var responseJSON = json.decode(response.body);
                 globals.userAccessToken = responseJSON['accessToken'];
+
+                globals.userName =  emailController.text;
 
                 await getData();
 

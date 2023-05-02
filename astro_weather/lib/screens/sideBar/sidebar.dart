@@ -31,7 +31,7 @@ class _SideMenuState extends State<SideMenu> {
           child: Column(
             children: [
               SideMenuInfoCard(
-                name: 'Fake name',
+                name: globals.userName,
                 userType: 'User',
               ),
               Padding(
