@@ -37,19 +37,15 @@ class LoginPageState extends State<LoginPage> {
           const StarsView(
             fps: 60,
           ),
-          Column(
-            children: [
-              ListView(
-                children: <Widget> [
-                     Column(
-                      children: [
-                        LoginBuilder(context),
-                        //SecondEarth(),
-                      ],
-                    ),
-                ],
-              ),
-              earthState(),
+          ListView(
+            children: <Widget> [
+                 Column(
+                  children: [
+                    LoginBuilder(context),
+                    earthState()
+                    //SecondEarth(),
+                  ],
+                ),
             ],
           ),
                     
