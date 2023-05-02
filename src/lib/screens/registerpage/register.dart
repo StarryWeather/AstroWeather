@@ -30,14 +30,18 @@ class RegisterPageState extends State<RegisterPage> {
           const StarsView(
             fps: 60,
           ),
-          Column(
-            children: [
-              SizedBox(
-                height: 12,
+          ListView(
+            children: <Widget>[
+              Column(
+                children: [
+                  SizedBox(
+                    height: 12,
+                  ),
+                  RegistrationBuilder(context),
+                  //earthState(),
+                  SecondEarth(),
+                ],
               ),
-              RegistrationBuilder(context),
-              earthState(),
-              //SecondEarth(),
             ],
           ),
         ],

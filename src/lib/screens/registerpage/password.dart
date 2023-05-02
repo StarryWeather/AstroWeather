@@ -30,50 +30,54 @@ class PasswordPageState extends State<PasswordPage> {
           const StarsView(
             fps: 60,
           ),
-          Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(MediaQuery.of(context).size.height *
-                    0.03), //page hight: 3% top + 3% bottom
-                child: Container(
-                  constraints: BoxConstraints.tightForFinite(width: 700),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Color.fromARGB(160, 95, 95, 95),
-                      border: Border.all(width: 5.0, color: Colors.white),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(
-                          MediaQuery.of(context).size.height *
-                              0.05), //page hight: 5% + 5%
-                      child: Column(
-                        children: [
-                          //welcome back,
-                          forgotPWText(),
-                          const SizedBox(height: 16),
-                          ForgotPWEmail(),
-                          const SizedBox(height: 16),
-                          Row(
+          ListView(
+            children: <Widget>[
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(MediaQuery.of(context).size.height *
+                        0.03), //page hight: 3% top + 3% bottom
+                    child: Container(
+                      constraints: BoxConstraints.tightForFinite(width: 700),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Color.fromARGB(160, 95, 95, 95),
+                          border: Border.all(width: 5.0, color: Colors.white),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.height *
+                                  0.05), //page hight: 5% + 5%
+                          child: Column(
                             children: [
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: SendEmailButton(context),
-                              ),
-                              Expanded(
-                                child: GoBackButton(context),
+                              //welcome back,
+                              forgotPWText(),
+                              const SizedBox(height: 16),
+                              ForgotPWEmail(),
+                              const SizedBox(height: 16),
+                              Row(
+                                children: [
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: SendEmailButton(context),
+                                  ),
+                                  Expanded(
+                                    child: GoBackButton(context),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  //earthState(),
+                  SecondEarth(),
+                ],
               ),
-              earthState(),
-              //SecondEarth(),
             ],
           ),
         ],

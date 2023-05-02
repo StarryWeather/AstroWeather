@@ -37,16 +37,16 @@ class LoginPageState extends State<LoginPage> {
           const StarsView(
             fps: 60,
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Column(
+           ListView(
+            children: <Widget> [
+              Column(
               children: [
                 LoginBuilder(context),
                 earthState()
                 //SecondEarth(),
               ],
             ),
+            ]
           ),
         ],
       ),
