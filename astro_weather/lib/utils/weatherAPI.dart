@@ -28,6 +28,10 @@ Future<void> getGlobalLocation(lat, long) async {
     var clouds = responseJSON['data'][0]['clouds'];
     var desc = responseJSON['data'][0]['weather']['description'];
     var dn = responseJSON['data'][0]['pod'];
+    var feelsLike = responseJSON['data'][0]['app_temp'];
+    feelsLike = ((feelsLike) * 1.8) + 32;
+    feelsLike = feelsLike.round();
+    feelsLike = feelsLike.toString();
 
     //seting data to global:
     globals.latitude = lat;
@@ -36,6 +40,7 @@ Future<void> getGlobalLocation(lat, long) async {
     globals.cloudCover = clouds;
     globals.weatherDescription = desc;
     globals.DayNight = dn;
+    globals.realFeel = feelsLike;
 
     if (clouds > 75) {
       globals.cloudIndex = 2;
@@ -47,52 +52,62 @@ Future<void> getGlobalLocation(lat, long) async {
       globals.cloudIndex = 0;
     }
 
-    if(dn == "n")
-    {
+    if (dn == "n") {
       globals.skyColor = LinearGradient(
-          colors: [Color.fromARGB(255, 0, 0, 0), Color.fromARGB(255, 40, 48, 54)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.0, 1.0],
-          tileMode: TileMode.clamp,
-        );
-    }
-    else if(globals.cloudIndex == 3)
-    {
+        colors: [Color.fromARGB(255, 0, 0, 0), Color.fromARGB(255, 40, 48, 54)],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        stops: [0.0, 1.0],
+        tileMode: TileMode.clamp,
+      );
+    } else if (globals.cloudIndex == 3) {
       globals.skyColor = LinearGradient(
-          colors: [Color.fromARGB(255, 19, 28, 35), Color.fromARGB(255, 76, 114, 145), Color.fromARGB(255, 130, 130, 130)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.01, 0.6, 0.9],
-          tileMode: TileMode.clamp,
-        );
-    } else if(globals.cloudIndex == 2)
-    {
+        colors: [
+          Color.fromARGB(255, 19, 28, 35),
+          Color.fromARGB(255, 76, 114, 145),
+          Color.fromARGB(255, 130, 130, 130)
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        stops: [0.01, 0.6, 0.9],
+        tileMode: TileMode.clamp,
+      );
+    } else if (globals.cloudIndex == 2) {
       globals.skyColor = LinearGradient(
-          colors: [Color.fromARGB(255, 19, 28, 35),Color.fromARGB(255, 31, 98, 153), Color.fromARGB(255, 181, 181, 181)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.01, 0.6, 0.9],
-          tileMode: TileMode.clamp,
-        );
-    } else if(globals.cloudIndex == 1)
-    {
+        colors: [
+          Color.fromARGB(255, 19, 28, 35),
+          Color.fromARGB(255, 31, 98, 153),
+          Color.fromARGB(255, 181, 181, 181)
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        stops: [0.01, 0.6, 0.9],
+        tileMode: TileMode.clamp,
+      );
+    } else if (globals.cloudIndex == 1) {
       globals.skyColor = LinearGradient(
-          colors: [Color.fromARGB(255, 19, 28, 35),Color.fromARGB(255, 32, 126, 203), Color.fromARGB(255, 154, 154, 154)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.01, 0.6, 0.9],
-          tileMode: TileMode.clamp,
-        );
-    } else if(globals.cloudIndex ==0)
-    {
+        colors: [
+          Color.fromARGB(255, 19, 28, 35),
+          Color.fromARGB(255, 32, 126, 203),
+          Color.fromARGB(255, 154, 154, 154)
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        stops: [0.01, 0.6, 0.9],
+        tileMode: TileMode.clamp,
+      );
+    } else if (globals.cloudIndex == 0) {
       globals.skyColor = LinearGradient(
-          colors: [Color.fromARGB(255, 19, 28, 35),Colors.blue, Color.fromARGB(255, 189, 189, 189)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.01, 0.6, 0.9],
-          tileMode: TileMode.clamp,
-        );
+        colors: [
+          Color.fromARGB(255, 19, 28, 35),
+          Colors.blue,
+          Color.fromARGB(255, 189, 189, 189)
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        stops: [0.01, 0.6, 0.9],
+        tileMode: TileMode.clamp,
+      );
     }
 
     //Crash:
@@ -114,13 +129,16 @@ Future<LocationData> getLocationList(lat, long, id) async {
   //getting response:
   if (response.statusCode == 200) {
     var responseJSON = json.decode(response.body);
-    
+
     //getting data:
     var cityName = responseJSON['data'][0]['city_name'];
     var windSpeed = responseJSON['data'][0]['wind_spd'];
     var windDirection = responseJSON['data'][0]['wind_cdir'];
     var humidity = responseJSON['data'][0]['rh'];
     var precip = responseJSON['data'][0]['precip'];
+    if(precip == 'null'){
+      precip = '0';
+    }
     var currentTemp = responseJSON['data'][0]['temp'];
     currentTemp = ((currentTemp) * 1.8) + 32;
     currentTemp = currentTemp.round();
@@ -129,6 +147,7 @@ Future<LocationData> getLocationList(lat, long, id) async {
     feelsLikeTemp = ((feelsLikeTemp) * 1.8) + 32;
     feelsLikeTemp = feelsLikeTemp.round();
     feelsLikeTemp = feelsLikeTemp.toString();
+
     var uv = responseJSON['data'][0]['uv'];
     var airQuality = responseJSON['data'][0]['aqi'];
 
@@ -163,5 +182,3 @@ Future<LocationData> getLocationList(lat, long, id) async {
         airQuality: "API FAIL!");
   }
 }
-
-

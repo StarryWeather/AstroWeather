@@ -98,24 +98,37 @@ class _RootPageState extends State<RootPage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        globals.currentTemp + "\u00B0",
+                                        "Current Temp: "+globals.currentTemp + "\u00B0",
                                         style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.02,
+                                              0.03,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                           fontFamily: 'KdamThmorPro',
                                         ),
                                       ),
                                       Text(
+                                        "Real Feel: "+globals.realFeel + "\u00B0",
+                                        style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.03,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          fontFamily: 'KdamThmorPro',
+                                        ),
+                                      ),
+                                      SizedBox(height: MediaQuery.of(context).size.width * 0.02,),
+                                      Text(
                                         globals.weatherDescription,
                                         style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.02,
+                                              0.03,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                           fontFamily: 'KdamThmorPro',

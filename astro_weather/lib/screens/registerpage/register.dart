@@ -31,17 +31,31 @@ class RegisterPageState extends State<RegisterPage> {
             fps: 60,
           ),
           SingleChildScrollView(
-          child : Column(
-            children: [
-              SizedBox(
-                height: 12,
-              ),
-              RegistrationBuilder(context),
-              earthState(),
-            ],
-          ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 12,
+                ),
+                RegistrationBuilder(context),
+                //earthState(),
+                SecondEarth(),
+              ],
+            ),
           ),
         ],
+      ),
+    );
+  }
+
+  SizedBox SecondEarth() {
+    return SizedBox(
+      child: Image.asset(
+        'assets/weather/earth_spin.gif',
+        color: Color.fromARGB(80, 0, 0, 0),
+        colorBlendMode: BlendMode.srcATop,
+        width: 900.0,
+        height: 900.0,
+        fit: BoxFit.cover,
       ),
     );
   }

@@ -31,53 +31,67 @@ class PasswordPageState extends State<PasswordPage> {
             fps: 60,
           ),
           SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(MediaQuery.of(context).size.height *
-                    0.03), //page hight: 3% top + 3% bottom
-                child: Container(
-                  constraints: BoxConstraints.tightForFinite(width: 700),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Color.fromARGB(160, 95, 95, 95),
-                      border: Border.all(width: 5.0, color: Colors.white),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(
-                          MediaQuery.of(context).size.height *
-                              0.05), //page hight: 5% + 5%
-                      child: Column(
-                        children: [
-                          //welcome back,
-                          forgotPWText(),
-                          const SizedBox(height: 16),
-                          ForgotPWEmail(),
-                          const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: SendEmailButton(context),
-                              ),
-                              Expanded(
-                                child: GoBackButton(context),
-                              ),
-                            ],
-                          ),
-                        ],
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height *
+                      0.03), //page hight: 3% top + 3% bottom
+                  child: Container(
+                    constraints: BoxConstraints.tightForFinite(width: 700),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Color.fromARGB(160, 95, 95, 95),
+                        border: Border.all(width: 5.0, color: Colors.white),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.height *
+                                0.05), //page hight: 5% + 5%
+                        child: Column(
+                          children: [
+                            //welcome back,
+                            forgotPWText(),
+                            const SizedBox(height: 16),
+                            ForgotPWEmail(),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: SendEmailButton(context),
+                                ),
+                                Expanded(
+                                  child: GoBackButton(context),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              earthState(),
-            ],
-          ),
+                //earthState(),
+                SecondEarth(),
+              ],
+            ),
           ),
         ],
+      ),
+    );
+  }
+
+  SizedBox SecondEarth() {
+    return SizedBox(
+      child: Image.asset(
+        'assets/weather/earth_spin.gif',
+        color: Color.fromARGB(80, 0, 0, 0),
+        colorBlendMode: BlendMode.srcATop,
+        width: 900.0,
+        height: 900.0,
+        fit: BoxFit.cover,
       ),
     );
   }

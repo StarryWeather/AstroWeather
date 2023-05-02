@@ -10,6 +10,7 @@ import 'models/LocationInfo.dart';
   var cloudIndex;
   var skyColor;
   var DayNight;
+  var realFeel;
   bool isRaining = false;
   bool isSnowing = false;
   
