@@ -103,7 +103,7 @@ class _RootPageState extends State<RootPage> {
                                           fontSize: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.03,
+                                              0.01,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                           fontFamily: 'KdamThmorPro',
@@ -115,20 +115,20 @@ class _RootPageState extends State<RootPage> {
                                           fontSize: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.03,
+                                              0.01,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                           fontFamily: 'KdamThmorPro',
                                         ),
                                       ),
-                                      SizedBox(height: MediaQuery.of(context).size.width * 0.02,),
+                                      SizedBox(height: MediaQuery.of(context).size.width * 0.01,),
                                       Text(
                                         globals.weatherDescription,
                                         style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.03,
+                                              0.01,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                           fontFamily: 'KdamThmorPro',
