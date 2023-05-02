@@ -96,9 +96,11 @@ class _SideMenuState extends State<SideMenu> {
                     Future.delayed(Duration(seconds: 1), () {
                       menu.input!.change(false);
                     });
-                    setState(() {
+                    setState(() async {
                       selectedMenu = menu;
                       if(menu.title == "Logout"){
+                        globals.OldLocations = [];
+                        globals.datalist = [];
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => LoginPage()));

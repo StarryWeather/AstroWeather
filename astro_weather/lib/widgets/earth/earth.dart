@@ -50,8 +50,6 @@ class _EarthState extends State<Earth> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height*.3,
-      width: MediaQuery.of(context).size.width,
       child: TweenAnimationBuilder<double>(
           duration: Duration(seconds: 0),
           curve: Curves.easeIn,

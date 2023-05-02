@@ -16,7 +16,7 @@ class earthStateState extends State<earthState> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height *.5,
+      height: MediaQuery.of(context).size.height *.35,
       child: Positioned(
         child: GestureDetector(
           onTap: () {
