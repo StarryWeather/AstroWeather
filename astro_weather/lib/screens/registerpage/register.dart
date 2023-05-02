@@ -30,7 +30,8 @@ class RegisterPageState extends State<RegisterPage> {
           const StarsView(
             fps: 60,
           ),
-          Column(
+          SingleChildScrollView(
+          child : Column(
             children: [
               SizedBox(
                 height: 12,
@@ -38,6 +39,7 @@ class RegisterPageState extends State<RegisterPage> {
               RegistrationBuilder(context),
               earthState(),
             ],
+          ),
           ),
         ],
       ),

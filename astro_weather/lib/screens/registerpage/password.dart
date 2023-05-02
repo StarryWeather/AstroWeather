@@ -30,7 +30,8 @@ class PasswordPageState extends State<PasswordPage> {
           const StarsView(
             fps: 60,
           ),
-          Column(
+          SingleChildScrollView(
+          child: Column(
             children: [
               Padding(
                 padding: EdgeInsets.all(MediaQuery.of(context).size.height *
@@ -74,6 +75,7 @@ class PasswordPageState extends State<PasswordPage> {
               ),
               earthState(),
             ],
+          ),
           ),
         ],
       ),

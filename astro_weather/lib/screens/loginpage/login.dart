@@ -37,7 +37,7 @@ class LoginPageState extends State<LoginPage> {
           const StarsView(
             fps: 60,
           ),
-          Column(
+          SingleChildScrollView(child:Column(
             children: [
               SizedBox(
                 height: 12,
@@ -45,6 +45,7 @@ class LoginPageState extends State<LoginPage> {
               LoginBuilder(context),
               earthState(),
             ],
+          ),
           ),
         ],
       ),

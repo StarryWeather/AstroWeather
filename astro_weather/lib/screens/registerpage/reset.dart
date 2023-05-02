@@ -36,7 +36,8 @@ class ResetPageState extends State<ResetPage> {
           const StarsView(
             fps: 60,
           ),
-          Column(
+          SingleChildScrollView(
+          child :Column(
             children: [
               Padding(
                 padding: EdgeInsets.all(MediaQuery.of(context).size.height *
@@ -163,6 +164,7 @@ class ResetPageState extends State<ResetPage> {
               ),
               earthState(),
             ],
+          ),
           ),
         ],
       ),
