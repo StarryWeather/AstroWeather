@@ -37,18 +37,13 @@ class LoginPageState extends State<LoginPage> {
           const StarsView(
             fps: 60,
           ),
-          ListView(
-            children: <Widget> [
-                 Column(
-                  children: [
-                    LoginBuilder(context),
-                    earthState()
-                    //SecondEarth(),
-                  ],
-                ),
+          Column(
+            children: [
+              LoginBuilder(context),
+              earthState()
+              //SecondEarth(),
             ],
           ),
-                    
         ],
       ),
     );
@@ -256,7 +251,7 @@ Future<void> getData() async {
   await Geolocator.requestPermission();
   Position position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.low);*/
-  await getGlobalLocation(28.608,-81.196);
+  await getGlobalLocation(28.608, -81.196);
 }
 
 Future<void> pullLocations() async {
