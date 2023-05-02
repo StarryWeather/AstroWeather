@@ -37,16 +37,16 @@ class LoginPageState extends State<LoginPage> {
           const StarsView(
             fps: 60,
           ),
-           ListView(
-            children: <Widget> [
+          ListView(
+            children: <Widget>[
               Column(
-              children: [
-                LoginBuilder(context),
-                earthState()
-                //SecondEarth(),
-              ],
-            ),
-            ]
+                children: [
+                  LoginBuilder(context),
+                  //earthState()
+                  SecondEarth(),
+                ],
+              ),
+            ],
           ),
         ],
       ),
@@ -59,8 +59,8 @@ class LoginPageState extends State<LoginPage> {
         'assets/weather/earth_spin.gif',
         color: Color.fromARGB(80, 0, 0, 0),
         colorBlendMode: BlendMode.srcATop,
-        width: 900.0,
-        height: 900.0,
+        width: MediaQuery.of(context).size.width * 0.5,
+        height: MediaQuery.of(context).size.height * 0.5,
         fit: BoxFit.cover,
       ),
     );

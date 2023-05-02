@@ -55,8 +55,8 @@ class RegisterPageState extends State<RegisterPage> {
         'assets/weather/earth_spin.gif',
         color: Color.fromARGB(80, 0, 0, 0),
         colorBlendMode: BlendMode.srcATop,
-        width: 900.0,
-        height: 900.0,
+        width: MediaQuery.of(context).size.width*.5,
+        height: MediaQuery.of(context).size.height*.5,
         fit: BoxFit.cover,
       ),
     );

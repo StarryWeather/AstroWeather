@@ -26,59 +26,59 @@ class PasswordPageState extends State<PasswordPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 0, 0),
       body: Stack(
+        alignment: Alignment.center,
         children: [
           const StarsView(
             fps: 60,
           ),
-          ListView(
-            children: <Widget>[
-              Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(MediaQuery.of(context).size.height *
-                        0.03), //page hight: 3% top + 3% bottom
-                    child: Container(
-                      constraints: BoxConstraints.tightForFinite(width: 700),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          color: Color.fromARGB(160, 95, 95, 95),
-                          border: Border.all(width: 5.0, color: Colors.white),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(
-                              MediaQuery.of(context).size.height *
-                                  0.05), //page hight: 5% + 5%
-                          child: Column(
-                            children: [
-                              //welcome back,
-                              forgotPWText(),
-                              const SizedBox(height: 16),
-                              ForgotPWEmail(),
-                              const SizedBox(height: 16),
-                              Row(
-                                children: [
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: SendEmailButton(context),
-                                  ),
-                                  Expanded(
-                                    child: GoBackButton(context),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.height *
+                      0.03), //page hight: 3% top + 3% bottom
+                  child: Container(
+                    constraints: BoxConstraints.tightForFinite(width: 700),
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Color.fromARGB(160, 95, 95, 95),
+                        border: Border.all(width: 5.0, color: Colors.white),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.height *
+                                0.05), //page hight: 5% + 5%
+                        child: Column(
+                          children: [
+                            //welcome back,
+                            forgotPWText(),
+                            const SizedBox(height: 16),
+                            ForgotPWEmail(),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: SendEmailButton(context),
+                                ),
+                                Expanded(
+                                  child: GoBackButton(context),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                  //earthState(),
-                  SecondEarth(),
-                ],
-              ),
-            ],
+                ),
+                //earthState(),
+                SecondEarth(),
+              ],
+            ),
           ),
         ],
       ),
@@ -91,8 +91,8 @@ class PasswordPageState extends State<PasswordPage> {
         'assets/weather/earth_spin.gif',
         color: Color.fromARGB(80, 0, 0, 0),
         colorBlendMode: BlendMode.srcATop,
-        width: 900.0,
-        height: 900.0,
+        width: MediaQuery.of(context).size.width * 0.5,
+        height: MediaQuery.of(context).size.height * 0.5,
         fit: BoxFit.cover,
       ),
     );
