@@ -122,8 +122,9 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Do you want to delete '+ globals.datalist[numIndex].cityName+ "?"),
-              
+              title: Text('Do you want to delete ' +
+                  globals.datalist[numIndex].cityName +
+                  "?"),
               actions: [
                 TextButton(
                   child: Text('DELETE'),
@@ -180,7 +181,7 @@ class _LocationInfoItemState extends State<LocationInfoItem> {
   SizedBox ContainerMethod(String one, String two) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.3,
-      width: MediaQuery.of(context).size.width * 0.4,
+      width: MediaQuery.of(context).size.width * 0.35,
       child: DecoratedBox(
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,

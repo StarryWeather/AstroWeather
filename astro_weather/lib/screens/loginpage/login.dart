@@ -37,15 +37,24 @@ class LoginPageState extends State<LoginPage> {
           const StarsView(
             fps: 60,
           ),
-          SingleChildScrollView(child:Column(
-            children: [
-              SizedBox(
-                height: 12,
-              ),
-              LoginBuilder(context),
-              earthState(),
-            ],
-          ),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 12,
+                ),
+                LoginBuilder(context),
+                //earthState(),
+                Center(
+                  child: Image.asset(
+                    'assets/weather/earth_spin.gif',
+                    width: 900.0,
+                    height: 900.0,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -124,7 +133,8 @@ class LoginPageState extends State<LoginPage> {
                 //turn this into an api call
 
                 for (LocationInfo i in globals.OldLocations) {
-                  globals.datalist.add(await getLocationList(i.Lat, i.Long, i.id));
+                  globals.datalist
+                      .add(await getLocationList(i.Lat, i.Long, i.id));
                 }
 
                 // ignore: use_build_context_synchronously
@@ -251,16 +261,16 @@ Future<void> pullLocations() async {
   if (response.statusCode == 200) {
     print("PARTY TIME!!!!");
     var responseJSON = json.decode(response.body);
-    if(responseJSON == null)
-    {
+    if (responseJSON == null) {
       return;
     }
-    for(int x = 0; x < responseJSON['savedLocations'].length; x++)
-    {
+    for (int x = 0; x < responseJSON['savedLocations'].length; x++) {
       print("Arigato!!!!");
-      globals.OldLocations.add(LocationInfo(Lat: responseJSON['savedLocations'][x]['latitude'].toString(), Long: responseJSON['savedLocations'][x]['longitude'].toString(), id: responseJSON['savedLocations'][x]['_id']));
+      globals.OldLocations.add(LocationInfo(
+          Lat: responseJSON['savedLocations'][x]['latitude'].toString(),
+          Long: responseJSON['savedLocations'][x]['longitude'].toString(),
+          id: responseJSON['savedLocations'][x]['_id']));
     }
-  
   } else {
     debugPrint(json.decode(response.body));
   }

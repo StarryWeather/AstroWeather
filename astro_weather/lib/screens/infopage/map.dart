@@ -179,10 +179,9 @@ class addButton extends StatelessWidget {
           ),
         ),
       ),
-      child: Icon(
-        Icons.add,
-        size: 60.0,
-        color: Color.fromARGB(255, 255, 0, 0),
+      child: Text(
+        "+",
+        style: TextStyle(color: Color.fromARGB(255, 255, 0, 0), fontSize: 30),
       ),
     );
   }
