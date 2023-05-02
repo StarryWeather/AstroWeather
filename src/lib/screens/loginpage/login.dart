@@ -252,12 +252,11 @@ class LoginPageState extends State<LoginPage> {
 }
 
 Future<void> getData() async {
-  await Geolocator.checkPermission();
+  /*await Geolocator.checkPermission();
   await Geolocator.requestPermission();
   Position position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.low);
-  await getGlobalLocation(
-      position.latitude.toString(), position.longitude.toString());
+      desiredAccuracy: LocationAccuracy.low);*/
+  await getGlobalLocation(28.608,-81.196);
 }
 
 Future<void> pullLocations() async {
