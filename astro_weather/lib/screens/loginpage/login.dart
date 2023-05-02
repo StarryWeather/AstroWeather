@@ -37,7 +37,6 @@ class LoginPageState extends State<LoginPage> {
           const StarsView(
             fps: 60,
           ),
-<<<<<<< Updated upstream
           ListView(
             children: <Widget> [
                  Column(
@@ -48,18 +47,6 @@ class LoginPageState extends State<LoginPage> {
                   ],
                 ),
             ],
-=======
-          SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                LoginBuilder(context),
-
-                //earthState(),
-                SecondEarth(),
-              ],
-            ),
->>>>>>> Stashed changes
           ),
                     
         ],

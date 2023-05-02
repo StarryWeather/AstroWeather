@@ -98,19 +98,12 @@ class _SideMenuState extends State<SideMenu> {
                     Future.delayed(Duration(seconds: 1), () {
                       menu.input!.change(false);
                     });
-<<<<<<< Updated upstream
-                    setState(() async {
-                      selectedMenu = menu;
-                      if(menu.title == "Logout"){
-                        globals.OldLocations = [];
-=======
                     setState(() async{
                       selectedMenu = menu;
                       if(menu.title == "Logout"){
                         globals.OldLocations = [
                           LocationInfo(Lat: latitude.toString(), Long: longitude.toString(), id: "Troll."),
                         ];
->>>>>>> Stashed changes
                         globals.datalist = [];
                         Navigator.pushReplacement(
                           context,
